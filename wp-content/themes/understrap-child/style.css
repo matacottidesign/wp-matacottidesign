@@ -1,0 +1,275 @@
+/* ==================================================
+   1. VARIABLES
+================================================== */
+
+:root {
+  --primary: rgb(68, 111, 142);
+  --secondary: #ef233c;
+  --dark-red: #9f0819;
+  --grey: #e7ecef;
+  --radius-xl: 300px;
+  --radius-md: 30px;
+  --transition: 0.3s ease;
+}
+
+/* ==================================================
+   2. BASE
+================================================== */
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+}
+
+p {
+  margin-bottom: 0;
+  font-weight: 300;
+}
+
+a,
+button,
+.btn {
+  transition: var(--transition);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.hero-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  color: var(--primary);
+}
+
+strong{
+    font-weight: 600;
+}
+
+/* BUTTON + CTA ANIMATION */
+
+.btn-primary {
+  background-color: var(--secondary);
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--dark-red);
+  transform: scale(1.05);
+}
+
+/* Pallino */
+.cta-arrow {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  animation: arrow-bounce 1s ease-in-out infinite;
+}
+
+.cta-arrow i {
+  color: var(--secondary);
+}
+
+/* Animazione */
+@keyframes arrow-bounce {
+  0%   { transform: translateX(0); }
+  50%  { transform: translateX(-6px); }
+  100% { transform: translateX(0); }
+}
+
+/* Hover colore freccia */
+.btn-primary:hover .cta-arrow i {
+  color: var(--dark-red);
+}
+
+/* ==================================================
+   3. NAVBAR
+================================================== */
+
+#main-menu,
+#main-menu li,
+#main-menu .nav-link {
+  backdrop-filter: none !important;
+}
+
+#main-nav {
+  background-color: transparent;
+  transition: background-color .35s ease, backdrop-filter .35s ease;
+}
+
+#main-nav.scrolled {
+  background-color: rgba(255,255,255,.8);
+  backdrop-filter: blur(8px);
+}
+
+.custom-logo-link img {
+  height: 50px;
+  width: auto;
+  display: block;
+}
+
+#main-menu li {
+  font-size: 1.25rem;
+  margin-right: 1.5rem;
+  position: relative;
+}
+
+#main-menu li:last-child {
+  margin-right: 0;
+}
+
+/* Hover underline animation */
+#main-menu li .nav-link {
+  position: relative;
+  display: inline-block;
+}
+
+#main-menu li .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  transform: translateX(-50%);
+  width: 0%;
+  height: 4px;
+  background-color: var(--secondary);
+  border-radius: 50px;
+  transition: width .35s ease;
+}
+
+#main-menu li .nav-link:hover::after,
+#main-menu li.active .nav-link::after {
+  width: 40px;
+}
+
+/* OFFCANVAS */
+.offcanvas {
+  background-color: var(--grey) !important;
+  border: none;
+}
+
+/* ==================================================
+   4. FRONT PAGE (HOME)
+================================================== */
+
+/* MOBILE DEFAULT */
+
+.hero-desktop,
+.hero-tablet {
+  display: none;
+}
+
+.hero-mobile,
+.hero-mobile-bg,
+.hero-mobile-bg::after{
+    border-bottom-left-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+}
+
+.hero-mobile-bg {
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+  position: relative; 
+  z-index: 1;
+}
+
+  .hero-mobile-bg::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 200px;
+
+    background: linear-gradient(
+      to bottom,
+      rgba(255,255,255,0) 0%,
+      rgba(68,111,142,0.9) 100%
+    );
+
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .hero-mobile-bg > * {
+  position: relative;
+  z-index: 3;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  line-height: .9;
+}
+
+.servizio-descrizione {
+  font-size: 1.1rem;
+}
+
+.servizio-img img{
+    height: 50px;
+    width: auto;
+}
+
+/* TABLET */
+
+@media (min-width: 992px) and (max-width: 1399px) {
+
+  .hero-mobile { display: none; }
+  .hero-tablet { display: block; }
+
+  .hero-title { font-size: 4.5rem; }
+  .servizio-descrizione { font-size: 1.3rem; }
+}
+
+/* DESKTOP */
+
+@media (min-width: 1400px) {
+
+  .hero-mobile,
+  .hero-tablet { display: none; }
+
+  .hero-desktop { display: flex; }
+
+  .hero-desktop .hero-title,
+  .servizi-hero {
+    margin-top: 7rem;
+  }
+
+  .hero-desktop .hero-title {
+    font-size: 6rem;
+  }
+
+  .hero-desktop .hero-text {
+    font-size: 1.5rem;
+    margin: 3rem 0;
+  }
+
+  .hero-desktop img.w-75 {
+    border-bottom-left-radius: var(--radius-xl);
+    border-bottom-right-radius: var(--radius-xl);
+    }
+
+    .servizio-item{
+        margin-top: 5rem;
+    }
+
+    .servizio-item:first-child{
+        margin-top: 0rem;
+    }
+
+  .servizio-descrizione {
+    font-size: 1.4rem;
+  }
+
+  .servizio-img img{
+    height: 80px;
+    width: auto;
+}
+}
+
+/* ==================================================
+   5. FOOTER
+================================================== */
