@@ -4,7 +4,7 @@ $cta         = $args['cta'] ?? '';
 $hero_mobile = $args['hero_mobile'] ?? '';
 ?>
 
-<section class="hero hero-desktop d-none d-xxl-block">
+<section class="hero hero-desktop d-none d-xxl-flex">
     <div class="<?php echo esc_attr($container); ?>">
         <div class="row align-items-start">
 
@@ -60,7 +60,7 @@ $hero_mobile = $args['hero_mobile'] ?? '';
 
                                 <?php if ( $descrizione = get_sub_field('descrizione_servizio_hero') ) : ?>
                                     <div class="servizio-descrizione text-end">
-                                        <?php echo $descrizione; ?>
+                                        <?php echo wp_kses_post($descrizione); ?>
                                     </div>
                                 <?php endif; ?>
 

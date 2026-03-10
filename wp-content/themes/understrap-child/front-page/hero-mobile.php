@@ -4,7 +4,7 @@ $cta         = $args['cta'] ?? '';
 $hero_mobile = $args['hero_mobile'] ?? '';
 ?>
 
-<section class="hero hero-mobile d-block d-lg-none bg-white mb-3">
+<section class="hero hero-mobile d-block d-md-none bg-white mb-3">
 
     <div class="hero-mobile-bg d-flex align-items-end justify-content-center text-center"
             <?php if ( !empty($hero_mobile) ) : ?>
