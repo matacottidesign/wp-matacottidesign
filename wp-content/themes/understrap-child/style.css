@@ -166,9 +166,14 @@ strong{
 
 .hero-mobile-bg {
   height: 500px;
-  background-size: cover;
-  background-position: center;
   position: relative; 
+  z-index: 1;
+  background: var(--gradient-hero);
+  overflow: hidden;
+}
+
+.hero-mobile-bg img{
+  height: 450px;
   z-index: 1;
 }
 
@@ -211,7 +216,7 @@ strong{
 
 /* TABLET */
 
-@media (min-width: 992px) and (max-width: 1399px) {
+@media (min-width: 768px) and (max-width: 1399px) {
 
   .hero-mobile { display: none; }
   .hero-tablet {
@@ -224,7 +229,7 @@ strong{
   .hero-title { font-size: 4.5rem; }
 
   .servizio-img img{
-    height: 100px;
+    height: 80px;
     width: auto;
 }
 

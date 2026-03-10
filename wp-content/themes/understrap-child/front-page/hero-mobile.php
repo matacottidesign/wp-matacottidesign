@@ -6,10 +6,15 @@ $hero_mobile = $args['hero_mobile'] ?? '';
 
 <section class="hero hero-mobile d-block d-md-none bg-white mb-3">
 
-    <div class="hero-mobile-bg d-flex align-items-end justify-content-center text-center"
-            <?php if ( !empty($hero_mobile) ) : ?>
-                style="background-image: url('<?php echo esc_url($hero_mobile['url']); ?>');"
-            <?php endif; ?>>
+    <div class="hero-mobile-bg d-flex align-items-end justify-content-center text-center position-relative">
+
+        <?php 
+        $immagine_hero_mobile = get_field('immagine_hero_mobile');
+        if( !empty( $immagine_hero_mobile ) ): ?>
+            <img src="<?php echo esc_url($immagine_hero_mobile['url']); ?>" 
+                alt="<?php echo esc_attr($immagine_hero_mobile['alt']); ?>"
+                class="position-absolute" />
+        <?php endif; ?>
 
         <div class="hero-title text-white pb-4">
             <?php the_field('titolo_hero'); ?>

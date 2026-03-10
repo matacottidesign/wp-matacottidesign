@@ -53,7 +53,7 @@ $hero_mobile = $args['hero_mobile'] ?? '';
     </div>
 
     <?php if ( have_rows('servizi_hero') ) : ?>
-        <div class="servizi-hero d-flex justify-content-between">
+        <div class="servizi-hero d-flex justify-content-evenly">
             <?php while ( have_rows('servizi_hero') ) : the_row(); ?>
 
                 <div class="text-center fs-3">
