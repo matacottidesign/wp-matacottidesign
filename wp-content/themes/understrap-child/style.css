@@ -45,8 +45,8 @@ h6,
   color: var(--primary);
 }
 
-strong{
-    font-weight: 600;
+strong {
+  font-weight: 600;
 }
 
 /* BUTTON + CTA ANIMATION */
@@ -61,7 +61,6 @@ strong{
   transform: scale(1.05);
 }
 
-/* Pallino */
 .cta-arrow {
   width: 40px;
   height: 40px;
@@ -73,14 +72,12 @@ strong{
   color: var(--secondary);
 }
 
-/* Animazione */
 @keyframes arrow-bounce {
-  0%   { transform: translateX(0); }
-  50%  { transform: translateX(-6px); }
+  0%,
   100% { transform: translateX(0); }
+  50%  { transform: translateX(-6px); }
 }
 
-/* Hover colore freccia */
 .btn-primary:hover .cta-arrow i {
   color: var(--dark-red);
 }
@@ -101,7 +98,7 @@ strong{
 }
 
 #main-nav.scrolled {
-  background-color: rgba(255,255,255,.8);
+  background-color: rgba(255, 255, 255, .8);
   backdrop-filter: blur(8px);
 }
 
@@ -121,7 +118,6 @@ strong{
   margin-right: 0;
 }
 
-/* Hover underline animation */
 #main-menu li .nav-link {
   position: relative;
   display: inline-block;
@@ -145,7 +141,6 @@ strong{
   width: 40px;
 }
 
-/* OFFCANVAS */
 .offcanvas {
   background-color: var(--grey) !important;
   border: none;
@@ -155,72 +150,60 @@ strong{
    4. FRONT PAGE (HOME)
 ================================================== */
 
-/* MOBILE DEFAULT */
-
-.hero-mobile,
-.hero-mobile-bg,
-.hero-mobile-bg::after{
-    border-bottom-left-radius: var(--radius-md);
-    border-bottom-right-radius: var(--radius-md);
-}
-
-.hero-mobile-bg {
-  height: 500px;
-  position: relative; 
-  z-index: 1;
-  background: var(--gradient-hero);
-  overflow: hidden;
-}
-
-.hero-mobile-bg img{
-  height: 450px;
-  z-index: 1;
-}
-
-  .hero-mobile-bg::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 200px;
-
-    background: linear-gradient(
-      to bottom,
-      rgba(255,255,255,0) 0%,
-      rgba(68,111,142,0.9) 100%
-    );
-
-    pointer-events: none;
-    z-index: 2;
-  }
-
-  .hero-mobile-bg > * {
-  position: relative;
-  z-index: 3;
-}
-
 .hero-title {
   font-size: 3.5rem;
   line-height: .9;
 }
 
-.servizio-descrizione {
-  font-size: 1.1rem;
+.servizio-img img {
+  height: 50px;
+  width: auto;
 }
 
-.servizio-img img{
-    height: 50px;
-    width: auto;
+/* MOBILE */
+
+.hero-mobile,
+.hero-mobile-bg,
+.hero-mobile-bg::after {
+  border-bottom-left-radius: var(--radius-md);
+  border-bottom-right-radius: var(--radius-md);
+}
+
+.hero-mobile-bg {
+  height: 500px;
+  position: relative;
+  z-index: 1;
+  background: var(--gradient-hero);
+  overflow: hidden;
+}
+
+.hero-mobile-bg img {
+  height: 450px;
+  z-index: 1;
+}
+
+.hero-mobile-bg::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(68, 111, 142, 0.9) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero-mobile-bg > * {
+  position: relative;
+  z-index: 3;
 }
 
 /* TABLET */
 
 @media (min-width: 768px) and (max-width: 1399px) {
 
-  .hero-mobile { display: none; }
   .hero-tablet {
-    display: block; 
     background: var(--gradient-hero);
     border-bottom-left-radius: var(--radius-md);
     border-bottom-right-radius: var(--radius-md);
@@ -228,10 +211,7 @@ strong{
 
   .hero-title { font-size: 4.5rem; }
 
-  .servizio-img img{
-    height: 80px;
-    width: auto;
-}
+  .servizio-img img { height: 80px; }
 
 }
 
@@ -239,17 +219,12 @@ strong{
 
 @media (min-width: 1400px) {
 
-  .hero-mobile,
-  .hero-tablet { display: none; }
-
   .hero-desktop .hero-title,
   .servizi-hero {
     margin-top: 7rem;
   }
 
-  .hero-desktop .hero-title {
-    font-size: 6rem;
-  }
+  .hero-desktop .hero-title { font-size: 6rem; }
 
   .hero-desktop .hero-text {
     font-size: 1.5rem;
@@ -259,24 +234,14 @@ strong{
   .hero-desktop img.w-75 {
     border-bottom-left-radius: var(--radius-xl);
     border-bottom-right-radius: var(--radius-xl);
-    }
-
-    .servizio-item{
-        margin-top: 5rem;
-    }
-
-    .servizio-item:first-child{
-        margin-top: 0rem;
-    }
-
-  .servizio-descrizione {
-    font-size: 1.4rem;
   }
 
-  .servizio-img img{
-    height: 80px;
-    width: auto;
-}
+  .servizio-item { margin-top: 5rem; }
+
+  .servizio-item:first-child { margin-top: 0; }
+
+  .servizio-descrizione { font-size: 1.4rem; }
+
 }
 
 /* ==================================================
