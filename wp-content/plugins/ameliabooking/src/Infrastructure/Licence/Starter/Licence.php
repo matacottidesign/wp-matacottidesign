@@ -48,6 +48,8 @@ class Licence extends \AmeliaBooking\Infrastructure\Licence\Lite\Licence
                 Commands\Coupon\GetValidCouponCommand::class                       => new Commands\Coupon\GetValidCouponCommandHandler($c),
                 Commands\Coupon\UpdateCouponCommand::class                         => new Commands\Coupon\UpdateCouponCommandHandler($c),
                 Commands\Coupon\UpdateCouponStatusCommand::class                   => new Commands\Coupon\UpdateCouponStatusCommandHandler($c),
+                // Google
+                Commands\Google\VerifyRecaptchaCommand::class                       => new Commands\Google\VerifyRecaptchaCommandHandler($c),
                 // Report
                 Commands\Report\GetAppointmentsCommand::class                      => new Commands\Report\GetAppointmentsCommandHandler($c),
                 Commands\Report\GetCouponsCommand::class                           => new Commands\Report\GetCouponsCommandHandler($c),

@@ -520,6 +520,29 @@ class GetAppointmentsCommandHandler extends CommandHandler
                 $row[BackendStrings::get('coupon_code')] = implode(', ', $couponCodes);
             }
         }
+
+        if (in_array('created', $params['fields'], true)) {
+            if ($booking) {
+                $row[BackendStrings::get('created_on')] = !empty($booking['created']) ?
+                    DateTimeService::getCustomDateTimeObject($booking['created'])
+                        ->format($dateFormat . ' ' . $timeFormat) : '';
+            } else {
+                $createdDate = '';
+                if (!empty($appointment['bookings'])) {
+                    $minBooking = null;
+                    foreach ($appointment['bookings'] as $booking2) {
+                        if ($minBooking === null || $booking2['id'] < $minBooking['id']) {
+                            $minBooking = $booking2;
+                        }
+                    }
+                    if ($minBooking && !empty($minBooking['created'])) {
+                        $createdDate = DateTimeService::getCustomDateTimeObject($minBooking['created'])
+                            ->format($dateFormat . ' ' . $timeFormat);
+                    }
+                }
+                $row[BackendStrings::get('created_on')] = $createdDate;
+            }
+        }
     }
 
     private function getBookingPrice($booking)

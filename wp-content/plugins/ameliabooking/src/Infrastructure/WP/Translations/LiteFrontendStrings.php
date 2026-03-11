@@ -171,6 +171,7 @@ class LiteFrontendStrings
             'get_in_touch'                 => __('Get in Touch', 'wpamelia'),
             'collapse_menu'                => __('Collapse menu', 'wpamelia'),
             'payment_onsite_sentence'      => __('The payment will be done on-site.', 'wpamelia'),
+            'payment_or_pay_with_card'     => __('Or pay with card', 'wpamelia'),
             'phone_number_colon'           => __('Phone Number', 'wpamelia'),
             'pick_date_and_time_colon'     => __('Pick date & time:', 'wpamelia'),
             'please_select'                => __('Please select', 'wpamelia'),

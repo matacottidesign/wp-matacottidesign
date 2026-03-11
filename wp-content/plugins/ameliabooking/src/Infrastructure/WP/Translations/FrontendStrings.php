@@ -325,7 +325,6 @@ class FrontendStrings
             'package_min_book'             => __('appointment is required to be booked now.', 'wpamelia'),
             'package_min_book_plural'      => __('appointments are required to be booked now.', 'wpamelia'),
             'payment_protected_policy'     => __('Payment protected by policy and powered by', 'wpamelia'),
-            'payment_or_pay_with_card'     => __('Or pay with card', 'wpamelia'),
             'payment_type_deposit_only'    => __('Deposit only', 'wpamelia'),
             'payment_type_full_amount'     => __('Whole amount', 'wpamelia'),
             'payment_wc_mollie_sentence'   => __('You will be redirected to the payment checkout.', 'wpamelia'),

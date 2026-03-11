@@ -114,8 +114,11 @@ class GetCustomersCommandHandler extends CommandHandler
 
             if (in_array('lastBooking', $fields, true)) {
                 $row[BackendStrings::get('last_booking')] =
-                    DateTimeService::getCustomDateTimeObject($customer['lastBooking'])
-                        ->format($dateFormat . ' ' . $timeFormat);
+                    !empty($customer['lastBooking']) ?
+                        DateTimeService::getCustomDateTimeObject(
+                            $customer['lastBooking']
+                        )->format($dateFormat . ' ' . $timeFormat) :
+                        '';
             }
 
             if (in_array('totalBookings', $fields, true)) {

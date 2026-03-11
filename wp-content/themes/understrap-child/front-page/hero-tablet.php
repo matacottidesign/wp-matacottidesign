@@ -46,7 +46,7 @@ $hero_mobile = $args['hero_mobile'] ?? '';
     </div>
 </section>
 
-<div class="container d-none d-md-block d-xxl-none">
+<section class="container d-none d-md-block d-xxl-none">
 
     <div class="fst-italic fs-3 my-5">
         <?php the_field('descrizione_hero'); ?>
@@ -72,4 +72,4 @@ $hero_mobile = $args['hero_mobile'] ?? '';
         </div>
     <?php endif; ?>
 
-</div>
+</section>

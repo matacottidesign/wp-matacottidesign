@@ -126,6 +126,12 @@ msgstr "+još"
 msgid "+{count} more"
 msgstr ""
 
+msgid "1/1 width"
+msgstr ""
+
+msgid "1/2 width"
+msgstr ""
+
 msgid "10h"
 msgstr "10č"
 
@@ -439,6 +445,9 @@ msgstr ""
 msgid "Add appointment"
 msgstr "Dodaj termina"
 
+msgid "Add booking"
+msgstr ""
+
 msgid "Add category"
 msgstr ""
 
@@ -446,6 +455,9 @@ msgid "Add custom field"
 msgstr ""
 
 msgid "Add custom notification"
+msgstr ""
+
+msgid "Add customer"
 msgstr ""
 
 msgid "Add date range"
@@ -467,6 +479,9 @@ msgstr ""
 "Dodaj ID elementa (dugme, link...) koji će ručno učitati sadržaj Amelia "
 "shortcode-a"
 
+msgid "Add event"
+msgstr ""
+
 msgid "Add event attendees"
 msgstr ""
 
@@ -486,6 +501,9 @@ msgid ""
 msgstr ""
 
 msgid "Add option"
+msgstr ""
+
+msgid "Add package"
 msgstr ""
 
 msgid "Add period"
@@ -619,9 +637,6 @@ msgstr "Dozvoli administratoru da rezerviše termin u bilo koje vreme"
 
 msgid "Allow booking above maximum capacity"
 msgstr "Dozvoli rezervisanje preko maksimalnog kapaciteta"
-
-msgid "Allow booking below minimum capacity"
-msgstr "Dozvoli rezervacije ispod minimalnog kapaciteta"
 
 msgid "Allow booking without a prior login"
 msgstr "Dozvoli rezervacije bez logovanja"
@@ -780,9 +795,6 @@ msgstr "Amelia Podešavanja Korisnika"
 
 msgid "Amount"
 msgstr "Količina"
-
-msgid "Amount:"
-msgstr "Iznos:"
 
 msgid "An email with details of your booking has been sent to you."
 msgstr "Email sa detaljima o vašoj rezervaciji vam je poslat."
@@ -1822,8 +1834,8 @@ msgstr "Kartice"
 msgid "Cards and buttons"
 msgstr ""
 
-msgid "Carrier:"
-msgstr "Provajder:"
+msgid "Carrier"
+msgstr ""
 
 msgid "Cart"
 msgstr "Korpa"
@@ -2328,8 +2340,8 @@ msgstr ""
 msgid "Copy your API key now, as it won't be visible again."
 msgstr ""
 
-msgid "Cost:"
-msgstr "Cena:"
+msgid "Cost"
+msgstr ""
 
 msgid ""
 "Could not delete category. This category has services available for booking "
@@ -2502,6 +2514,9 @@ msgstr ""
 
 msgid "Created On"
 msgstr "Kreirano"
+
+msgid "Created on"
+msgstr ""
 
 msgid "Credit Card"
 msgstr "Kreditna Kartica"
@@ -2891,7 +2906,7 @@ msgstr ""
 msgid "Default appointment status"
 msgstr ""
 
-msgid "Default back‑end page"
+msgid "Default back end page"
 msgstr ""
 
 msgid "Default language"
@@ -4932,8 +4947,18 @@ msgid ""
 msgstr ""
 
 msgid ""
+"If disabled, booking must meet the minimum capacity, and the time slot "
+"closes after the first booking."
+msgstr ""
+
+msgid ""
 "If disabled, the price will remain the same regardless of how many people "
 "are included in the group appointment."
+msgstr ""
+
+msgid ""
+"If enabled, customers can book with Pending status even after maximum "
+"capacity is reached."
 msgstr ""
 
 msgid ""
@@ -4962,21 +4987,6 @@ msgstr ""
 msgid ""
 "If multiple customers have the same email address, only the first one will "
 "be imported."
-msgstr ""
-
-msgid ""
-"If this is disabled, your front-end customers won't be able to book "
-"appointment with Pending status above the maximum capacity. Once the maximum "
-"capacity is reached appointment will close and time slot will become "
-"unavailable."
-msgstr ""
-
-msgid ""
-"If this is disabled, your front-end customers won't be able to submit a "
-"booking unless they fill in the minimum service capacity, but once they book "
-"for any capacity above minimum, the time slot will become unavailable for "
-"booking for others. If enabled, multiple customers will be able to book the "
-"same time slot, without having to fill in the minimum capacity."
 msgstr ""
 
 msgid ""
@@ -5224,6 +5234,9 @@ msgstr "Integracije"
 msgid "Interested in unlocking this feature?"
 msgstr ""
 
+msgid "Invalid Stripe secret key."
+msgstr ""
+
 msgid "Invisible reCAPTCHA badge"
 msgstr ""
 
@@ -5352,6 +5365,9 @@ msgstr ""
 msgid ""
 "Keep operations aligned with unified settings, availability, and resource "
 "control"
+msgstr ""
+
+msgid "Keep slot available after first booking"
 msgstr ""
 
 msgid ""
@@ -5540,9 +5556,6 @@ msgstr "Lokalno Vreme:"
 msgid "Local time"
 msgstr ""
 
-msgid "Local time:"
-msgstr ""
-
 msgid "Location"
 msgstr "Lokacija"
 
@@ -5674,6 +5687,9 @@ msgid ""
 msgstr ""
 
 msgid "Make extra mandatory"
+msgstr ""
+
+msgid "Make sure you are using the correct WhatsApp credentials."
 msgstr ""
 
 msgid "Male"
@@ -6263,9 +6279,6 @@ msgstr ""
 
 msgid "Notify the customer(s)"
 msgstr "Obavesti mušteriju/mušterije"
-
-msgid "Notify the customer(s) by default"
-msgstr "Uvek obavesti mušteriju/mušterije"
 
 msgid "Number of Additional People"
 msgstr "Broj Dodatnih Osoba"
@@ -6866,9 +6879,6 @@ msgstr "Istorija Uplata"
 msgid "Payment ID"
 msgstr "ID uplate"
 
-msgid "Payment ID:"
-msgstr "ID uplate:"
-
 msgid "Payment Method"
 msgstr "Metod Uplate"
 
@@ -7061,6 +7071,11 @@ msgstr ""
 msgid "Placeholders"
 msgstr "Placeholder-i"
 
+msgid ""
+"Places API (New) is required but not enabled. Please enable it in Google "
+"Cloud Console."
+msgstr ""
+
 msgid "Plain"
 msgstr "Obično"
 
@@ -7222,20 +7237,20 @@ msgstr "Molimo unesite prezime"
 msgid "Please enter live API Key"
 msgstr "Molimo unesite Live API ključ"
 
-msgid "Please enter live ClientId"
-msgstr "Molimo unesite Live ID klijenta"
-
 msgid "Please enter live POSKey"
 msgstr "Molimo unesite Live API ključ"
 
-msgid "Please enter live Secret"
-msgstr "Molimo unesite Live tajnu"
+msgid "Please enter live client ID"
+msgstr ""
 
-msgid "Please enter live key id"
-msgstr "Molimo unesite Live ID ključa"
+msgid "Please enter live key ID"
+msgstr ""
 
 msgid "Please enter live key secret"
 msgstr "Molimo unesite Live tajnu ključa"
+
+msgid "Please enter live secret"
+msgstr ""
 
 msgid "Please enter name"
 msgstr "Molimo unesite ime"
@@ -7270,17 +7285,17 @@ msgstr ""
 msgid "Please enter test API Key"
 msgstr "Molimo unesite test API ključ"
 
-msgid "Please enter test ClientId"
-msgstr "Molimo unesite Test ID klijenta"
+msgid "Please enter test client ID"
+msgstr ""
 
-msgid "Please enter test Secret"
-msgstr "Molimo unesite Test tajnu"
-
-msgid "Please enter test key id"
-msgstr "Molimo unesite Test ID ključa"
+msgid "Please enter test key ID"
+msgstr ""
 
 msgid "Please enter test key secret"
 msgstr "Molimo unesite Test tajnu ključa"
+
+msgid "Please enter test secret"
+msgstr ""
 
 msgid "Please enter waiting list capacity"
 msgstr ""
@@ -8208,7 +8223,7 @@ msgstr "Sekcija"
 msgid "Securely process payments using Stripe."
 msgstr ""
 
-msgid "Segment:"
+msgid "Segment"
 msgstr ""
 
 msgid "Segments"
@@ -8490,8 +8505,8 @@ msgstr "Pošalji Test Email"
 msgid "Send your customer data to Mailchimp quickly and effortlessly."
 msgstr ""
 
-msgid "Sender ID supports up to 11 characters"
-msgstr "ID Pošiljaoca podržava maksimalno 11 karaktera"
+msgid "Sender ID must be between 3 and 11 characters"
+msgstr ""
 
 msgid "Sender email"
 msgstr ""
@@ -9207,9 +9222,6 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-msgid "Status:"
-msgstr ""
-
 msgid "Status Asc"
 msgstr ""
 
@@ -9541,9 +9553,6 @@ msgstr ""
 msgid "Text"
 msgstr "Tekst"
 
-msgid "Text:"
-msgstr "Tekst:"
-
 msgid "Text Mode"
 msgstr "Tekst mod"
 
@@ -9735,6 +9744,9 @@ msgstr ""
 msgid "This booking is part of a package deal"
 msgstr "Ova rezervacija je deo paketa"
 
+msgid "This category cannot be deleted because it is included in a package."
+msgstr ""
+
 msgid ""
 "This category has services with {count} past appointment. | This category "
 "has services with {count} past appointments."
@@ -9771,6 +9783,11 @@ msgstr ""
 
 msgid "This file is forbidden for upload"
 msgstr "Ovaj tip fajla nije dozvoljen"
+
+msgid ""
+"This is a temporary WhatsApp token and will automatically expire after 24 "
+"hours. Make sure to complete the setup before it expires."
+msgstr ""
 
 msgid ""
 "This is a unique security token. Copy it into the 'Verify token' field in "
@@ -9841,6 +9858,9 @@ msgid "This placeholder's content will be applied wherever it is used."
 msgstr ""
 
 msgid "This range"
+msgstr ""
+
+msgid "This service cannot be deleted because it is included in a package."
 msgstr ""
 
 msgid "This service does not have any extras"
@@ -10187,9 +10207,6 @@ msgstr ""
 
 msgid "Type"
 msgstr "Tip"
-
-msgid "Type:"
-msgstr "Tip:"
 
 msgid "Type Asc"
 msgstr ""
@@ -11075,6 +11092,15 @@ msgstr ""
 msgid "reCAPTCHA Type"
 msgstr ""
 
+msgid "reCAPTCHA challenge expired. Please try again."
+msgstr ""
+
+msgid "reCAPTCHA configuration is invalid."
+msgstr ""
+
+msgid "reCAPTCHA could not be loaded."
+msgstr ""
+
 msgid "reCAPTCHA on Customer Panel"
 msgstr ""
 
@@ -11082,6 +11108,9 @@ msgid "reCAPTCHA on Employee Panel"
 msgstr ""
 
 msgid "reCAPTCHA setup"
+msgstr ""
+
+msgid "reCAPTCHA validation failed."
 msgstr ""
 
 msgid "results"

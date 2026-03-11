@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Amelia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-10 16:18+0100\n"
+"POT-Creation-Date: 2026-03-10 12:06+0000\n"
 "PO-Revision-Date: 2025-11-20 16:11+0100\n"
 "Last-Translator: \n"
 "Language-Team: Amelia\n"
@@ -39,6 +39,18 @@ msgid "You have reached maximum number of registered domains"
 msgstr ""
 
 msgid "The purchase code is invalid or it has expired"
+msgstr ""
+
+msgid "Add booking"
+msgstr ""
+
+msgid "Add customer"
+msgstr ""
+
+msgid "Add event"
+msgstr ""
+
+msgid "Add package"
 msgstr ""
 
 msgid ""
@@ -92,6 +104,9 @@ msgid ""
 msgstr ""
 
 msgid "Configure waiting list for appointments"
+msgstr ""
+
+msgid "Created on"
 msgstr ""
 
 msgid "Country"
@@ -402,16 +417,16 @@ msgid ""
 "payment is completed through the payment link."
 msgstr ""
 
-msgid "Please enter live ClientId"
+msgid "Please enter live client ID"
 msgstr ""
 
-msgid "Please enter live Secret"
+msgid "Please enter live secret"
 msgstr ""
 
-msgid "Please enter test ClientId"
+msgid "Please enter test client ID"
 msgstr ""
 
-msgid "Please enter test Secret"
+msgid "Please enter test secret"
 msgstr ""
 
 #, php-format
@@ -420,13 +435,13 @@ msgid ""
 "to activate Amelia."
 msgstr ""
 
-msgid "Please enter live key id"
+msgid "Please enter live key ID"
 msgstr ""
 
 msgid "Please enter live key secret"
 msgstr ""
 
-msgid "Please enter test key id"
+msgid "Please enter test key ID"
 msgstr ""
 
 msgid "Please enter test key secret"
@@ -446,6 +461,18 @@ msgstr ""
 msgid ""
 "Paste the secret key you received after creating your API key pair in Google "
 "reCAPTCHA."
+msgstr ""
+
+msgid "reCAPTCHA configuration is invalid."
+msgstr ""
+
+msgid "reCAPTCHA validation failed."
+msgstr ""
+
+msgid "reCAPTCHA challenge expired. Please try again."
+msgstr ""
+
+msgid "reCAPTCHA could not be loaded."
 msgstr ""
 
 msgid ""
@@ -1107,7 +1134,7 @@ msgstr ""
 msgid "Special characters are not allowed"
 msgstr ""
 
-msgid "Sender ID supports up to 11 characters"
+msgid "Sender ID must be between 3 and 11 characters"
 msgstr ""
 
 msgid "Your ID must include at least one letter"
@@ -1141,6 +1168,9 @@ msgid ""
 "that responses via WhatsApp are not supported."
 msgstr ""
 
+msgid "Make sure you are using the correct WhatsApp credentials."
+msgstr ""
+
 msgid ""
 "Only templates in the default language will be displayed in the back-end. If "
 "a template doesn’t exist in the customer’s language, the default language "
@@ -1163,6 +1193,11 @@ msgid ""
 msgstr ""
 
 msgid "Template name"
+msgstr ""
+
+msgid ""
+"This is a temporary WhatsApp token and will automatically expire after 24 "
+"hours. Make sure to complete the setup before it expires."
 msgstr ""
 
 msgid "E-ticket"
@@ -1211,6 +1246,11 @@ msgid "Edit location"
 msgstr ""
 
 msgid "Google Maps failed to load. Check your API key and restrictions."
+msgstr ""
+
+msgid ""
+"Places API (New) is required but not enabled. Please enable it in Google "
+"Cloud Console."
 msgstr ""
 
 msgid "Latitude"
@@ -2368,12 +2408,6 @@ msgid "You can edit or delete each appointment"
 msgstr ""
 
 msgid "Date"
-msgstr ""
-
-msgid "Date:"
-msgstr ""
-
-msgid "Local time:"
 msgstr ""
 
 msgid "Location:"
@@ -3537,9 +3571,6 @@ msgid "Add Attendee"
 msgstr ""
 
 msgid "New appointment"
-msgstr ""
-
-msgid "New Event"
 msgstr ""
 
 msgid "'New appointment' button style"
@@ -4913,6 +4944,12 @@ msgid ""
 "Calendar connection is not available."
 msgstr ""
 
+msgid "1/2 width"
+msgstr ""
+
+msgid "1/1 width"
+msgstr ""
+
 msgid ""
 "If this option is disabled, the item will be available only for booking from "
 "the backend."
@@ -5327,9 +5364,6 @@ msgid "Appointments from the first package expire on:"
 msgstr ""
 
 msgid "Next Service"
-msgstr ""
-
-msgid "Or pay with card"
 msgstr ""
 
 msgid "Payment was canceled."
@@ -6163,6 +6197,9 @@ msgstr ""
 msgid "New Appointment"
 msgstr ""
 
+msgid "New Event"
+msgstr ""
+
 msgid "There are no attendees yet..."
 msgstr ""
 
@@ -6657,7 +6694,7 @@ msgstr ""
 msgid "Add period"
 msgstr ""
 
-msgid "Amount:"
+msgid "Amount"
 msgstr ""
 
 msgid "Attendee"
@@ -6791,9 +6828,6 @@ msgstr ""
 msgid "Payment amount"
 msgstr ""
 
-msgid "Payment ID:"
-msgstr ""
-
 msgid "Payment method"
 msgstr ""
 
@@ -6818,9 +6852,6 @@ msgid "Settings have been saved."
 msgstr ""
 
 msgid "Social login"
-msgstr ""
-
-msgid "Status:"
 msgstr ""
 
 msgid "Text"
@@ -6886,21 +6917,16 @@ msgid "After with space"
 msgstr ""
 
 msgid ""
-"If this is disabled, your front-end customers won't be able to book "
-"appointment with Pending status above the maximum capacity. Once the maximum "
-"capacity is reached appointment will close and time slot will become "
-"unavailable."
+"If enabled, customers can book with Pending status even after maximum "
+"capacity is reached."
 msgstr ""
 
 msgid ""
-"If this is disabled, your front-end customers won't be able to submit a "
-"booking unless they fill in the minimum service capacity, but once they book "
-"for any capacity above minimum, the time slot will become unavailable for "
-"booking for others. If enabled, multiple customers will be able to book the "
-"same time slot, without having to fill in the minimum capacity."
+"If disabled, booking must meet the minimum capacity, and the time slot "
+"closes after the first booking."
 msgstr ""
 
-msgid "Allow booking below minimum capacity"
+msgid "Keep slot available after first booking"
 msgstr ""
 
 msgid "Allow admin to book appointment at any time"
@@ -6920,7 +6946,7 @@ msgid ""
 "during another appointment."
 msgstr ""
 
-msgid "Allow employees to manage their special days"
+msgid "Allow employees to manage their days off"
 msgstr ""
 
 msgid "Allow employees to manage their services"
@@ -6929,7 +6955,7 @@ msgstr ""
 msgid "Allow employees to manage their schedule"
 msgstr ""
 
-msgid "Allow employees to manage their days off"
+msgid "Allow employees to manage their special days"
 msgstr ""
 
 msgid "Allow booking above maximum capacity"
@@ -7092,7 +7118,7 @@ msgstr ""
 msgid "Default number of items per page on the back end"
 msgstr ""
 
-msgid "Default back‑end page"
+msgid "Default back end page"
 msgstr ""
 
 msgid "Default payment method"
@@ -7220,9 +7246,6 @@ msgstr ""
 msgid ""
 "Define the time before the appointment during which customers can't "
 "reschedule."
-msgstr ""
-
-msgid "Notify the customer(s) by default"
 msgstr ""
 
 msgid "Maximum number of events returned"
@@ -7465,10 +7488,10 @@ msgstr ""
 msgid "Your balance has been recharged."
 msgstr ""
 
-msgid "Carrier:"
+msgid "Carrier"
 msgstr ""
 
-msgid "Cost:"
+msgid "Cost"
 msgstr ""
 
 msgid "Current password"
@@ -7754,10 +7777,7 @@ msgstr ""
 msgid "To send a test SMS, please recharge your balance."
 msgstr ""
 
-msgid "Text:"
-msgstr ""
-
-msgid "Type:"
+msgid "Local time"
 msgstr ""
 
 msgid "To customer"
@@ -7816,7 +7836,7 @@ msgstr ""
 msgid "Location longitude"
 msgstr ""
 
-msgid "Segment:"
+msgid "Segment"
 msgstr ""
 
 msgid "Already have an account?"
@@ -8132,9 +8152,6 @@ msgid "Please map corresponding data to columns:"
 msgstr ""
 
 msgid "Some records have an incorrect format."
-msgstr ""
-
-msgid "Amount"
 msgstr ""
 
 msgid "Booking start"
@@ -8469,9 +8486,6 @@ msgid "Email address"
 msgstr ""
 
 msgid "Phone number"
-msgstr ""
-
-msgid "Local time"
 msgstr ""
 
 msgid "Choose a Form"
@@ -9213,6 +9227,9 @@ msgstr ""
 msgid "Content placeholders"
 msgstr ""
 
+msgid "This category cannot be deleted because it is included in a package."
+msgstr ""
+
 msgid "Clear filters"
 msgstr ""
 
@@ -9942,6 +9959,9 @@ msgid "Service Desc"
 msgstr ""
 
 msgid "Service/Event"
+msgstr ""
+
+msgid "This service cannot be deleted because it is included in a package."
 msgstr ""
 
 msgid "Service has been updated."
@@ -11001,6 +11021,9 @@ msgstr ""
 msgid "SMTP credentials validation failed. Please check your settings."
 msgstr ""
 
+msgid "Invalid Stripe secret key."
+msgstr ""
+
 msgid "Add to Calendar"
 msgstr ""
 
@@ -11039,6 +11062,9 @@ msgid "Enable Microsoft Teams"
 msgstr ""
 
 msgid "You have already booked this event"
+msgstr ""
+
+msgid "Date:"
 msgstr ""
 
 msgid "Email:"
@@ -11104,6 +11130,9 @@ msgid "Email Address"
 msgstr ""
 
 msgid "Get in Touch"
+msgstr ""
+
+msgid "Or pay with card"
 msgstr ""
 
 msgid "Phone Number"

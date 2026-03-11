@@ -129,6 +129,12 @@ msgstr "+mai mult"
 msgid "+{count} more"
 msgstr "+{count} mai multe"
 
+msgid "1/1 width"
+msgstr ""
+
+msgid "1/2 width"
+msgstr ""
+
 msgid "10h"
 msgstr "10 ore"
 
@@ -454,6 +460,9 @@ msgstr ""
 msgid "Add appointment"
 msgstr "Adăugați o întâlnire"
 
+msgid "Add booking"
+msgstr ""
+
 msgid "Add category"
 msgstr "Adaugă categorie"
 
@@ -462,6 +471,9 @@ msgstr "Adăugați un câmp personalizat"
 
 msgid "Add custom notification"
 msgstr "Adăugați o notificare personalizată"
+
+msgid "Add customer"
+msgstr ""
 
 msgid "Add date range"
 msgstr "Adăugați un interval de date"
@@ -481,6 +493,9 @@ msgid ""
 msgstr ""
 "Adăugați ID-ul elementului (buton, link...), care va încărca manual "
 "conținutul codului scurt Amelia"
+
+msgid "Add event"
+msgstr ""
 
 msgid "Add event attendees"
 msgstr "Adaugă participanți la eveniment"
@@ -505,6 +520,9 @@ msgstr ""
 
 msgid "Add option"
 msgstr "Adaugă opțiune"
+
+msgid "Add package"
+msgstr ""
 
 msgid "Add period"
 msgstr "Adaugă perioadă"
@@ -637,9 +655,6 @@ msgstr ""
 
 msgid "Allow booking above maximum capacity"
 msgstr "Permiteți rezervarea peste capacitatea maximă"
-
-msgid "Allow booking below minimum capacity"
-msgstr "Permiteți rezervarea sub o capacitate minimă"
 
 msgid "Allow booking without a prior login"
 msgstr "Permiteți rezervarea fără autentificare prealabilă"
@@ -813,9 +828,6 @@ msgstr "Setările utilizatorilor Amelia"
 
 msgid "Amount"
 msgstr "Suma"
-
-msgid "Amount:"
-msgstr "Suma:"
 
 msgid "An email with details of your booking has been sent to you."
 msgstr "Ți-a fost trimis un e-mail cu detalii despre rezervare."
@@ -1004,7 +1016,7 @@ msgid "Appointment status has been updated."
 msgstr "Starea programării a fost actualizată."
 
 msgid "Appointment title"
-msgstr ""
+msgstr "Titlul programării"
 
 msgid "Appointments"
 msgstr "Rezervări"
@@ -1203,6 +1215,9 @@ msgid ""
 "Are you sure you want to skip the setup? Once skipped, the guided setup will "
 "no longer be available. All settings will need to be configured later."
 msgstr ""
+"Sunteți sigur că doriți să săriți peste configurare? Odată sărită, "
+"configurarea ghidată nu va mai fi disponibilă. Toate setările vor trebui "
+"configurate ulterior."
 
 msgid "Are you sure you want to unblock this customer?"
 msgstr "Sigur doriți să deblocați acest client?"
@@ -1259,7 +1274,7 @@ msgid "Auto-Reply Message"
 msgstr "Mesaj de răspuns automat"
 
 msgid "Auto-approve booking after payment"
-msgstr ""
+msgstr "Aprobare automată a rezervării după efectuarea plății"
 
 msgid "Auto-fill your details using:"
 msgstr "Completați automat datele folosind:"
@@ -1522,6 +1537,8 @@ msgid ""
 "Book time-based appointments with configurable durations, prices, and "
 "availability."
 msgstr ""
+"Programează întâlniri pe bază de oră, cu durate, prețuri și disponibilitate "
+"configurabile."
 
 msgid "Booked"
 msgstr "Rezervat"
@@ -1542,10 +1559,10 @@ msgid "Booking Appointment"
 msgstr "Programare rezervare"
 
 msgid "Booking Approved with Issues"
-msgstr ""
+msgstr "Rezervare aprobată cu probleme"
 
 msgid "Booking Canceled"
-msgstr ""
+msgstr "Rezervare anulată"
 
 msgid "Booking Closes"
 msgstr "Rezervarea se închide"
@@ -1563,7 +1580,7 @@ msgid "Booking Details"
 msgstr "Detalii rezervare"
 
 msgid "Booking Failed"
-msgstr ""
+msgstr "Rezervarea a eșuat"
 
 msgid "Booking Form"
 msgstr "Rezervare"
@@ -1587,10 +1604,10 @@ msgid "Booking Overview"
 msgstr "Prezentare generală a rezervării"
 
 msgid "Booking Processed"
-msgstr ""
+msgstr "Rezervare procesată"
 
 msgid "Booking Rejected"
-msgstr ""
+msgstr "Rezervare respinsă"
 
 msgid "Booking added"
 msgstr "Rezervare adăugată"
@@ -1864,7 +1881,7 @@ msgid "Canceled by attendee"
 msgstr "Anulat de participant"
 
 msgid "Cancellation Failed"
-msgstr ""
+msgstr "Anulare eșuată"
 
 msgid "Cancelled"
 msgstr "Anulat"
@@ -1899,8 +1916,8 @@ msgstr "Carduri"
 msgid "Cards and buttons"
 msgstr "Cărți și butoane"
 
-msgid "Carrier:"
-msgstr "Operator:"
+msgid "Carrier"
+msgstr ""
 
 msgid "Cart"
 msgstr "Coș"
@@ -2071,6 +2088,7 @@ msgstr "Alegeți un formular"
 
 msgid "Choose a currency that will be used for all price based settings."
 msgstr ""
+"Alegeți o monedă care va fi utilizată pentru toate setările bazate pe preț."
 
 msgid ""
 "Choose a form you want to customize. The Step-by-Step 2.0 form is the new "
@@ -2088,6 +2106,8 @@ msgid ""
 "Choose a time interval that will be used when defining all time based "
 "settings."
 msgstr ""
+"Alegeți un interval de timp care va fi utilizat la definirea tuturor "
+"setărilor bazate pe timp."
 
 msgid "Choose date and time"
 msgstr "Alegeți data și ora"
@@ -2138,7 +2158,7 @@ msgid "Choose when the repeating ends"
 msgstr "Alegeți când se termină repetarea"
 
 msgid "Choose whether you want to manage services, events, or both."
-msgstr ""
+msgstr "Alegeți dacă doriți să gestionați servicii, evenimente sau ambele."
 
 msgid "Choosing layout of first step in step by step form"
 msgstr "Alegerea aspectului primului pas în formularul pas cu pas"
@@ -2445,13 +2465,13 @@ msgid "Continue Booking"
 msgstr "Continuați rezervarea"
 
 msgid "Continue setup"
-msgstr ""
+msgstr "Continuați configurarea"
 
 msgid "Copy your API key now, as it won't be visible again."
 msgstr "Copiați acum cheia API, deoarece nu va mai fi vizibilă din nou."
 
-msgid "Cost:"
-msgstr "Preț:"
+msgid "Cost"
+msgstr ""
 
 msgid ""
 "Could not delete category. This category has services available for booking "
@@ -2597,10 +2617,10 @@ msgstr ""
 "informați la momentul potrivit."
 
 msgid "Create employee"
-msgstr ""
+msgstr "Creați un angajat"
 
 msgid "Create event"
-msgstr ""
+msgstr "Creați un eveniment"
 
 msgid "Create meetings for pending appointments"
 msgstr "Creează întâlniri pentru programările în așteptare"
@@ -2635,10 +2655,10 @@ msgstr ""
 "disponibil."
 
 msgid "Create scheduled events with fixed dates, prices and capacities."
-msgstr ""
+msgstr "Creați evenimente programate cu date, prețuri și capacități fixe."
 
 msgid "Create service"
-msgstr ""
+msgstr "Creați un serviciu"
 
 msgid "Create spaces for pending appointments"
 msgstr "Creați spații pentru programările în așteptare"
@@ -2654,6 +2674,9 @@ msgstr ""
 
 msgid "Created On"
 msgstr "Creat in"
+
+msgid "Created on"
+msgstr ""
 
 msgid "Credit Card"
 msgstr "Card de credit"
@@ -2815,7 +2838,7 @@ msgid "Customer last name"
 msgstr "Nume client"
 
 msgid "Customer name"
-msgstr ""
+msgstr "Numele clientului"
 
 msgid "Customer note"
 msgstr "Mențiune client"
@@ -2875,6 +2898,8 @@ msgstr "Clienți în lista de așteptare"
 
 msgid "Customers will be redirected to this URL after booking an event."
 msgstr ""
+"Clienții vor fi redirecționați către această adresă URL după rezervarea unui "
+"eveniment."
 
 msgid ""
 "Customers will be redirected to this URL after scheduling an appointment."
@@ -3065,8 +3090,8 @@ msgstr "Locație implicită Square"
 msgid "Default appointment status"
 msgstr "Starea implicită a programării"
 
-msgid "Default back‑end page"
-msgstr "Pagină back-end implicită"
+msgid "Default back end page"
+msgstr ""
 
 msgid "Default language"
 msgstr "Limba implicita"
@@ -3749,7 +3774,7 @@ msgid "Employee last name"
 msgstr "Numele membrului staff"
 
 msgid "Employee name"
-msgstr ""
+msgstr "Numele angajatului"
 
 msgid "Employee name, email & phone"
 msgstr "Numele membrului staff, e-mail și telefon"
@@ -4203,7 +4228,7 @@ msgid "Error"
 msgstr "Eroare"
 
 msgid "Error occurred"
-msgstr ""
+msgstr "A apărut o eroare"
 
 msgid "Error while generating CSV."
 msgstr "Eroare la generarea fișierului CSV."
@@ -5061,7 +5086,7 @@ msgid "Header"
 msgstr "Antet"
 
 msgid "Header Image URL"
-msgstr ""
+msgstr "URL-ul imaginii de antet"
 
 msgid "Heading"
 msgstr "Titlu"
@@ -5239,7 +5264,7 @@ msgid "How to get your"
 msgstr "Cum să obțineți"
 
 msgid "How will you use Amelia?"
-msgstr ""
+msgstr "Cum vei folosi Amelia?"
 
 msgid "ID"
 msgstr ""
@@ -5267,11 +5292,21 @@ msgstr ""
 "va folosi metoda de plată implicită."
 
 msgid ""
+"If disabled, booking must meet the minimum capacity, and the time slot "
+"closes after the first booking."
+msgstr ""
+
+msgid ""
 "If disabled, the price will remain the same regardless of how many people "
 "are included in the group appointment."
 msgstr ""
 "Dacă este dezactivat, prețul va rămâne același indiferent de câți oameni "
 "sunt incluși în programarea de grup."
+
+msgid ""
+"If enabled, customers can book with Pending status even after maximum "
+"capacity is reached."
+msgstr ""
 
 msgid ""
 "If enabled, customers can complete their payment using the link in their "
@@ -5313,34 +5348,11 @@ msgstr ""
 "importat."
 
 msgid ""
-"If this is disabled, your front-end customers won't be able to book "
-"appointment with Pending status above the maximum capacity. Once the maximum "
-"capacity is reached appointment will close and time slot will become "
-"unavailable."
-msgstr ""
-"Dacă aceasta este dezactivată, clienții de pe front-end nu vor putea rezerva "
-"o programare cu statutul În așteptare peste capacitatea maximă. Odată ce "
-"capacitatea maximă este atinsă, programarea se va închide și intervalul de "
-"timp va deveni indisponibil."
-
-msgid ""
-"If this is disabled, your front-end customers won't be able to submit a "
-"booking unless they fill in the minimum service capacity, but once they book "
-"for any capacity above minimum, the time slot will become unavailable for "
-"booking for others. If enabled, multiple customers will be able to book the "
-"same time slot, without having to fill in the minimum capacity."
-msgstr ""
-"Dacă aceasta este dezactivată, clienții de pe front-end nu vor putea trimite "
-"o rezervare decât dacă completează capacitatea minimă a serviciului, dar "
-"odată ce rezervă pentru orice capacitate peste minim, intervalul de timp va "
-"deveni indisponibil pentru alții. Dacă este activată, mai mulți clienți vor "
-"putea rezerva același interval de timp, fără a fi nevoie să completeze "
-"capacitatea minimă."
-
-msgid ""
 "If this option is disabled, the item will be available only for booking from "
 "the backend."
 msgstr ""
+"Dacă această opțiune este dezactivată, articolul va fi disponibil numai "
+"pentru rezervare din backend."
 
 msgid ""
 "If this option is enabled customers will be able to pay via email "
@@ -5493,11 +5505,19 @@ msgid ""
 "can be fully customized with its own name, duration, price, capacity, "
 "availability, and extras, and booked online with assigned employees."
 msgstr ""
+"În Amelia, un „serviciu” este un tip specific de programare pe care afacerea "
+"dvs. îl oferă clienților - cum ar fi consultări, tratamente sau cursuri - "
+"care poate fi personalizat complet cu propriul nume, durată, preț, "
+"capacitate, disponibilitate și extraopțiuni și rezervat online cu angajații "
+"desemnați."
 
 msgid ""
 "In Amelia, an employee is a team member who provides services or hosts "
 "events, with their own schedule, working hours, and assigned offerings."
 msgstr ""
+"În Amelia, un angajat este un membru al echipei care furnizează servicii sau "
+"organizează evenimente, având propriul program, ore de lucru și oferte "
+"alocate."
 
 msgid ""
 "In Amelia, an event is a booking-type offering designed for group activities "
@@ -5505,6 +5525,10 @@ msgid ""
 "series - that can be configured with its own schedule, capacity, pricing "
 "structure and assigned staff."
 msgstr ""
+"În Amelia, un eveniment este o ofertă de tip rezervare concepută pentru "
+"activități de grup sau ocazii de mai multe zile - cum ar fi ateliere, "
+"conferințe, tururi sau serii de traininguri - care poate fi configurată cu "
+"propriul program, capacitate, structură de prețuri și personal alocat."
 
 msgid "In Package"
 msgstr "În pachet"
@@ -5525,6 +5549,8 @@ msgid ""
 "Include buffer time in slot calculation. When disabled, slots are based only "
 "on service duration."
 msgstr ""
+"Includeți timpul tampon în calculul sloturilor. Când această opțiune este "
+"dezactivată, sloturile se bazează numai pe durata serviciului."
 
 msgid "Include in invoice"
 msgstr "Includeți în factură"
@@ -5616,6 +5642,9 @@ msgstr "Integrări"
 msgid "Interested in unlocking this feature?"
 msgstr "Vă interesează să deblocați această funcție?"
 
+msgid "Invalid Stripe secret key."
+msgstr ""
+
 msgid "Invisible reCAPTCHA badge"
 msgstr "Insigna reCAPTCHA invizibilă"
 
@@ -5665,6 +5694,8 @@ msgid ""
 "It looks like this is your first time here, so let’s walk through a few "
 "simple steps to help you get started."
 msgstr ""
+"Se pare că este prima dată când ești aici, așa că hai să parcurgem câțiva "
+"pași simpli care să te ajute să începi."
 
 msgid ""
 "It seems like there are no available or visible services assigned to the "
@@ -5754,6 +5785,9 @@ msgid ""
 msgstr ""
 "Mențineți operațiunile aliniate cu setările unificate, disponibilitatea și "
 "controlul resurselor"
+
+msgid "Keep slot available after first booking"
+msgstr ""
 
 msgid ""
 "Keep your data organized and meaningful with structured fields that "
@@ -5946,9 +5980,6 @@ msgstr "Ora locală:"
 msgid "Local time"
 msgstr "Ora locală"
 
-msgid "Local time:"
-msgstr "Ora locală:"
-
 msgid "Location"
 msgstr "Locație"
 
@@ -6083,6 +6114,9 @@ msgstr ""
 
 msgid "Make extra mandatory"
 msgstr "Fă opțiunea suplimentară obligatorie"
+
+msgid "Make sure you are using the correct WhatsApp credentials."
+msgstr ""
 
 msgid "Male"
 msgstr "Bărbat"
@@ -6684,9 +6718,6 @@ msgstr "Anunță participanții"
 msgid "Notify the customer(s)"
 msgstr "Notificați clientul (clienții)"
 
-msgid "Notify the customer(s) by default"
-msgstr "Notificați clientul (clienții) în mod implicit"
-
 msgid "Number of Additional People"
 msgstr "Numărul de persoane suplimentare"
 
@@ -6911,6 +6942,9 @@ msgid ""
 "Once you start receiving bookings, your customers will be displayed here. "
 "You can also get started by clicking the Add or Import button below."
 msgstr ""
+"Odată ce începeți să primiți rezervări, clienții dvs. vor fi afișați aici. "
+"De asemenea, puteți începe făcând clic pe butonul Adăugați sau Importați de "
+"mai jos."
 
 msgid "One booking can have multiple attendees/spots in it."
 msgstr "O rezervare poate avea mai mulți participanți/locuri în ea."
@@ -7329,9 +7363,6 @@ msgstr "Istoric plăți"
 msgid "Payment ID"
 msgstr "ID plată"
 
-msgid "Payment ID:"
-msgstr "ID plată:"
-
 msgid "Payment Method"
 msgstr "Modalitate de plată"
 
@@ -7399,7 +7430,7 @@ msgid "Payment type, deposit payment..."
 msgstr "Tipul de plată, plata depozitului..."
 
 msgid "Payment was canceled."
-msgstr ""
+msgstr "Plata a fost anulată."
 
 msgid "Payments"
 msgstr "Plăți"
@@ -7523,6 +7554,11 @@ msgstr "Text substituent"
 
 msgid "Placeholders"
 msgstr "Substituenți"
+
+msgid ""
+"Places API (New) is required but not enabled. Please enable it in Google "
+"Cloud Console."
+msgstr ""
 
 msgid "Plain"
 msgstr "Simplu"
@@ -7688,20 +7724,20 @@ msgstr "Vă rugăm să introduceți numele dvs"
 msgid "Please enter live API Key"
 msgstr "Introduceți cheia API live"
 
-msgid "Please enter live ClientId"
-msgstr "Vă rugăm să introduceți ClientId live"
-
 msgid "Please enter live POSKey"
 msgstr "Vă rugăm să introduceți cheia POSKey activă"
 
-msgid "Please enter live Secret"
-msgstr "Vă rugăm să introduceți live Secret"
+msgid "Please enter live client ID"
+msgstr ""
 
-msgid "Please enter live key id"
-msgstr "Vă rugăm să introduceți ID-ul cheii live"
+msgid "Please enter live key ID"
+msgstr ""
 
 msgid "Please enter live key secret"
 msgstr "Vă rugăm să introduceți secretul cheii live"
+
+msgid "Please enter live secret"
+msgstr ""
 
 msgid "Please enter name"
 msgstr "Vă rugăm să introduceți numele"
@@ -7736,17 +7772,17 @@ msgstr "Vă rugăm să introduceți denumirea cotei de impozitare."
 msgid "Please enter test API Key"
 msgstr "Introduceți cheia API de testare"
 
-msgid "Please enter test ClientId"
-msgstr "Vă rugăm să introduceți testul ClientId"
+msgid "Please enter test client ID"
+msgstr ""
 
-msgid "Please enter test Secret"
-msgstr "Vă rugăm să introduceți testul Secret"
-
-msgid "Please enter test key id"
-msgstr "Introduceți codul cheii de testare"
+msgid "Please enter test key ID"
+msgstr ""
 
 msgid "Please enter test key secret"
 msgstr "Introduceți secretul cheii de testare"
+
+msgid "Please enter test secret"
+msgstr ""
 
 msgid "Please enter waiting list capacity"
 msgstr "Vă rugăm să introduceți capacitatea listei de așteptare"
@@ -8409,7 +8445,7 @@ msgid "Reset Password"
 msgstr "Resetează parola"
 
 msgid "Reset form settings"
-msgstr ""
+msgstr "Resetează setările formularului"
 
 msgid "Reset password"
 msgstr "Resetare parolă"
@@ -8442,7 +8478,7 @@ msgid "Resources"
 msgstr "Resurse"
 
 msgid "Return to Home"
-msgstr ""
+msgstr "Reveniți la pagina principală"
 
 msgid "Returning"
 msgstr "Revenire"
@@ -8503,6 +8539,8 @@ msgstr "Nume utilizator SMTP"
 
 msgid "SMTP credentials validation failed. Please check your settings."
 msgstr ""
+"Validarea datelor de autentificare SMTP a eșuat. Vă rugăm să verificați "
+"setările."
 
 msgid "SSL"
 msgstr ""
@@ -8694,7 +8732,7 @@ msgstr "Actiune"
 msgid "Securely process payments using Stripe."
 msgstr "Procesează plățile în siguranță folosind Stripe."
 
-msgid "Segment:"
+msgid "Segment"
 msgstr ""
 
 msgid "Segments"
@@ -8783,7 +8821,7 @@ msgstr ""
 "Selectează un substituent pentru a-l insera acolo unde este plasat cursorul."
 
 msgid "Select at least one option."
-msgstr ""
+msgstr "Selectați cel puțin o opțiune"
 
 msgid "Select box"
 msgstr "Casetă de selecție"
@@ -8986,8 +9024,8 @@ msgstr "Trimite pe e-mail"
 msgid "Send your customer data to Mailchimp quickly and effortlessly."
 msgstr "Trimite rapid și fără efort datele clienților către Mailchimp."
 
-msgid "Sender ID supports up to 11 characters"
-msgstr "ID-ul expeditorului acceptă până la 11 caractere"
+msgid "Sender ID must be between 3 and 11 characters"
+msgstr ""
 
 msgid "Sender email"
 msgstr "E-mailul expeditorului"
@@ -9176,7 +9214,7 @@ msgstr ""
 "date pentru a maximiza accesibilitatea și veniturile."
 
 msgid "Set general settings"
-msgstr ""
+msgstr "Setați setările generale"
 
 msgid ""
 "Set individual time zones for employees so availability and bookings are "
@@ -9351,6 +9389,9 @@ msgid ""
 "Set your company working hours. This schedule will be used for all new "
 "employees, however you can customize schedule for each employee later."
 msgstr ""
+"Setați programul de lucru al companiei. Acest program va fi utilizat pentru "
+"toți angajații noi, însă puteți personaliza programul pentru fiecare angajat "
+"ulterior."
 
 msgid "Setting up days off"
 msgstr "Configurarea zilelor libere"
@@ -9377,7 +9418,7 @@ msgid "Show"
 msgstr "Arată"
 
 msgid "Show Add To Calendar option to customers"
-msgstr ""
+msgstr "Afișează opțiunea „Adaugă la calendar” pentru clienți"
 
 msgid "Show All"
 msgstr "Arata tot"
@@ -9541,7 +9582,7 @@ msgid "Sign in with Google"
 msgstr "Conectați-vă cu Google"
 
 msgid "Sign in with Microsoft"
-msgstr ""
+msgstr "Conectați-vă cu Microsoft"
 
 msgid "Sign in with Outlook"
 msgstr "Conectați-vă cu Outlook"
@@ -9599,7 +9640,7 @@ msgid "Skip packages and continue with the selected service"
 msgstr "Omiteți pachetele și continuați cu serviciul selectat"
 
 msgid "Skip setup"
-msgstr ""
+msgstr "Sari peste configurare"
 
 msgid "Slot end time"
 msgstr "Ora de încheiere a intervalului orar"
@@ -9747,9 +9788,6 @@ msgstr "Ora de început"
 msgid "Status"
 msgstr "Stare"
 
-msgid "Status:"
-msgstr "Stare:"
-
 msgid "Status Asc"
 msgstr "Status Ascendent"
 
@@ -9792,16 +9830,16 @@ msgid "Step-by-step booking form guide"
 msgstr "Ghid pas cu pas pentru formularul de programare"
 
 msgid "Step 1"
-msgstr ""
+msgstr "Pasul 1"
 
 msgid "Step 2"
-msgstr ""
+msgstr "Pasul 2"
 
 msgid "Step 3"
-msgstr ""
+msgstr "Pasul 3"
 
 msgid "Step 4"
-msgstr ""
+msgstr "Pasul 4"
 
 msgid "Step Booking"
 msgstr "Rezervare pas"
@@ -9911,6 +9949,8 @@ msgid ""
 "Suggest customers to add an appointment to their calendar when booking is "
 "finalized."
 msgstr ""
+"Sugerați clienților să adauge o programare în calendarul lor atunci când "
+"rezervarea este finalizată."
 
 msgid "Suggest next available date"
 msgstr "Sugerează următoarea dată disponibilă"
@@ -9969,6 +10009,8 @@ msgid ""
 "Sync your and your employee's personal and professional events by connection "
 "Outlook calendars."
 msgstr ""
+"Sincronizați evenimentele personale și profesionale ale dvs. și ale "
+"angajaților dvs. prin conectarea calendarelor Outlook."
 
 msgid ""
 "Sync your and your employees' personal and professional events by connecting "
@@ -10101,9 +10143,6 @@ msgid "Test secret Key"
 msgstr "Cheie secretă de test"
 
 msgid "Text"
-msgstr ""
-
-msgid "Text:"
 msgstr ""
 
 msgid "Text Mode"
@@ -10328,10 +10367,13 @@ msgid "This Only"
 msgstr "Doar acesta"
 
 msgid "This appointment is a part of a package."
-msgstr ""
+msgstr "Această programare face parte dintr-un pachet."
 
 msgid "This booking is part of a package deal"
 msgstr "Această rezervare face parte dintr-un pachet"
+
+msgid "This category cannot be deleted because it is included in a package."
+msgstr ""
 
 msgid ""
 "This category has services with {count} past appointment. | This category "
@@ -10378,6 +10420,11 @@ msgstr "Acest câmp este obligatoriu."
 
 msgid "This file is forbidden for upload"
 msgstr "Acest fișier este interzis pentru încărcare"
+
+msgid ""
+"This is a temporary WhatsApp token and will automatically expire after 24 "
+"hours. Make sure to complete the setup before it expires."
+msgstr ""
 
 msgid ""
 "This is a unique security token. Copy it into the 'Verify token' field in "
@@ -10472,6 +10519,9 @@ msgstr "Conținutul acestui substituent va fi aplicat oriunde este utilizat."
 
 msgid "This range"
 msgstr "Acest interval"
+
+msgid "This service cannot be deleted because it is included in a package."
+msgstr ""
 
 msgid "This service does not have any extras"
 msgstr "Acest serviciu nu are opțiuni extra"
@@ -10850,9 +10900,6 @@ msgstr ""
 msgid "Type"
 msgstr "Tip"
 
-msgid "Type:"
-msgstr "Tip:"
-
 msgid "Type Asc"
 msgstr "Tip Asc"
 
@@ -11191,11 +11238,16 @@ msgid ""
 "We were unable to cancel your booking. Please contact admin for assistance "
 "with canceling this booking."
 msgstr ""
+"Nu am putut anula rezervarea dumneavoastră. Vă rugăm să contactați "
+"administratorul pentru asistență în anularea acestei rezervări."
 
 msgid ""
 "We were unable to process your booking, and it was rejected. Please contact "
 "admin if you need help or want to try booking again."
 msgstr ""
+"Nu am putut procesa rezervarea dvs., aceasta fiind respinsă. Vă rugăm să "
+"contactați administratorul dacă aveți nevoie de ajutor sau doriți să "
+"încercați din nou rezervarea."
 
 msgid "Web"
 msgstr ""
@@ -11234,7 +11286,7 @@ msgid "Welcome back"
 msgstr "Bine ai revenit"
 
 msgid "Welcome to Amelia!"
-msgstr ""
+msgstr "Bine ați venit la Amelia!"
 
 msgid "Wellness"
 msgstr "Bunăstare"
@@ -11430,6 +11482,8 @@ msgid ""
 "You are currently connected to Outlook Calendar by Admin. Overriding Outlook "
 "Calendar connection is not available."
 msgstr ""
+"În prezent sunteți conectat la Calendarul Outlook prin admin. Nu este "
+"disponibilă suprascrierea conexiunii la Calendarul Outlook."
 
 msgid "You are on the waiting list with position"
 msgstr "Ești pe lista de așteptare cu poziția "
@@ -11531,6 +11585,8 @@ msgid ""
 "You have successfully declined this booking request. The status has been "
 "updated in the system."
 msgstr ""
+"Ați refuzat cu succes această solicitare de rezervare. Statusul a fost "
+"actualizat în sistem."
 
 msgid "You will be redirected to the payment checkout."
 msgstr "Veți fi redirecționat către casa de plată."
@@ -11554,21 +11610,30 @@ msgid ""
 "Your booking has been successfully canceled. If you have any questions or "
 "wish to reschedule, please contact admin."
 msgstr ""
+"Rezervarea dvs. a fost anulată cu succes. Dacă aveți întrebări sau doriți să "
+"reprogramați, vă rugăm să contactați administratorul."
 
 msgid ""
 "Your booking has been successfully completed and approved. You're all set "
 "and can expect everything to proceed smoothly."
 msgstr ""
+"Rezervarea ta a fost finalizată și aprobată cu succes. Ești gata și te poți "
+"aștepta ca totul să decurgă fără probleme."
 
 msgid ""
 "Your booking was approved, but there was an issue completing the process. "
 "Please reach out to admin to ensure everything is properly recorded."
 msgstr ""
+"Rezervarea dvs. a fost aprobată, dar a apărut o problemă la finalizarea "
+"procesului. Vă rugăm să contactați administratorul pentru a vă asigura că "
+"totul este înregistrat corect."
 
 msgid ""
 "Your booking was successfully processed, but it could not be approved. "
 "Please contact admin if you need assistance."
 msgstr ""
+"Rezervarea dvs. a fost procesată cu succes, dar nu a putut fi aprobată. Vă "
+"rugăm să contactați administratorul dacă aveți nevoie de asistență."
 
 msgid "Your card's expiration date is incomplete"
 msgstr "Data de expirare a cardului dvs. este incompletă"
@@ -11779,6 +11844,15 @@ msgstr ""
 msgid "reCAPTCHA Type"
 msgstr "Tip reCAPTCHA"
 
+msgid "reCAPTCHA challenge expired. Please try again."
+msgstr ""
+
+msgid "reCAPTCHA configuration is invalid."
+msgstr ""
+
+msgid "reCAPTCHA could not be loaded."
+msgstr ""
+
 msgid "reCAPTCHA on Customer Panel"
 msgstr "reCAPTCHA pe Panoul Clientului"
 
@@ -11787,6 +11861,9 @@ msgstr "reCAPTCHA pe Panoul Angajatului"
 
 msgid "reCAPTCHA setup"
 msgstr "Configurare reCAPTCHA"
+
+msgid "reCAPTCHA validation failed."
+msgstr ""
 
 msgid "results"
 msgstr "rezultate"

@@ -3,7 +3,7 @@
 Plugin Name: Amelia
 Plugin URI: https://wpamelia.com/
 Description: Amelia is a simple yet powerful automated booking specialist, working 24/7 to make sure your customers can make appointments and events even while you sleep!
-Version: 9.1.2
+Version: 9.2
 Author: Melograno Ventures
 Author URI: https://melograno.io/
 Text Domain: wpamelia
@@ -37,6 +37,8 @@ use AmeliaBooking\Infrastructure\WP\Translations\BackendStrings;
 use AmeliaBooking\Infrastructure\WP\UserRoles\UserRoles;
 use AmeliaBooking\Infrastructure\WP\WPMenu\Submenu;
 use AmeliaBooking\Infrastructure\WP\WPMenu\SubmenuPageHandler;
+use AmeliaBooking\Infrastructure\WP\Compatibility\LiteSpeedCacheCompatibility;
+use AmeliaBooking\Infrastructure\WP\WPMenu\AdminBarMenu;
 use Exception;
 use Slim\App;
 use AmeliaBooking\Infrastructure\Licence;
@@ -111,7 +113,7 @@ if (!defined('AMELIA_LOGIN_URL')) {
 
 // Const for Amelia version
 if (!defined('AMELIA_VERSION')) {
-    define('AMELIA_VERSION', '9.1.2');
+    define('AMELIA_VERSION', '9.2');
 }
 
 // Const for site URL
@@ -216,6 +218,9 @@ class Plugin
     {
         $settingsService = new SettingsService(new SettingsStorage());
 
+        // Initialize LiteSpeed Cache compatibility
+        LiteSpeedCacheCompatibility::init();
+
         self::weglotConflict($settingsService, true);
 
         load_plugin_textdomain(AMELIA_DOMAIN, false, plugin_basename(__DIR__) . '/languages/' . AMELIA_LOCALE . '/');
@@ -259,6 +264,18 @@ class Plugin
 
         $ameliaRole = UserRoles::getUserAmeliaRole(wp_get_current_user());
 
+        // Register Gutenberg blocks for rendering on frontend (works for all users, logged in or not)
+        AmeliaStepBookingGutenbergBlock::init();
+        AmeliaCatalogBookingGutenbergBlock::init();
+        AmeliaBookingGutenbergBlock::init();
+        AmeliaSearchGutenbergBlock::init();
+        AmeliaCatalogGutenbergBlock::init();
+        AmeliaEventsGutenbergBlock::init();
+        AmeliaEventsListBookingGutenbergBlock::init();
+        AmeliaEventsCalendarBookingGutenbergBlock::init();
+        AmeliaCustomerCabinetGutenbergBlock::init();
+        AmeliaEmployeeCabinetGutenbergBlock::init();
+
         // Init menu if user is logged in with amelia role
         if (in_array($ameliaRole, ['admin', 'manager', 'provider', 'customer'])) {
             if ($ameliaRole === 'admin') {
@@ -267,19 +284,6 @@ class Plugin
 
             // Add TinyMCE button for shortcode generator
             ButtonService::renderButton();
-
-            // Add Gutenberg Block for shortcode generator
-            AmeliaStepBookingGutenbergBlock::init();
-            AmeliaCatalogBookingGutenbergBlock::init();
-            AmeliaBookingGutenbergBlock::init();
-            AmeliaSearchGutenbergBlock::init();
-            AmeliaCatalogGutenbergBlock::init();
-            AmeliaEventsGutenbergBlock::init();
-            AmeliaEventsListBookingGutenbergBlock::init();
-            AmeliaEventsCalendarBookingGutenbergBlock::init();
-            AmeliaCustomerCabinetGutenbergBlock::init();
-            AmeliaEmployeeCabinetGutenbergBlock::init();
-
 
             add_filter('block_categories_all', array('AmeliaBooking\Plugin', 'addAmeliaBlockCategory'), 10, 2);
             add_filter('learn-press/frontend-default-scripts', array('AmeliaBooking\Plugin', 'learnPressConflict'));
@@ -427,6 +431,16 @@ class Plugin
         );
 
         $wpMenu->addOptionsPages();
+    }
+
+    public static function initAdminBar()
+    {
+        $settingsService = new SettingsService(new SettingsStorage());
+
+        add_action('admin_bar_menu', function ($wpAdminBar) use ($settingsService) {
+            $adminBarMenu = new AdminBarMenu($settingsService);
+            $adminBarMenu->addAdminBarMenu($wpAdminBar);
+        }, 100);
     }
 
     public static function adminInit()
@@ -680,6 +694,9 @@ add_action('wp_ajax_nopriv_wpamelia_api', array('AmeliaBooking\Plugin', 'wpAmeli
 
 /** Init the plugin */
 add_action('plugins_loaded', array('AmeliaBooking\Plugin', 'init'));
+
+add_action('init', array('AmeliaBooking\Infrastructure\WP\WPMenu\AdminBarMenu', 'enqueueScripts'));
+add_action('init', array('AmeliaBooking\Plugin', 'initAdminBar'));
 
 add_action('admin_init', array('AmeliaBooking\Plugin', 'adminInit'));
 

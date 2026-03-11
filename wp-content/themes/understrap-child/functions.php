@@ -28,3 +28,13 @@ add_action( 'wp_enqueue_scripts', 'child_theme_configurator_css', 10 );
 
 
 
+add_action('add_meta_boxes', function() {
+    add_meta_box(
+        'postimagediv',
+        __('Immagine in evidenza'),
+        'post_thumbnail_meta_box',
+        'progetto',
+        'side',
+        'low'
+    );
+});

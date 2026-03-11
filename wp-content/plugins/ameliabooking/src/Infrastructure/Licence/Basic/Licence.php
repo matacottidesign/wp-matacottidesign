@@ -81,6 +81,7 @@ class Licence extends \AmeliaBooking\Infrastructure\Licence\Starter\Licence
                 Commands\PaymentGateway\BarionPaymentCommand::class                => new Commands\PaymentGateway\BarionPaymentCommandHandler($c),
                 Commands\PaymentGateway\BarionPaymentNotifyCommand::class          => new Commands\PaymentGateway\BarionPaymentNotifyCommandHandler($c),
                 Commands\PaymentGateway\BarionPaymentCallbackCommand::class        => new Commands\PaymentGateway\BarionPaymentCallbackCommandHandler($c),
+                Commands\PaymentGateway\StripeValidateKeysCommand::class           => new Commands\PaymentGateway\StripeValidateKeysCommandHandler($c),
 
                 // Tax
                 Commands\Tax\AddTaxCommand::class                                  => new Commands\Tax\AddTaxCommandHandler($c),

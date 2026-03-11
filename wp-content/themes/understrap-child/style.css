@@ -58,7 +58,11 @@ strong {
 
 .btn-primary:hover {
   background-color: var(--dark-red);
-  transform: scale(1.05);
+  transform: scale(0.98);
+}
+
+.text-primary{
+  color: var(--primary) !important;
 }
 
 .cta-arrow {
@@ -70,6 +74,28 @@ strong {
 
 .cta-arrow i {
   color: var(--secondary);
+}
+
+.btn-small .cta-arrow{
+  width: 30px;
+  height: 30px;
+}
+
+.progetto-card{
+  transition: var(--transition);
+}
+
+.progetto-card:hover{
+  transform: scale(0.98);
+}
+
+.progetto-cover,
+.progetto-body{
+  border-radius: var(--radius-md);
+}
+
+.progetto-cover{
+  margin-bottom: -50px;
 }
 
 @keyframes arrow-bounce {
@@ -158,6 +184,12 @@ strong {
 .servizio-img img {
   height: 50px;
   width: auto;
+}
+
+.progetto-cover {
+    height: 400px;
+    background-size: cover;
+    background-position: center;
 }
 
 /* MOBILE */

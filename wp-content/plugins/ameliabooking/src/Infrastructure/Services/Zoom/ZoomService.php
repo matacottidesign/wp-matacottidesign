@@ -87,8 +87,6 @@ class ZoomService extends AbstractZoomService
             return null;
         }
 
-        curl_close($ch);
-
         $resultArray = json_decode($result, true);
 
         $this->settingsService->setSetting(
@@ -141,8 +139,6 @@ class ZoomService extends AbstractZoomService
         if ($result === false || $code === 401) {
             return ['message' => curl_error($ch), 'code' => curl_getinfo($ch, CURLINFO_HTTP_CODE), 'users' => null];
         }
-
-        curl_close($ch);
 
         return json_decode($result, true);
     }
