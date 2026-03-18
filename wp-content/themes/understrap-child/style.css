@@ -192,6 +192,27 @@ strong {
     background-position: center;
 }
 
+.banner-laterale {
+    border-radius: var(--radius-md);
+    background: var(--gradient-hero);
+    background-size: cover;
+    background-position: center top;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 450px;
+    max-width: 450px;
+    text-align: center;
+}
+
+.banner-laterale-title {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--primary);
+}
+
 /* MOBILE */
 
 .hero-mobile,
@@ -253,7 +274,7 @@ strong {
 
   .hero-desktop .hero-title,
   .servizi-hero {
-    margin-top: 7rem;
+    margin-top: 6rem;
   }
 
   .hero-desktop .hero-title { font-size: 6rem; }
