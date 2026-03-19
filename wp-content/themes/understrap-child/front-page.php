@@ -26,6 +26,7 @@ $args = [
     <?php get_template_part('front-page/hero', 'tablet', $args); ?>
     <?php get_template_part('front-page/hero', 'mobile', $args); ?>
     <?php get_template_part('front-page/projects'); ?>
+    <?php get_template_part('front-page/bio-banner'); ?>
 
 </div>
 
