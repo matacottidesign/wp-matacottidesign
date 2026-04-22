@@ -1,35 +1,61 @@
+<?php
+/*
+ * ============================================================
+ * SEZIONE PROGETTI IN EVIDENZA — HOMEPAGE
+ * ============================================================
+ * Layout a due colonne:
+ * - Colonna sinistra (sticky su desktop): titolo sezione,
+ *   citazione e banner laterale con CTA.
+ * - Colonna destra: lista di progetti in evidenza selezionati
+ *   tramite ACF (relationship field).
+ *
+ * Campi ACF richiesti:
+ * - titolo_sezione_progetti
+ * - descrizione_sezione_progetti
+ * - immagine_banner
+ * - titolo_banner
+ * - link_banner
+ * - progetti_in_evidenza (relationship → post type "progetto")
+ * ============================================================
+ */
+
+// Recupero campi ACF comuni a entrambe le colonne (un'unica chiamata)
+$image_banner = get_field( 'immagine_banner' );
+$link_banner  = get_field( 'link_banner' );
+?>
+
 <section class="container-fluid mt-5">
 
     <div class="row">
-        <div class="col-12 col-xl-4 mb-3 sticky-xl-top align-self-start" style="top:5.5rem;">
+
+        <?php /* ---- COLONNA SINISTRA: intestazione + banner (sticky su desktop) ---- */ ?>
+        <div class="col-12 col-xl-4 mb-3 sticky-xl-top align-self-start" style="top: 5.5rem;">
 
             <h3 class="text-uppercase fs-1">
-                <?php echo esc_html( get_field('titolo_sezione_progetti') ); ?>
+                <?php echo esc_html( get_field( 'titolo_sezione_progetti' ) ); ?>
             </h3>
 
-            <p class="fs-4 fst-italic">"<?php echo esc_html( get_field('descrizione_sezione_progetti') ); ?>"</p>
+            <p class="fs-4 fst-italic">
+                "<?php echo esc_html( get_field( 'descrizione_sezione_progetti' ) ); ?>"
+            </p>
 
-            <?php
-            $image      = get_field('immagine_banner');
-            $link       = get_field('link_banner');
-            ?>
-
+            <?php /* Banner laterale: visibile solo su desktop (≥ 1200px) */ ?>
             <div class="d-none d-xl-flex banner-laterale overflow-hidden px-3 pb-3 pt-4 mt-4"
-                <?php if ( !empty($image) ) : ?>
-                    style="background-image: url('<?php echo esc_url($image['url']); ?>');"
+                <?php if ( ! empty( $image_banner ) ) : ?>
+                    style="background-image: url('<?php echo esc_url( $image_banner['url'] ); ?>');"
                 <?php endif; ?>>
 
                 <div class="banner-laterale-title">
-                    <?php echo esc_html(get_field('titolo_banner')); ?>
+                    <?php echo esc_html( get_field( 'titolo_banner' ) ); ?>
                 </div>
 
-                <?php if ( $link ) : ?>
+                <?php if ( $link_banner ) : ?>
                     <a class="btn btn-primary rounded-pill d-inline-flex align-items-center justify-content-between w-100"
-                    href="<?php echo esc_url($link['url']); ?>"
-                    target="<?php echo esc_attr($link['target'] ?: '_self'); ?>">
-                        <span class="ms-2"><?php echo esc_html($link['title']); ?></span>
+                       href="<?php echo esc_url( $link_banner['url'] ); ?>"
+                       target="<?php echo esc_attr( $link_banner['target'] ?: '_self' ); ?>">
+                        <span class="ms-2"><?php echo esc_html( $link_banner['title'] ); ?></span>
                         <span class="cta-arrow bg-white rounded-circle d-flex align-items-center justify-content-center ms-3">
-                            <i class="fa-solid fa-plane" style="color: var(--secondary);"></i>
+                            <i class="fa-solid fa-plane"></i>
                         </span>
                     </a>
                 <?php endif; ?>
@@ -38,23 +64,31 @@
 
         </div>
 
+        <?php /* ---- COLONNA DESTRA: lista progetti ---- */ ?>
         <div class="col-12 col-xl-8 mb-3">
 
             <?php
-            $progetti_in_evidenza = get_field('progetti_in_evidenza');
+            $progetti_in_evidenza = get_field( 'progetti_in_evidenza' );
+
             if ( $progetti_in_evidenza ) : ?>
+
                 <div class="progetti-listing">
+
                     <?php foreach ( $progetti_in_evidenza as $post ) :
-                        setup_postdata($post);
-                        $categorie = get_the_terms($post->ID, 'categoria-di-progetto');
+                        setup_postdata( $post );
+
+                        // Dati del singolo progetto
+                        $categorie = get_the_terms( $post->ID, 'categoria-di-progetto' );
                         $permalink = get_permalink();
-                        $thumbnail = get_the_post_thumbnail_url($post->ID, 'full');
+                        $thumbnail = get_the_post_thumbnail_url( $post->ID, 'full' );
                     ?>
+
                         <article class="progetto-card position-relative mb-3">
 
+                            <?php /* Immagine di copertina con sfondo CSS */ ?>
                             <?php if ( $thumbnail ) : ?>
                                 <div class="progetto-cover"
-                                    style="background-image: url('<?php echo esc_url($thumbnail); ?>');">
+                                     style="background-image: url('<?php echo esc_url( $thumbnail ); ?>');">
                                 </div>
                             <?php endif; ?>
 
@@ -62,17 +96,20 @@
 
                                 <div class="progetto-meta d-flex align-items-center flex-wrap gap-2">
 
+                                    <?php /* Titolo con link cliccabile sull'intera card via stretched-link */ ?>
                                     <h2 class="progetto-titolo mb-0 pt-1">
-                                        <a href="<?php echo esc_url($permalink); ?>" class="text-primary text-decoration-none stretched-link">
+                                        <a href="<?php echo esc_url( $permalink ); ?>"
+                                           class="text-primary text-decoration-none stretched-link">
                                             <?php the_title(); ?>
                                         </a>
                                     </h2>
 
-                                    <?php if ( !empty($categorie) && !is_wp_error($categorie) ) : ?>
+                                    <?php /* Badge delle categorie del progetto */ ?>
+                                    <?php if ( ! empty( $categorie ) && ! is_wp_error( $categorie ) ) : ?>
                                         <div class="progetto-categorie d-flex flex-wrap gap-2">
                                             <?php foreach ( $categorie as $cat ) : ?>
                                                 <span class="progetto-tag badge rounded-pill border text-primary fw-normal">
-                                                    <?php echo esc_html($cat->name); ?>
+                                                    <?php echo esc_html( $cat->name ); ?>
                                                 </span>
                                             <?php endforeach; ?>
                                         </div>
@@ -80,42 +117,44 @@
 
                                 </div>
 
+                                <?php /* Estratto breve del progetto (max 20 parole) */ ?>
                                 <div class="progetto-excerpt">
-                                    <?php echo wp_trim_words(get_post_field('post_excerpt', $post->ID), 20, ''); ?>
+                                    <?php echo wp_trim_words( get_post_field( 'post_excerpt', $post->ID ), 20, '' ); ?>
                                 </div>
 
                             </div>
 
                         </article>
+
                     <?php endforeach; ?>
                     <?php wp_reset_postdata(); ?>
+
                 </div>
 
             <?php else : ?>
-                <?php get_template_part('loop-templates/content', 'none'); ?>
+
+                <?php /* Nessun progetto selezionato: mostra template vuoto */ ?>
+                <?php get_template_part( 'loop-templates/content', 'none' ); ?>
+
             <?php endif; ?>
 
-            <?php
-            $image      = get_field('immagine_banner');
-            $link       = get_field('link_banner');
-            ?>
-
+            <?php /* Banner inferiore: visibile su mobile e tablet (< 1200px) */ ?>
             <div class="d-flex d-xl-none banner-laterale overflow-hidden px-3 pb-3 pt-4 mt-4"
-                <?php if ( !empty($image) ) : ?>
-                    style="background-image: url('<?php echo esc_url($image['url']); ?>');"
+                <?php if ( ! empty( $image_banner ) ) : ?>
+                    style="background-image: url('<?php echo esc_url( $image_banner['url'] ); ?>');"
                 <?php endif; ?>>
 
                 <div class="banner-laterale-title">
-                    <?php echo esc_html(get_field('titolo_banner')); ?>
+                    <?php echo esc_html( get_field( 'titolo_banner' ) ); ?>
                 </div>
 
-                <?php if ( $link ) : ?>
+                <?php if ( $link_banner ) : ?>
                     <a class="btn btn-primary rounded-pill d-inline-flex align-items-center justify-content-between w-100"
-                    href="<?php echo esc_url($link['url']); ?>"
-                    target="<?php echo esc_attr($link['target'] ?: '_self'); ?>">
-                        <span class="ms-2"><?php echo esc_html($link['title']); ?></span>
+                       href="<?php echo esc_url( $link_banner['url'] ); ?>"
+                       target="<?php echo esc_attr( $link_banner['target'] ?: '_self' ); ?>">
+                        <span class="ms-2"><?php echo esc_html( $link_banner['title'] ); ?></span>
                         <span class="cta-arrow bg-white rounded-circle d-flex align-items-center justify-content-center ms-3">
-                            <i class="fa-solid fa-plane" style="color: var(--secondary);"></i>
+                            <i class="fa-solid fa-plane"></i>
                         </span>
                     </a>
                 <?php endif; ?>
@@ -123,6 +162,7 @@
             </div>
 
         </div>
+
     </div>
 
 </section>

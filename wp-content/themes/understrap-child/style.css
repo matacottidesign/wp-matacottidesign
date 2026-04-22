@@ -1,36 +1,46 @@
+/*
+ Theme Name: Understrap Child
+ Description: Tema figlio di Understrap
+ Template: understrap
+ Version: 1.0.0
+*/
+
 /* ==================================================
-   1. VARIABLES
+   1. VARIABILI GLOBALI
+   Definisce colori, bordi e transizioni riutilizzabili
+   in tutto il tema tramite custom properties CSS.
 ================================================== */
 
 :root {
-  --primary: rgb(68, 111, 142);
-  --secondary: #ef233c;
-  --dark-red: #9f0819;
-  --grey: #e7ecef;
-  --gradient-hero: linear-gradient(to bottom, #E5E7E4, #FFFFFF);
-  --radius-xl: 300px;
-  --radius-md: 30px;
-  --transition: 0.3s ease;
+    --primary:        rgb(68, 111, 142);
+    --secondary:      #ef233c;
+    --dark-red:       #9f0819;
+    --grey:           #e7ecef;
+    --gradient-hero:  linear-gradient(to bottom, #E5E7E4, #FFFFFF);
+    --radius-xl:      300px;
+    --radius-md:      30px;
+    --transition:     0.3s ease;
 }
 
 /* ==================================================
-   2. BASE
+   2. STILI DI BASE
+   Reset e stili globali per tipografia, link e titoli.
 ================================================== */
 
 body {
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
 }
 
 p {
-  margin-bottom: 0;
-  font-weight: 300;
+    margin-bottom: 0;
+    font-weight: 300;
 }
 
 a,
 button,
 .btn {
-  transition: var(--transition);
+    transition: var(--transition);
 }
 
 h1,
@@ -40,158 +50,280 @@ h4,
 h5,
 h6,
 .hero-title {
-  font-family: "Bebas Neue", sans-serif;
-  font-weight: 400;
-  color: var(--primary);
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    color: var(--primary);
 }
 
 strong {
-  font-weight: 600;
+    font-weight: 600;
 }
 
-/* BUTTON + CTA ANIMATION */
+/* ==================================================
+   3. PULSANTI E CTA
+   Stili per i bottoni primari e l'animazione della freccia.
+================================================== */
 
+/* Pulsante primario: colore secondario (rosso) */
 .btn-primary {
-  background-color: var(--secondary);
-  border: none;
+    background-color: var(--secondary);
+    border: none;
 }
 
 .btn-primary:hover {
-  background-color: var(--dark-red);
-  transform: scale(0.98);
+    background-color: var(--dark-red);
+    transform: scale(0.98);
 }
 
-.text-primary{
-  color: var(--primary) !important;
+.text-primary {
+    color: var(--primary) !important;
 }
 
+/* Freccia animata nelle CTA: oscilla da destra a sinistra */
 .cta-arrow {
-  width: 40px;
-  height: 40px;
-  flex-shrink: 0;
-  animation: arrow-bounce 1s ease-in-out infinite;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    animation: arrow-bounce 1s ease-in-out infinite;
 }
 
 .cta-arrow i {
-  color: var(--secondary);
+    color: var(--secondary);
 }
 
-.btn-small .cta-arrow{
-  width: 30px;
-  height: 30px;
-}
-
-.progetto-card{
-  transition: var(--transition);
-}
-
-.progetto-card:hover{
-  transform: scale(0.98);
-}
-
-.progetto-cover,
-.progetto-body{
-  border-radius: var(--radius-md);
-}
-
-.progetto-cover{
-  margin-bottom: -50px;
+.btn-small .cta-arrow {
+    width: 30px;
+    height: 30px;
 }
 
 @keyframes arrow-bounce {
-  0%,
-  100% { transform: translateX(0); }
-  50%  { transform: translateX(-6px); }
+    0%,
+    100% { transform: translateX(0); }
+    50%  { transform: translateX(-6px); }
 }
 
+/* Il colore dell'icona segue il hover del pulsante padre */
 .btn-primary:hover .cta-arrow i {
-  color: var(--dark-red);
+    color: var(--dark-red);
 }
 
 /* ==================================================
-   3. NAVBAR
+   4. CARD PROGETTO
+   Stili per le card dei progetti in evidenza.
 ================================================== */
 
-#main-menu,
-#main-menu li,
-#main-menu .nav-link {
-  backdrop-filter: none !important;
+/* Animazione hover sulla card: leggera riduzione di scala */
+.progetto-card {
+    transition: var(--transition);
 }
 
-#main-nav {
-  background-color: transparent;
-  transition: background-color .35s ease, backdrop-filter .35s ease;
+.progetto-card:hover {
+    transform: scale(0.98);
 }
 
-#main-nav.scrolled {
-  background-color: rgba(255, 255, 255, .8);
-  backdrop-filter: blur(8px);
+/* Arrotondamento angoli sia per l'immagine che per il corpo */
+.progetto-cover,
+.progetto-body {
+    border-radius: var(--radius-md);
 }
 
-.custom-logo-link img {
-  height: 50px;
-  width: auto;
-  display: block;
-}
-
-#main-menu li {
-  font-size: 1.25rem;
-  margin-right: 1.5rem;
-  position: relative;
-}
-
-#main-menu li:last-child {
-  margin-right: 0;
-}
-
-#main-menu li .nav-link {
-  position: relative;
-  display: inline-block;
-}
-
-#main-menu li .nav-link::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: -4px;
-  transform: translateX(-50%);
-  width: 0%;
-  height: 4px;
-  background-color: var(--secondary);
-  border-radius: 50px;
-  transition: width .35s ease;
-}
-
-#main-menu li .nav-link:hover::after,
-#main-menu li.active .nav-link::after {
-  width: 40px;
-}
-
-.offcanvas {
-  background-color: var(--grey) !important;
-  border: none;
-}
-
-/* ==================================================
-   4. FRONT PAGE (HOME)
-================================================== */
-
-.hero-title {
-  font-size: 3.5rem;
-  line-height: .9;
-}
-
-.servizio-img img {
-  height: 50px;
-  width: auto;
-}
-
+/* Immagine di copertina: sfondo CSS, altezza fissa */
 .progetto-cover {
     height: 400px;
     background-size: cover;
     background-position: center;
+    /* Margine negativo per sovrapporre leggermente il corpo */
+    margin-bottom: -50px;
 }
 
+/* ==================================================
+   5. NAVBAR
+   Stili per la barra di navigazione principale.
+   Effetto glassmorphism allo scroll tramite JS.
+================================================== */
+
+/* Rimuove il backdrop-filter dai figli della navbar */
+#main-menu,
+#main-menu li,
+#main-menu .nav-link {
+    backdrop-filter: none !important;
+}
+
+/* Navbar trasparente di default, con transizione allo scroll */
+#main-nav {
+    background-color: transparent;
+    transition: background-color .35s ease, backdrop-filter .35s ease;
+}
+
+/* Classe aggiunta via JS quando l'utente scrolla: sfondo frosted glass */
+#main-nav.scrolled {
+    background-color: rgba(255, 255, 255, .8);
+    backdrop-filter: blur(8px);
+}
+
+/* Logo: altezza fissa, larghezza automatica */
+.custom-logo-link img {
+    height: 50px;
+    width: auto;
+    display: block;
+}
+
+/* Voci di menu: dimensione e spaziatura */
+#main-menu li {
+    font-size: 1.25rem;
+    margin-right: 1.5rem;
+    position: relative;
+}
+
+#main-menu li:last-child {
+    margin-right: 0;
+}
+
+#main-menu li .nav-link {
+    position: relative;
+    display: inline-block;
+}
+
+/* Underline animato centrato sotto la voce attiva o in hover */
+#main-menu li .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -4px;
+    transform: translateX(-50%);
+    width: 0%;
+    height: 4px;
+    background-color: var(--secondary);
+    border-radius: 50px;
+    transition: width .35s ease;
+}
+
+#main-menu li .nav-link:hover::after,
+#main-menu li.active .nav-link::after {
+    width: 40px;
+}
+
+/* Offcanvas mobile: sfondo grigio chiaro */
+.offcanvas {
+    background-color: var(--grey) !important;
+    border: none;
+}
+
+/* ==================================================
+   6. FRONT PAGE — HERO
+   Stili specifici per le sezioni hero della homepage,
+   suddivisi per breakpoint: mobile, tablet, desktop.
+================================================== */
+
+/* Titolo hero: dimensione di base (sovrascritta per breakpoint) */
+.hero-title {
+    font-size: 3.5rem;
+    line-height: .9;
+}
+
+/* Icona servizio nella colonna destra */
+.servizio-img img {
+    height: 50px;
+    width: auto;
+}
+
+/* --- MOBILE (< 768px) --- */
+
+/* Arrotondamento angoli inferiori dell'hero mobile */
+.hero-mobile,
+.hero-mobile-bg,
+.hero-mobile-bg::after {
+    border-bottom-left-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+}
+
+/* Contenitore immagine hero mobile con altezza fissa */
+.hero-mobile-bg {
+    height: 500px;
+    position: relative;
+    z-index: 1;
+    background: var(--gradient-hero);
+    overflow: hidden;
+}
+
+.hero-mobile-bg img {
+    height: 450px;
+    z-index: 1;
+}
+
+/* Overlay gradiente nella parte bassa dell'immagine */
+.hero-mobile-bg::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(68, 111, 142, 0.9) 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* I figli dell'hero mobile restano sopra l'overlay */
+.hero-mobile-bg > * {
+    position: relative;
+    z-index: 3;
+}
+
+/* --- TABLET (768px – 1399px) --- */
+
+@media (min-width: 768px) and (max-width: 1399px) {
+
+    .hero-tablet {
+        background: var(--gradient-hero);
+        border-bottom-left-radius: var(--radius-md);
+        border-bottom-right-radius: var(--radius-md);
+    }
+
+    .hero-title { font-size: 4.5rem; }
+
+    .servizio-img img { height: 80px; }
+
+}
+
+/* --- DESKTOP (≥ 1400px) --- */
+
+@media (min-width: 1400px) {
+
+    /* Margine superiore per allineare titolo e servizi all'immagine centrale */
+    .hero-desktop .hero-title,
+    .servizi-hero {
+        margin-top: 6rem;
+    }
+
+    .hero-desktop .hero-title { font-size: 6rem; }
+
+    .hero-desktop .hero-text {
+        font-size: 1.5rem;
+        margin: 3rem 0;
+    }
+
+    /* Bordi arrotondati solo in basso sull'immagine centrale desktop */
+    .hero-desktop img.w-75 {
+        border-bottom-left-radius: var(--radius-xl);
+        border-bottom-right-radius: var(--radius-xl);
+    }
+
+    /* Spaziatura verticale tra i servizi nella colonna destra */
+    .servizio-item { margin-top: 5rem; }
+
+    .servizio-item:first-child { margin-top: 0; }
+
+    .servizio-descrizione { font-size: 1.4rem; }
+
+}
+
+/* ==================================================
+   7. FRONT PAGE — BANNER E SEZIONI
+   Stili per il banner laterale progetti e il bio banner.
+================================================== */
+
+/* Banner laterale nella sezione progetti */
 .banner-laterale {
     border-radius: var(--radius-md);
     background: var(--gradient-hero);
@@ -213,6 +345,7 @@ strong {
     color: var(--primary);
 }
 
+/* Bio banner: sfondo fotografico impostato inline via PHP */
 .bio-banner {
     background-size: cover;
     background-position: center;
@@ -220,96 +353,16 @@ strong {
     border-radius: var(--radius-md);
 }
 
-.bio-banner .h1{
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 5rem;
-  line-height: 1;
-}
-
-/* MOBILE */
-
-.hero-mobile,
-.hero-mobile-bg,
-.hero-mobile-bg::after {
-  border-bottom-left-radius: var(--radius-md);
-  border-bottom-right-radius: var(--radius-md);
-}
-
-.hero-mobile-bg {
-  height: 500px;
-  position: relative;
-  z-index: 1;
-  background: var(--gradient-hero);
-  overflow: hidden;
-}
-
-.hero-mobile-bg img {
-  height: 450px;
-  z-index: 1;
-}
-
-.hero-mobile-bg::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 200px;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(68, 111, 142, 0.9) 100%);
-  pointer-events: none;
-  z-index: 2;
-}
-
-.hero-mobile-bg > * {
-  position: relative;
-  z-index: 3;
-}
-
-/* TABLET */
-
-@media (min-width: 768px) and (max-width: 1399px) {
-
-  .hero-tablet {
-    background: var(--gradient-hero);
-    border-bottom-left-radius: var(--radius-md);
-    border-bottom-right-radius: var(--radius-md);
-  }
-
-  .hero-title { font-size: 4.5rem; }
-
-  .servizio-img img { height: 80px; }
-
-}
-
-/* DESKTOP */
-
-@media (min-width: 1400px) {
-
-  .hero-desktop .hero-title,
-  .servizi-hero {
-    margin-top: 6rem;
-  }
-
-  .hero-desktop .hero-title { font-size: 6rem; }
-
-  .hero-desktop .hero-text {
-    font-size: 1.5rem;
-    margin: 3rem 0;
-  }
-
-  .hero-desktop img.w-75 {
-    border-bottom-left-radius: var(--radius-xl);
-    border-bottom-right-radius: var(--radius-xl);
-  }
-
-  .servizio-item { margin-top: 5rem; }
-
-  .servizio-item:first-child { margin-top: 0; }
-
-  .servizio-descrizione { font-size: 1.4rem; }
-
+/* Titolo grande nel bio banner */
+.bio-banner .h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 5rem;
+    line-height: 1;
 }
 
 /* ==================================================
-   5. FOOTER
+   8. FOOTER
+   Stili per il footer del sito.
+   (Il footer utilizza principalmente le classi Bootstrap;
+   aggiungere qui eventuali personalizzazioni future.)
 ================================================== */
