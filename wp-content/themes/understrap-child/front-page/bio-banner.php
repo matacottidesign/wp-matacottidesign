@@ -36,7 +36,7 @@ $link        = get_field( 'link_banner_biografia' );
 
                     <?php if ( $titolo ) : ?>
                         <div class="bio-banner-title h1 text-white mt-5">
-                            <?php echo esc_html( $titolo ); ?>
+                            <?php echo wp_kses_post( $titolo ); ?>
                         </div>
                     <?php endif; ?>
 
@@ -73,7 +73,7 @@ $link        = get_field( 'link_banner_biografia' );
 
                     <?php if ( $titolo ) : ?>
                         <div class="bio-banner-title">
-                            <?php echo esc_html( $titolo ); ?>
+                            <?php echo wp_kses_post( $titolo ); ?>
                         </div>
                     <?php endif; ?>
 
@@ -110,7 +110,7 @@ $link        = get_field( 'link_banner_biografia' );
 
                     <?php if ( $titolo ) : ?>
                         <div class="bio-banner-title my-5">
-                            <?php echo esc_html( $titolo ); ?>
+                            <?php echo wp_kses_post( $titolo ); ?>
                         </div>
                     <?php endif; ?>
 

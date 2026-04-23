@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Amelia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-10 12:06+0000\n"
+"POT-Creation-Date: 2026-04-20 08:21+0000\n"
 "PO-Revision-Date: 2025-11-20 16:11+0100\n"
 "Last-Translator: \n"
 "Language-Team: Amelia\n"
@@ -35,19 +35,13 @@ msgid ""
 "have a valid purchase of Amelia"
 msgstr ""
 
+msgid "Unable to complete plugin activation. Please try again."
+msgstr ""
+
 msgid "You have reached maximum number of registered domains"
 msgstr ""
 
 msgid "The purchase code is invalid or it has expired"
-msgstr ""
-
-msgid "Add booking"
-msgstr ""
-
-msgid "Add customer"
-msgstr ""
-
-msgid "Add event"
 msgstr ""
 
 msgid "Add package"
@@ -104,9 +98,6 @@ msgid ""
 msgstr ""
 
 msgid "Configure waiting list for appointments"
-msgstr ""
-
-msgid "Created on"
 msgstr ""
 
 msgid "Country"
@@ -486,7 +477,7 @@ msgid ""
 msgstr ""
 
 msgid ""
-"Block booking times that overlap with busy events in the employee’s Apple "
+"Block booking times that overlap with events in the employee’s Apple "
 "Calendar."
 msgstr ""
 
@@ -807,9 +798,6 @@ msgstr ""
 msgid "Hi %employee_full_name%, Thank you, %company_name%"
 msgstr ""
 
-msgid "Delivered"
-msgstr ""
-
 msgid "Details changed"
 msgstr ""
 
@@ -898,6 +886,9 @@ msgid "Appointment initial start time"
 msgstr ""
 
 msgid "Appointment initial end time"
+msgstr ""
+
+msgid "Assigned employee full name"
 msgstr ""
 
 msgid "Appointment deposit"
@@ -1083,9 +1074,6 @@ msgstr ""
 msgid "Placeholders"
 msgstr ""
 
-msgid "Prepared"
-msgstr ""
-
 msgid "Recipient phone"
 msgstr ""
 
@@ -1153,9 +1141,6 @@ msgid "Undelivered"
 msgstr ""
 
 msgid "Use this placeholder:"
-msgstr ""
-
-msgid "View message"
 msgstr ""
 
 msgid ""
@@ -1804,6 +1789,9 @@ msgstr ""
 msgid "Start date"
 msgstr ""
 
+msgid "Make sure you are using the correct Zoom credentials."
+msgstr ""
+
 msgid "Zoom user"
 msgstr ""
 
@@ -1978,6 +1966,9 @@ msgid "Edit Coupon"
 msgstr ""
 
 msgid "Please enter a code."
+msgstr ""
+
+msgid "Event name"
 msgstr ""
 
 msgid "Search Coupons"
@@ -2196,9 +2187,6 @@ msgstr ""
 msgid "Repeat event"
 msgstr ""
 
-msgid "Event booking has been deleted."
-msgstr ""
-
 msgid "Set the event period first to enable pricing by date range."
 msgstr ""
 
@@ -2235,9 +2223,6 @@ msgid "Today"
 msgstr ""
 
 msgid "Week"
-msgstr ""
-
-msgid "Add appointment"
 msgstr ""
 
 msgid "Add option"
@@ -2996,9 +2981,6 @@ msgstr ""
 msgid "mandatory notice"
 msgstr ""
 
-msgid "Reschedule appointment"
-msgstr ""
-
 msgid "Book appointment"
 msgstr ""
 
@@ -3198,9 +3180,6 @@ msgid "Sidebar"
 msgstr ""
 
 msgid "Log out"
-msgstr ""
-
-msgid "Reschedule"
 msgstr ""
 
 msgid "Google Meet link"
@@ -3726,9 +3705,6 @@ msgstr ""
 msgid "Apply to future recurring events"
 msgstr ""
 
-msgid "Apply"
-msgstr ""
-
 msgid "{count} Appointment | {count} Appointments"
 msgstr ""
 
@@ -3736,9 +3712,6 @@ msgid "Appointment not found."
 msgstr ""
 
 msgid "Appointment note"
-msgstr ""
-
-msgid "Appointment has been updated."
 msgstr ""
 
 msgid "{count}x Appointment | {count}x Appointments"
@@ -3804,9 +3777,6 @@ msgstr ""
 msgid ""
 "{count} customers were not imported due to missing First Name, Last Name, "
 "invalid Email, Phone number, or a combination of these reasons."
-msgstr ""
-
-msgid "Customer note has been added."
 msgstr ""
 
 msgid "Repeat"
@@ -3908,9 +3878,6 @@ msgstr ""
 msgid "Failed to load package details. Please try again later."
 msgstr ""
 
-msgid "Filter"
-msgstr ""
-
 msgid "Frontend & Backend"
 msgstr ""
 
@@ -3949,6 +3916,9 @@ msgid "Max"
 msgstr ""
 
 msgid "Missing required fields:"
+msgstr ""
+
+msgid "Invalid Mollie API key."
 msgstr ""
 
 msgid "{count} Month | {count} Months"
@@ -4229,9 +4199,6 @@ msgid "WhatsApp setup"
 msgstr ""
 
 msgid "Total number of appointments"
-msgstr ""
-
-msgid "An unexpected error occurred. Please try again later."
 msgstr ""
 
 msgid "View packages"
@@ -4576,9 +4543,6 @@ msgstr ""
 msgid "Also cancel and delete future events"
 msgstr ""
 
-msgid "You can also cancel and delete its future events."
-msgstr ""
-
 msgid "You can also cancel its future events."
 msgstr ""
 
@@ -4675,6 +4639,9 @@ msgid "Join link"
 msgstr ""
 
 msgid "Invoice #"
+msgstr ""
+
+msgid "Event_bookings"
 msgstr ""
 
 msgid ""
@@ -4792,15 +4759,6 @@ msgid ""
 msgstr ""
 
 msgid "This placeholder's content will be applied wherever it is used."
-msgstr ""
-
-msgid "Back to"
-msgstr ""
-
-msgid "Send Reset Link"
-msgstr ""
-
-msgid "Repeat new password"
 msgstr ""
 
 msgid "SMS History"
@@ -4956,6 +4914,15 @@ msgid ""
 msgstr ""
 
 msgid "Show on website"
+msgstr ""
+
+msgid "Add another account"
+msgstr ""
+
+msgid "Block time from calendars"
+msgstr ""
+
+msgid "Add calendar"
 msgstr ""
 
 msgid ""
@@ -5247,6 +5214,12 @@ msgstr ""
 msgid "Specific Date & Time"
 msgstr ""
 
+msgid "Delete appointment"
+msgstr ""
+
+msgid "Open side menu"
+msgstr ""
+
 msgid "Appointment Date:"
 msgstr ""
 
@@ -5308,6 +5281,9 @@ msgid "Time Range:"
 msgstr ""
 
 msgid "to"
+msgstr ""
+
+msgid "Add appointment"
 msgstr ""
 
 msgid "Add extra"
@@ -6044,6 +6020,18 @@ msgstr ""
 msgid "Select or Create Tag"
 msgstr ""
 
+msgid "Manage Event Tags"
+msgstr ""
+
+msgid "Create New Tag"
+msgstr ""
+
+msgid "Tag label"
+msgstr ""
+
+msgid "Tag label cannot be empty"
+msgstr ""
+
 msgid "Export"
 msgstr ""
 
@@ -6402,6 +6390,9 @@ msgstr ""
 msgid "Repeat Every Year"
 msgstr ""
 
+msgid "Reschedule"
+msgstr ""
+
 msgid "Save Changes"
 msgstr ""
 
@@ -6478,6 +6469,9 @@ msgid "Settings"
 msgstr ""
 
 msgid "Please enter end time"
+msgstr ""
+
+msgid "Please add period"
 msgstr ""
 
 msgid "Please enter start time"
@@ -6688,6 +6682,12 @@ msgstr ""
 msgid "Enter booking ID"
 msgstr ""
 
+msgid "Select calendar"
+msgstr ""
+
+msgid "Insert pending appointments"
+msgstr ""
+
 msgid "Admin"
 msgstr ""
 
@@ -6711,6 +6711,9 @@ msgid ""
 "between modes."
 msgstr ""
 
+msgid "Created on"
+msgstr ""
+
 msgid "Select delimiter"
 msgstr ""
 
@@ -6727,6 +6730,9 @@ msgid "Hour"
 msgstr ""
 
 msgid "Hours"
+msgstr ""
+
+msgid "Delivered"
 msgstr ""
 
 msgid "Employee Badge"
@@ -6898,6 +6904,15 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
+msgid "Add booking"
+msgstr ""
+
+msgid "Add customer"
+msgstr ""
+
+msgid "Add event"
+msgstr ""
+
 msgid "Import"
 msgstr ""
 
@@ -6982,6 +6997,9 @@ msgid "Allow employees to manage their events"
 msgstr ""
 
 msgid "Allow employees to manage customers"
+msgstr ""
+
+msgid "Allow employees to view all customers"
 msgstr ""
 
 msgid "API base URL: "
@@ -7162,10 +7180,11 @@ msgstr ""
 msgid "Facebook app secret"
 msgstr ""
 
-msgid "Google Map API key"
+msgid "Google Maps API key"
 msgstr ""
 
-msgid "Add Google Map API Key to show Google static map on \"Locations\" page."
+msgid ""
+"Add Google Maps API Key to show Google static map on \"Locations\" page."
 msgstr ""
 
 msgid "Client ID"
@@ -7202,9 +7221,6 @@ msgid "Log In"
 msgstr ""
 
 msgid "Identify country code by user's IP address"
-msgstr ""
-
-msgid "Insert pending appointments"
 msgstr ""
 
 msgid "Create meetings for pending appointments"
@@ -7302,7 +7318,7 @@ msgstr ""
 msgid "Remove Outlook Calendar busy slots"
 msgstr ""
 
-msgid "Remove Apple Calendar busy slots"
+msgid "Remove Apple Calendar event slots"
 msgstr ""
 
 msgid "Redirect URL for successfully rejected booking"
@@ -7554,6 +7570,9 @@ msgstr ""
 msgid "You have entered an incorrect password."
 msgstr ""
 
+msgid "Repeat new password"
+msgstr ""
+
 msgid "Please enter a new password."
 msgstr ""
 
@@ -7672,9 +7691,6 @@ msgid "Event end time"
 msgstr ""
 
 msgid "Event ID"
-msgstr ""
-
-msgid "Event name"
 msgstr ""
 
 msgid "Event date period"
@@ -8270,6 +8286,9 @@ msgstr ""
 msgid "Closes on"
 msgstr ""
 
+msgid "Event booking has been deleted."
+msgstr ""
+
 msgid "Opens on"
 msgstr ""
 
@@ -8363,6 +8382,9 @@ msgid "Attachment"
 msgstr ""
 
 msgid "Date picker"
+msgstr ""
+
+msgid "Prepared"
 msgstr ""
 
 msgid "Background Color"
@@ -8787,6 +8809,9 @@ msgstr ""
 msgid "View all photos"
 msgstr ""
 
+msgid "View message"
+msgstr ""
+
 msgid "Contact message"
 msgstr ""
 
@@ -8841,6 +8866,9 @@ msgid "Event ends"
 msgstr ""
 
 msgid "How many attendees do you want to book event for?"
+msgstr ""
+
+msgid "Filter"
 msgstr ""
 
 msgid "Event card"
@@ -9163,6 +9191,9 @@ msgstr ""
 msgid "Appointment note has been updated."
 msgstr ""
 
+msgid "Appointment has been updated."
+msgstr ""
+
 msgid ""
 "The total number of persons ({approvedPersonsCount}) exceeds the maximum "
 "capacity of {maxAppointmentCapacity}."
@@ -9321,6 +9352,9 @@ msgstr ""
 msgid "Customer Desc"
 msgstr ""
 
+msgid "Customer note has been added."
+msgstr ""
+
 msgid "Customers detected in file:"
 msgstr ""
 
@@ -9337,9 +9371,6 @@ msgid "Date Asc"
 msgstr ""
 
 msgid "Date Desc"
-msgstr ""
-
-msgid "Delete appointment"
 msgstr ""
 
 msgid "Delete booking"
@@ -9949,6 +9980,9 @@ msgstr ""
 msgid "Send test"
 msgstr ""
 
+msgid "Send Reset Link"
+msgstr ""
+
 msgid "Service Asc"
 msgstr ""
 
@@ -9986,6 +10020,9 @@ msgid "SMS balance"
 msgstr ""
 
 msgid "SMS Settings"
+msgstr ""
+
+msgid "Back to"
 msgstr ""
 
 msgid "Status Asc"
@@ -10480,6 +10517,9 @@ msgstr ""
 msgid "All assigned services"
 msgstr ""
 
+msgid "You can also cancel and delete its future events."
+msgstr ""
+
 msgid "Default location"
 msgstr ""
 
@@ -10542,6 +10582,9 @@ msgid "Block customer"
 msgstr ""
 
 msgid "Unblock customer"
+msgstr ""
+
+msgid "An unexpected error occurred. Please try again later."
 msgstr ""
 
 msgid "Hide event"
@@ -10636,6 +10679,21 @@ msgstr ""
 msgid ""
 "Enhance flexibility with customer information ready for marketing tools or "
 "external platforms"
+msgstr ""
+
+msgid "Export event booking data with ease"
+msgstr ""
+
+msgid ""
+"Quickly download all event booking details from the Event Bookings page, "
+"making reporting, analysis, and record-keeping simple and efficient."
+msgstr ""
+
+msgid "Save time with fast, one-click event booking exports"
+msgstr ""
+
+msgid ""
+"Improve reporting accuracy by accessing complete event booking data instantly"
 msgstr ""
 
 msgid "Send smart, personalized notifications your way"
@@ -10876,6 +10934,9 @@ msgstr ""
 msgid "Service has been added."
 msgstr ""
 
+msgid "Reschedule appointment"
+msgstr ""
+
 msgid "Upcoming events section"
 msgstr ""
 
@@ -11007,6 +11068,9 @@ msgstr ""
 msgid "Employee name"
 msgstr ""
 
+msgid "Apply"
+msgstr ""
+
 msgid "Appointment title"
 msgstr ""
 
@@ -11022,6 +11086,70 @@ msgid "SMTP credentials validation failed. Please check your settings."
 msgstr ""
 
 msgid "Invalid Stripe secret key."
+msgstr ""
+
+msgid "Event time scope"
+msgstr ""
+
+msgid "Future events"
+msgstr ""
+
+msgid "Past events"
+msgstr ""
+
+msgid "Custom range"
+msgstr ""
+
+msgid "Notice: Please select start and end date."
+msgstr ""
+
+msgid "Block time"
+msgstr ""
+
+msgid "Block time has been updated."
+msgstr ""
+
+msgid "Block time has been added."
+msgstr ""
+
+msgid "Block time has been deleted."
+msgstr ""
+
+msgid "Delete block time"
+msgstr ""
+
+msgid "Are you sure you want to delete this block time?"
+msgstr ""
+
+msgid "New block time"
+msgstr ""
+
+msgid "Edit block time"
+msgstr ""
+
+msgid ""
+"Please delete this appointment. It cannot be edited due to a conflict with "
+"the associated account."
+msgstr ""
+
+msgid "Event tags"
+msgstr ""
+
+msgid ""
+"Event tags allow you to label and organize events in Amelia based on "
+"criteria that matter most to your business."
+msgstr ""
+
+msgid "Create new tag"
+msgstr ""
+
+msgid "Manage event tags"
+msgstr ""
+
+msgid "Event tags setup"
+msgstr ""
+
+msgid "Event tags have been saved."
 msgstr ""
 
 msgid "Add to Calendar"
@@ -11126,6 +11254,9 @@ msgstr ""
 msgid "View"
 msgstr ""
 
+msgid "Please use a different email or phone number to complete the booking."
+msgstr ""
+
 msgid "Email Address"
 msgstr ""
 
@@ -11187,6 +11318,9 @@ msgid "Search for Events"
 msgstr ""
 
 msgid "Event Location"
+msgstr ""
+
+msgid "Date Picker"
 msgstr ""
 
 msgid "View More"

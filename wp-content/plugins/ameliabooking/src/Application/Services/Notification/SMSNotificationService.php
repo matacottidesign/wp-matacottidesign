@@ -107,6 +107,12 @@ class SMSNotificationService extends AbstractNotificationService
         );
 
         foreach ($users as $user) {
+            if (!empty($user['phone_country'])) {
+                $allowedCountries = apply_filters('amelia_whitelists_sms_countries', []);
+                if (!empty($allowedCountries) && !in_array(strtoupper($user['phone_country']), $allowedCountries)) {
+                    continue;
+                }
+            }
             if ($user['phone']) {
                 if (!$isCustomerPackage && !empty($data['providersAppointments'][$user['id']])) {
                     $text = $placeholderService->applyPlaceholders(
@@ -311,7 +317,7 @@ class SMSNotificationService extends AbstractNotificationService
 
                         if (empty($smsData['skipSending'])) {
                             $apiResponse = $smsApiService->send(
-                                $smsData['customer_phone'],
+                                $smsData['to'],
                                 $smsData['text'],
                                 AMELIA_ACTION_URL . '/notifications/sms/history/' . $historyId
                             );
@@ -468,9 +474,30 @@ class SMSNotificationService extends AbstractNotificationService
         /** @var SMSAPIService $smsApiService */
         $smsApiService = $this->container->get('application.smsApi.service');
 
+        $smsData = apply_filters(
+            'amelia_manipulate_sms_data',
+            [
+                'text' => $data['body'],
+                'to'   => $data['sendTo']
+            ]
+        );
+
+        $data = array_merge(
+            $data,
+            [
+                'text' => $data['body'],
+                'to'   => $data['sendTo']
+            ],
+            is_array($smsData) ? $smsData : []
+        );
+
+        if (!empty($data['skipSending'])) {
+            return;
+        }
+
         $apiResponse = $smsApiService->send(
-            $data['sendTo'],
-            $data['body'],
+            $data['to'],
+            $data['text'],
             AMELIA_ACTION_URL . '/notifications/sms/history/' . $data['historyId']
         );
 

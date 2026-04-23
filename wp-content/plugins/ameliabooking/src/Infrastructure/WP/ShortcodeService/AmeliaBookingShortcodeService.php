@@ -23,7 +23,7 @@ use Interop\Container\Exception\ContainerException;
  *
  * @package AmeliaBooking\Infrastructure\WP\ShortcodeService
  */
-class AmeliaBookingShortcodeService
+class AmeliaBookingShortcodeService extends AmeliaShortcodeService
 {
     public static $counter = 1000;
 
@@ -44,9 +44,7 @@ class AmeliaBookingShortcodeService
 
         $settingsService = new SettingsService(new SettingsStorage());
 
-        if ($settingsService->getSetting('payments', 'payPal')['enabled'] === true) {
-            wp_enqueue_script('amelia_paypal_script', 'https://www.paypalobjects.com/api/checkout.js');
-        }
+        self::enqueuePaypalScript($settingsService);
 
         if ($settingsService->getSetting('payments', 'stripe')['enabled'] === true) {
             wp_enqueue_script('amelia_stripe_script', 'https://js.stripe.com/v3/');
@@ -74,7 +72,7 @@ class AmeliaBookingShortcodeService
         $gmapApiKey = $settingsService->getSetting('general', 'gMapApiKey');
 
         if ($gmapApiKey) {
-            $container = $container ?: require AMELIA_PATH . '/src/Infrastructure/ContainerConfig/container.php';
+            $container = require AMELIA_PATH . '/src/Infrastructure/ContainerConfig/container.php';
 
             /** @var CustomFieldRepository $customFieldRepository */
             $customFieldRepository = $container->get('domain.customField.repository');
@@ -110,7 +108,7 @@ class AmeliaBookingShortcodeService
         } else {
             wp_enqueue_script(
                 $scriptId,
-                AMELIA_URL . 'v3/public/assets/public.93883475.js',
+                AMELIA_URL . 'v3/public/assets/public.d56c1425.js',
                 [],
                 AMELIA_VERSION,
                 true

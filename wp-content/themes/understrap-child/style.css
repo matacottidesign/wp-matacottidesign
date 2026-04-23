@@ -27,13 +27,22 @@
    Reset e stili globali per tipografia, link e titoli.
 ================================================== */
 
+/* Margine superiore per le intestazioni che seguono un paragrafo */
+.entry-content h1,
+.entry-content h2,
+.entry-content h3,
+.entry-content h4,
+.entry-content h5,
+.entry-content h6 {
+    margin-top: 2rem;
+}
+
 body {
     font-family: "Poppins", sans-serif;
     font-weight: 400;
 }
 
 p {
-    margin-bottom: 0;
     font-weight: 300;
 }
 
@@ -209,6 +218,75 @@ strong {
     border: none;
 }
 
+/* Offcanvas < xxl: voci in cima, centrate, touch-friendly */
+@media (max-width: 1399.98px) {
+    .offcanvas-body .navbar-nav {
+        justify-content: flex-start !important;
+        align-items: center;
+        padding-top: 1rem;
+    }
+
+    .offcanvas-body #main-menu li {
+        font-size: 1.75rem;
+        margin-right: 0;
+        text-align: center;
+        width: 100%;
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(0, 0, 0, .08);
+    }
+
+    .offcanvas-body #main-menu li:last-child {
+        border-bottom: none;
+    }
+
+    .offcanvas-body #main-menu li .nav-link {
+        display: block;
+    }
+}
+
+/* ==================================================
+   5.1 NAVBAR — VOCE "CONTATTI" COME PILL BUTTON
+   Evidenzia il link Contatti come CTA rossa pill,
+   coerente con i pulsanti primari del sito.
+   Classe generata da WP: .menu-item-1501
+================================================== */
+
+#main-menu .menu-item-1501 .nav-link {
+    background-color: var(--secondary);
+    color: #fff !important;
+    border-radius: var(--radius-xl);
+    padding: 0.35rem 1.25rem;
+    transition: background-color var(--transition), transform var(--transition);
+}
+
+#main-menu .menu-item-1501 .nav-link:hover {
+    background-color: var(--dark-red);
+    transform: scale(0.98);
+}
+
+/* Niente underline animato su questa voce */
+#main-menu .menu-item-1501 .nav-link::after {
+    display: none;
+}
+
+/* Stato active: rimane rosso scuro */
+#main-menu .menu-item-1501.active .nav-link {
+    background-color: var(--dark-red);
+}
+
+/* Mobile offcanvas: pill centrato, senza bordo di separazione */
+@media (max-width: 1399.98px) {
+    .offcanvas-body #main-menu .menu-item-1501 {
+        border-bottom: none;
+        padding: 1.5rem 0;
+    }
+
+    .offcanvas-body #main-menu .menu-item-1501 .nav-link {
+        display: inline-block;
+        padding: 0.5rem 2rem;
+    }
+}
+
 /* ==================================================
    6. FRONT PAGE — HERO
    Stili specifici per le sezioni hero della homepage,
@@ -223,7 +301,7 @@ strong {
 
 /* Icona servizio nella colonna destra */
 .servizio-img img {
-    height: 50px;
+    height: 70px;
     width: auto;
 }
 
@@ -282,7 +360,7 @@ strong {
 
     .hero-title { font-size: 4.5rem; }
 
-    .servizio-img img { height: 80px; }
+    .servizio-img img { height: 100px; }
 
 }
 
@@ -315,6 +393,8 @@ strong {
     .servizio-item:first-child { margin-top: 0; }
 
     .servizio-descrizione { font-size: 1.4rem; }
+
+    .servizio-img img { height: 80px; }
 
 }
 
@@ -361,7 +441,124 @@ strong {
 }
 
 /* ==================================================
-   8. FOOTER
+   8. SIDEBAR CONTATTO
+   Widget laterale riutilizzato in pagina Contatti
+   e nel single Progetto.
+================================================== */
+
+.contatto-sidebar {
+    background: #fff;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+}
+
+.contatto-sidebar-tagline {
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: var(--secondary);
+    margin-bottom: .25rem;
+}
+
+.contatto-sidebar-titolo {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 2rem;
+    line-height: 1.05;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.contatto-sidebar-foto {
+    border-radius: var(--radius-md);
+    height: 220px;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 1rem;
+}
+
+.contatto-sidebar-label {
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: var(--secondary);
+    margin-bottom: .75rem;
+}
+
+/* ==================================================
+   9. BLOCCHI IMMAGINE GUTENBERG
+   Applica lo stesso border-radius delle card a tutti
+   i blocchi immagine WordPress usati nei widget e nelle pagine.
+================================================== */
+
+/* Cover block */
+.wp-block-cover,
+.wp-block-cover-image {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+/* Image block */
+.wp-block-image img,
+.wp-block-image figure {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+/* Media & Text block (lato immagine) */
+.wp-block-media-text .wp-block-media-text__media img {
+    border-radius: var(--radius-md);
+}
+
+/* Gallery block */
+.wp-block-gallery .wp-block-image img {
+    border-radius: var(--radius-md);
+}
+
+/* ==================================================
+   10. AMELIA BOOKING
+   Rimuove il padding interno del contenitore Amelia
+   in modo che il calendario si adatti alla colonna.
+================================================== */
+
+#amelia-container,
+[id^="amelia-step-booking"] {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* ==================================================
+   11. INFINITE SCROLL — ARCHIVIO PROGETTI
+   Spinner visibile mentre vengono caricati altri post.
+================================================== */
+
+#infinite-sentinel {
+    height: 2px;
+    width: 100%;
+}
+
+#infinite-sentinel.is-loading {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#infinite-sentinel.is-loading::after {
+    content: '';
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid var(--grey);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: infinite-spin 0.75s linear infinite;
+}
+
+@keyframes infinite-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ==================================================
+   12. FOOTER
    Stili per il footer del sito.
    (Il footer utilizza principalmente le classi Bootstrap;
    aggiungere qui eventuali personalizzazioni future.)

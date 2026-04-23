@@ -1,0 +1,1175 @@
+================================================================================
+  GUIDA COMPLETA — MIGRAZIONE, LANCIO E CONFIGURAZIONE
+  Sito: matacotti.design
+  Hosting di destinazione: Netsons
+  Data redazione: aprile 2026
+================================================================================
+
+Leggi questa guida dall'inizio alla fine prima di iniziare qualsiasi operazione.
+Ogni sezione è pensata per essere eseguita nell'ordine in cui appare.
+
+
+================================================================================
+  INDICE
+================================================================================
+
+  1.  Prerequisiti e strumenti necessari
+  2.  Backup completo dell'ambiente locale
+  3.  Esportazione del database locale
+  4.  Preparazione dell'hosting Netsons
+  5.  Caricamento dei file via FTP
+  6.  Creazione e importazione del database su Netsons
+  7.  Configurazione di wp-config.php per la produzione
+  8.  Aggiornamento degli URL nel database (search & replace)
+  9.  Configurazione DNS e puntamento del dominio
+  10. Attivazione SSL (HTTPS)
+  11. Check post-migrazione
+  12. Sicurezza di base del sito
+  13. Protezione anti-spam su email e form di contatto
+  14. Migrazione SEO da matacottidesign.it al nuovo dominio
+  15. Plugin: YOAST SEO — installazione e configurazione completa
+  16. Plugin: Google Site Kit — installazione e configurazione completa
+  17. Plugin: Iubenda — installazione e configurazione GDPR completa
+  18. Performance e cache
+  19. Backup automatici in produzione
+  20. Checklist finale pre-lancio
+
+
+================================================================================
+  1. PREREQUISITI E STRUMENTI NECESSARI
+================================================================================
+
+Prima di iniziare assicurati di avere a portata di mano:
+
+  — Credenziali cPanel Netsons (ricevute via email al momento dell'acquisto)
+  — Dominio già acquistato o trasferito su Netsons
+  — Un client FTP installato sul tuo Mac: consigliato Cyberduck (gratuito)
+    oppure FileZilla
+  — Accesso all'area clienti Netsons per la gestione DNS
+  — Accesso alla casella email associata al dominio (o a Gmail) per le
+    verifiche Google
+  — phpMyAdmin (disponibile nel cPanel Netsons)
+  — Il plugin "WP Migrate" oppure semplicemente phpMyAdmin per l'export DB
+  — Circa 1-2 ore di tempo senza interruzioni
+
+Strumenti online utili durante il processo:
+  — whatsmydns.net       → verifica propagazione DNS
+  — gtmetrix.com         → test velocità dopo il lancio
+  — search.google.com/search-console → Google Search Console
+
+
+================================================================================
+  2. BACKUP COMPLETO DELL'AMBIENTE LOCALE
+================================================================================
+
+Prima di toccare qualsiasi file esegui un backup completo dell'ambiente locale.
+
+  PASSO 2.1 — Copia di sicurezza dei file
+  ----------------------------------------
+  Copia l'intera cartella del progetto in una posizione diversa dal disco:
+    /Users/francescomatacotti/Local Sites/matacotti-design/
+  Rinominala con la data, es.: matacotti-design-BACKUP-20260423
+
+  PASSO 2.2 — Snapshot Git
+  -------------------------
+  Dal terminale, nella root del progetto, esegui:
+
+    git add -A
+    git commit -m "Snapshot pre-migrazione produzione"
+
+  In questo modo hai un punto di ripristino certo anche in Git.
+
+
+================================================================================
+  3. ESPORTAZIONE DEL DATABASE LOCALE
+================================================================================
+
+Il database locale si chiama "local", gira su localhost con utente root/root.
+
+  PASSO 3.1 — Aprire phpMyAdmin locale
+  --------------------------------------
+  In Local by Flywheel, con il sito avviato, clicca su "Database" nella
+  barra laterale sinistra → si apre phpMyAdmin nel browser.
+
+  PASSO 3.2 — Esportare il database
+  -----------------------------------
+  1. Seleziona il database "local" nel pannello di sinistra
+  2. Clicca sulla scheda "Esporta" in alto
+  3. Scegli metodo: "Personalizzato"
+  4. Assicurati che tutte le tabelle siano selezionate
+  5. In "Output" seleziona: "Salva su file"
+  6. Formato: SQL
+  7. In "Opzioni specifiche per il formato SQL":
+     — spunta "Aggiungi DROP TABLE / VIEW / PROCEDURE..."
+     — spunta "Aggiungi CREATE DATABASE / USE"
+     — Character set: utf8mb4
+  8. Clicca "Esegui"
+  9. Salva il file come: matacotti-design-DB-20260423.sql
+
+  PASSO 3.3 — Verifica del file SQL esportato
+  ---------------------------------------------
+  Apri il file .sql con un editor di testo (BBEdit o VS Code) e cerca le righe:
+    siteurl
+    home
+  Dovresti trovare l'URL locale, es. http://matacotti-design.local
+  Questo URL verrà sostituito nella fase 8.
+
+  IMPORTANTE: non modificare manualmente il file SQL con Find & Replace
+  perché alcuni URL possono essere serializzati (base64 o con lunghezze
+  numerate). Usa sempre il metodo descritto nella fase 8.
+
+
+================================================================================
+  4. PREPARAZIONE DELL'HOSTING NETSONS
+================================================================================
+
+  PASSO 4.1 — Accesso al cPanel
+  -------------------------------
+  1. Vai su netsons.com → Area Clienti → accedi con le tue credenziali
+  2. Dalla lista dei servizi, seleziona il tuo piano hosting
+  3. Clicca su "Pannello di controllo" o "cPanel"
+
+  PASSO 4.2 — Creare il database MySQL
+  --------------------------------------
+  Nel cPanel di Netsons, cerca la sezione "Database":
+
+  1. Clicca su "Database MySQL" (o "MySQL Databases")
+  2. Nel campo "Crea nuovo database" inserisci un nome, es.: matacotti_db
+     Il nome completo sarà tipo: netsonsuser_matacotti_db
+     Annotalo: ti servirà in wp-config.php
+  3. Clicca "Crea database"
+
+  4. Scorri in basso alla sezione "Utenti MySQL"
+  5. Crea un nuovo utente:
+     — Nome utente: es. matacotti_user
+     — Password: usa il generatore di password sicure del cPanel (min. 16 char)
+     — Clicca "Crea utente"
+     — Salva queste credenziali in un posto sicuro (es. Keychain su Mac)
+
+  6. Nella sezione "Aggiungi utente al database":
+     — Seleziona l'utente appena creato
+     — Seleziona il database appena creato
+     — Clicca "Aggiungi"
+     — Nella schermata successiva seleziona "TUTTI I PRIVILEGI"
+     — Clicca "Apporta modifiche"
+
+  PASSO 4.3 — Trovare le credenziali FTP
+  ----------------------------------------
+  Nel cPanel:
+  1. Cerca "Account FTP" o "FTP Accounts"
+  2. Puoi usare l'account FTP principale oppure crearne uno dedicato
+  3. Annota: host FTP, utente, password, porta (di solito 21)
+  4. La cartella root del tuo sito web di solito è /public_html/
+     Se hai un dominio addon, potrebbe essere /public_html/nomedominio/
+
+  PASSO 4.4 — Verificare la versione PHP
+  ----------------------------------------
+  Nel cPanel cerca "Seleziona versione PHP" o "MultiPHP Manager".
+  Imposta PHP 8.1 o 8.2 (la più recente supportata da WordPress 6.x).
+  Assicurati che siano attive le estensioni:
+    — mysql / mysqli
+    — curl
+    — gd o imagick
+    — mbstring
+    — xml
+    — zip
+    — openssl
+
+
+================================================================================
+  5. CARICAMENTO DEI FILE VIA FTP
+================================================================================
+
+Questo è il metodo di migrazione utilizzato in questa guida: sostituzione dei
+file tramite FTP e importazione del database tramite phpMyAdmin (sezione 6).
+Segui i passi nell'ordine indicato.
+
+  PASSO 5.1 — Connessione FTP con Cyberduck
+  -------------------------------------------
+  1. Apri Cyberduck
+  2. Clicca "Nuova connessione"
+  3. Protocollo: FTP o SFTP (preferisci SFTP se disponibile su Netsons)
+  4. Server: l'host FTP fornito da Netsons (es. ftp.tuodominio.it)
+  5. Porta: 22 per SFTP, 21 per FTP
+  6. Nome utente e password: quelli del tuo account FTP
+  7. Clicca "Connetti"
+
+  PASSO 5.2 — Navigare nella cartella di destinazione
+  -----------------------------------------------------
+  Una volta connesso, naviga nella cartella root del sito:
+    /public_html/
+  oppure, se hai un dominio addon:
+    /public_html/matacotti.design/
+
+  Se la cartella contiene già file (es. index.html di default), puoi
+  eliminarli (purché non siano file di configurazione del server).
+
+  PASSO 5.3 — Caricamento dei file WordPress
+  --------------------------------------------
+  Seleziona il CONTENUTO della cartella locale:
+    /Users/francescomatacotti/Local Sites/matacotti-design/app/public/
+
+  NON caricare la cartella stessa, ma il suo contenuto (tutti i file
+  e cartelle che vedi al suo interno: wp-admin, wp-content, wp-includes,
+  wp-config.php, index.php, ecc.)
+
+  ATTENZIONE: prima di caricare wp-config.php, preparalo come descritto
+  nella fase 7. Puoi anche caricare tutto e modificare wp-config.php
+  dopo, ma è più ordinato modificarlo prima.
+
+  Il caricamento richiederà 15-40 minuti a seconda della velocità
+  della connessione e del peso dei file (soprattutto wp-content/uploads/).
+
+  PASSO 5.4 — File da NON caricare in produzione
+  ------------------------------------------------
+  Esclude questi file/cartelle dal caricamento FTP:
+    — .git/ (directory del repository Git)
+    — local-xdebuginfo.php (specifico di Local by Flywheel)
+    — wp-config.php (lo caricherai dopo averlo modificato, vedi fase 7)
+
+  Per escludere file in Cyberduck: usa il sync oppure semplicemente
+  non selezionarli durante il caricamento.
+
+
+================================================================================
+  6. CREAZIONE E IMPORTAZIONE DEL DATABASE SU NETSONS
+================================================================================
+
+  PASSO 6.1 — Aprire phpMyAdmin su Netsons
+  ------------------------------------------
+  Nel cPanel Netsons cerca "phpMyAdmin" e cliccaci sopra.
+  Seleziona il database che hai creato nella fase 4 (es. netsonsuser_matacotti_db)
+
+  PASSO 6.2 — Importare il file SQL
+  -----------------------------------
+  1. Clicca sulla scheda "Importa"
+  2. In "File da importare" clicca "Scegli file" e seleziona il file
+     matacotti-design-DB-20260423.sql che hai esportato nella fase 3
+  3. Character set del file: utf8mb4 (o utf8)
+  4. Formato: SQL
+  5. Clicca "Esegui"
+
+  Se il file è troppo grande (>50 MB) phpMyAdmin potrebbe bloccarsi.
+  In quel caso usa il plugin "WP Migrate" oppure BigDump (script PHP
+  per importazioni di grandi dimensioni).
+
+  PASSO 6.3 — Verifica dell'importazione
+  ----------------------------------------
+  Dopo l'importazione, nel pannello di sinistra di phpMyAdmin dovresti
+  vedere le tabelle WordPress:
+    wp_commentmeta, wp_comments, wp_links, wp_options, wp_postmeta,
+    wp_posts, wp_term_relationships, wp_term_taxonomy, wp_termmeta,
+    wp_terms, wp_usermeta, wp_users
+
+  Se le tabelle ci sono, l'importazione è riuscita.
+
+
+================================================================================
+  7. CONFIGURAZIONE DI WP-CONFIG.PHP PER LA PRODUZIONE
+================================================================================
+
+Apri il file wp-config.php con VS Code prima di caricarlo sul server.
+
+  PASSO 7.1 — Aggiornare le credenziali del database
+  ----------------------------------------------------
+  Sostituisci i valori locali con quelli di Netsons:
+
+    define( 'DB_NAME',     'netsonsuser_matacotti_db' );  // ← il tuo nome DB
+    define( 'DB_USER',     'netsonsuser_matacotti_user' ); // ← il tuo utente DB
+    define( 'DB_PASSWORD', 'LA_TUA_PASSWORD_SICURA' );     // ← password DB
+    define( 'DB_HOST',     'localhost' );                  // ← di solito localhost su Netsons
+
+  PASSO 7.2 — Rinnovare i Secret Keys
+  -------------------------------------
+  Le chiavi locali non sono sicure per la produzione. Genera un nuovo set:
+  1. Vai su: https://api.wordpress.org/secret-key/1.1/salt/
+  2. Copia il blocco di define() generato
+  3. Sostituisci il blocco esistente in wp-config.php con quello nuovo
+
+  PASSO 7.3 — Disabilitare il debug in produzione
+  -------------------------------------------------
+  Cerca la riga:
+    define( 'WP_DEBUG', true );
+  e cambiala in:
+    define( 'WP_DEBUG', false );
+
+  Aggiungi anche queste righe per sicurezza:
+    define( 'WP_DEBUG_LOG',     false );
+    define( 'WP_DEBUG_DISPLAY', false );
+
+  PASSO 7.4 — Aggiungere l'URL del sito (opzionale ma utile)
+  ------------------------------------------------------------
+  Prima della riga "stop editing", aggiungi:
+
+    define( 'WP_HOME',    'https://www.matacotti.design' );
+    define( 'WP_SITEURL', 'https://www.matacotti.design' );
+
+  Adatta l'URL al tuo dominio effettivo (con o senza www, in base
+  a come vuoi che sia raggiunto il sito).
+
+  PASSO 7.5 — Caricare wp-config.php sul server
+  -----------------------------------------------
+  Carica il wp-config.php modificato via FTP nella root del sito su Netsons,
+  sovrascrivendo eventualmente quello già presente.
+
+
+================================================================================
+  8. AGGIORNAMENTO DEGLI URL NEL DATABASE (SEARCH & REPLACE)
+================================================================================
+
+Questo è il passaggio più critico: tutti i riferimenti all'URL locale
+(es. http://matacotti-design.local) devono diventare il dominio di produzione
+(es. https://www.matacotti.design).
+
+NON usare un semplice Find & Replace sul file SQL: WordPress serializza
+alcune stringhe e un replace manuale le corromperebbe.
+
+USA il metodo corretto:
+
+  METODO CONSIGLIATO — Plugin "Better Search Replace"
+  ----------------------------------------------------
+  1. Accedi al pannello WordPress sul server di produzione
+     (se il DNS non è ancora puntato, puoi accedere temporaneamente
+     andando su http://IP-DEL-SERVER/wp-admin, oppure modificando
+     il file /etc/hosts sul tuo Mac — vedi nota sotto)
+  2. Vai su Plugin → Aggiungi nuovo → cerca "Better Search Replace"
+  3. Installa e attiva
+  4. Vai su Strumenti → Better Search Replace
+  5. Nel campo "Cerca": http://matacotti-design.local
+     Nel campo "Sostituisci con": https://www.matacotti.design
+  6. Seleziona TUTTE le tabelle
+  7. Prima spunta "Fai un test?" e clicca Esegui per vedere quante
+     occorrenze verranno sostituite (senza modificare nulla)
+  8. Se il numero sembra corretto, deseleziona "Fai un test?" e riesegui
+  9. Ripeti con http:// → https:// se necessario
+
+  NOTA — Accesso temporaneo senza DNS puntato:
+  Su Mac, apri Terminale e modifica /etc/hosts:
+    sudo nano /etc/hosts
+  Aggiungi la riga:
+    IP.DEL.SERVER.NETSONS  www.matacotti.design
+  Salva (Ctrl+X, Y, Enter). Ora il browser risolverà il dominio al server.
+  Ricordati di rimuovere questa riga dopo aver puntato il DNS ufficialmente.
+
+  Trovi l'IP del server Netsons nel cPanel sotto "Informazioni account"
+  o "Statistiche" → "Indirizzo IP condiviso".
+
+  PASSO 8.2 — Svuotare la cache e rigenerare i permalink
+  --------------------------------------------------------
+  Dopo il search & replace, nel pannello WordPress:
+  1. Vai su Impostazioni → Permalink
+  2. Senza cambiare nulla, clicca "Salva modifiche"
+  Questo rigenera il file .htaccess e risolve eventuali errori 404.
+
+
+================================================================================
+  9. CONFIGURAZIONE DNS E PUNTAMENTO DEL DOMINIO
+================================================================================
+
+  PASSO 9.1 — Trovare i nameserver o l'IP di Netsons
+  ----------------------------------------------------
+  Nel cPanel Netsons, sezione "Informazioni account" o nella email di
+  benvenuto, trovi:
+    — I nameserver (es. ns1.netsons.net, ns2.netsons.net)
+    — L'indirizzo IP del server
+
+  PASSO 9.2 — Caso A: dominio registrato su Netsons
+  ---------------------------------------------------
+  Se il dominio è già su Netsons il puntamento è automatico o quasi.
+  Verifica che nel gestore DNS del dominio esista un record A:
+    @ → IP del server
+
+  PASSO 9.3 — Caso B: dominio registrato altrove
+  ------------------------------------------------
+  Accedi al pannello del registrar dove hai il dominio (es. Aruba, Register,
+  GoDaddy) e:
+  OPZIONE 1 — Cambia i nameserver:
+    Imposta ns1.netsons.net e ns2.netsons.net come nameserver del dominio.
+    La propagazione richiede 24-48 ore.
+
+  OPZIONE 2 — Modifica solo i record DNS (consigliata se vuoi mantenere
+  la gestione DNS nel registrar):
+    Aggiungi/modifica i record A:
+      @    → IP Netsons   (TTL: 3600)
+      www  → IP Netsons   (TTL: 3600)
+
+  PASSO 9.4 — Verificare la propagazione DNS
+  -------------------------------------------
+  Vai su whatsmydns.net, inserisci il tuo dominio e seleziona tipo "A".
+  Quando la maggior parte dei nodi mostra l'IP Netsons, la propagazione
+  è completata. Nei casi peggiori attendere fino a 48 ore.
+
+
+================================================================================
+  10. ATTIVAZIONE SSL (HTTPS)
+================================================================================
+
+  PASSO 10.1 — Attivare Let's Encrypt dal cPanel Netsons
+  --------------------------------------------------------
+  1. Nel cPanel cerca "Let's Encrypt SSL" o "SSL/TLS"
+  2. Seleziona il tuo dominio (es. matacotti.design)
+  3. Spunta anche www.matacotti.design
+  4. Clicca "Installa" o "Emetti certificato"
+  5. Attendi 1-5 minuti per l'emissione
+
+  PASSO 10.2 — Forzare HTTPS con .htaccess
+  ------------------------------------------
+  Una volta attivato l'SSL, forza il reindirizzamento HTTP → HTTPS.
+  Apri il file .htaccess nella root del sito e aggiungi PRIMA di
+  "# BEGIN WordPress":
+
+    # Forza HTTPS
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Forza www (opzionale, rimuovi se preferisci senza www)
+    RewriteCond %{HTTP_HOST} !^www\.
+    RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  PASSO 10.3 — Aggiornare gli URL WordPress a HTTPS
+  ---------------------------------------------------
+  Se non l'hai già fatto nella fase 7.4, aggiorna in WordPress:
+  Impostazioni → Generali → "Indirizzo WordPress" e "Indirizzo sito"
+  Entrambi devono iniziare con https://
+
+
+================================================================================
+  11. CHECK POST-MIGRAZIONE
+================================================================================
+
+Esegui questi controlli sistematicamente dopo che il sito è online.
+
+  CONTROLLI TECNICI
+  -----------------
+  □ Il sito carica senza errori sulla homepage
+  □ HTTPS attivo, lucchetto verde visibile nel browser
+  □ Il reindirizzamento HTTP → HTTPS funziona
+  □ Il reindirizzamento www → non-www (o viceversa) funziona
+  □ L'accesso a /wp-admin funziona con le tue credenziali
+  □ Tutti i menu di navigazione funzionano e linkano alle pagine corrette
+  □ Nessuna pagina restituisce errore 404 (controlla le pagine principali)
+  □ I permalink sono corretti (Impostazioni → Permalink → Salva)
+  □ Le immagini si caricano su tutte le pagine
+  □ I Custom Post Type "progetto" sono visibili nell'archivio
+  □ I single project si aprono correttamente
+  □ I campi ACF Pro sono presenti e mostrano i dati corretti
+  □ Il footer si visualizza correttamente
+  □ L'infinite scroll sull'archivio progetti funziona
+  □ Il sito è responsive su mobile (usa Chrome DevTools o un dispositivo reale)
+
+  CONTROLLI SUI CONTENUTI
+  -----------------------
+  □ Testi corretti su tutte le pagine
+  □ Nessuna immagine rotta (broken image)
+  □ Link interni funzionanti
+  □ Link esterni funzionanti
+  □ Form di contatto invia correttamente (fai una prova reale)
+  □ La email di notifica dei form arriva nella tua casella
+
+  CONTROLLI EMAIL
+  ---------------
+  □ Il plugin di invio email (SMTP) è configurato (vedi sezione 13)
+  □ Invia un'email di test dal form di contatto
+  □ Verifica che non finisca in spam
+
+  STRUMENTI DI VERIFICA ONLINE
+  -----------------------------
+  □ Passa il sito su gtmetrix.com per il report di velocità
+  □ Usa Google PageSpeed Insights per il punteggio Core Web Vitals
+  □ Controlla la console del browser (F12) per errori JavaScript
+
+
+================================================================================
+  12. SICUREZZA DI BASE DEL SITO
+================================================================================
+
+  PASSO 12.1 — Cambia il nome utente admin
+  ------------------------------------------
+  Se l'utente amministratore si chiama "admin" è un rischio di sicurezza.
+  Per cambiarlo:
+  1. Crea un nuovo utente con ruolo "Amministratore" con un nome diverso
+  2. Assegna tutti i contenuti al nuovo utente
+  3. Elimina l'utente "admin"
+
+  PASSO 12.2 — Installa "Limit Login Attempts Reloaded"
+  -------------------------------------------------------
+  Plugin gratuito che blocca IP che tentano brute force sulla pagina
+  di login wp-admin.
+  1. Plugin → Aggiungi nuovo → cerca "Limit Login Attempts Reloaded"
+  2. Installa e attiva
+  3. Nelle impostazioni imposta: max 3 tentativi, blocco di 24 ore
+
+  PASSO 12.3 — Proteggi wp-admin con password aggiuntiva (opzionale)
+  -------------------------------------------------------------------
+  Nel cPanel Netsons → "Directory protette da password":
+  1. Seleziona la cartella wp-admin
+  2. Aggiungi una protezione password HTTP
+  Questo aggiunge un doppio strato prima che l'attaccante possa anche
+  solo vedere la pagina di login di WordPress.
+  ATTENZIONE: disabilita questa protezione temporaneamente se usi
+  plugin che fanno chiamate AJAX al wp-admin da frontend.
+
+  PASSO 12.4 — Mantieni tutto aggiornato
+  ----------------------------------------
+  □ WordPress core aggiornato all'ultima versione stabile
+  □ Tutti i plugin aggiornati
+  □ Il tema padre Understrap aggiornato
+  □ Attiva gli aggiornamenti automatici per le patch di sicurezza:
+    Impostazioni → Aggiornamenti → "Aggiornamenti automatici del nucleo"
+    seleziona "Aggiornamenti minori" (patch di sicurezza)
+
+  PASSO 12.5 — Imposta i permessi corretti dei file
+  ---------------------------------------------------
+  Via FTP o nel File Manager di cPanel, imposta:
+    — Cartelle: 755
+    — File: 644
+    — wp-config.php: 600 (solo lettura per il proprietario)
+  In Cyberduck: tasto destro sul file → "Info" → "Permessi"
+
+  PASSO 12.6 — Aggiungi al .htaccess protezioni extra
+  -----------------------------------------------------
+  Aggiungi PRIMA di "# BEGIN WordPress":
+
+    # Blocca accesso diretto a wp-config.php
+    <Files wp-config.php>
+        Order Allow,Deny
+        Deny from all
+    </Files>
+
+    # Blocca accesso a file sensibili
+    <FilesMatch "(readme\.html|readme\.txt|license\.txt|wp-config-sample\.php)">
+        Order Allow,Deny
+        Deny from all
+    </FilesMatch>
+
+    # Disabilita la navigazione nelle directory
+    Options -Indexes
+
+    # Blocca XML-RPC se non lo usi
+    <Files xmlrpc.php>
+        Order Allow,Deny
+        Deny from all
+    </Files>
+
+
+================================================================================
+  13. PROTEZIONE ANTI-SPAM SU EMAIL E FORM DI CONTATTO
+================================================================================
+
+Questa è una delle problematiche più comuni quando si va online con i propri
+dati di contatto. Ecco una strategia a più livelli.
+
+  LIVELLO 1 — NON mettere indirizzi email in chiaro nell'HTML
+  ------------------------------------------------------------
+  Mai scrivere <a href="mailto:nome@dominio.it"> direttamente nel codice.
+  I bot di spam scansionano il web e raccolgono questi indirizzi.
+
+  Usa sempre un form di contatto al posto del link mailto.
+  Se devi mostrare l'indirizzo, usa il plugin "Email Encoder" che
+  offusca l'email con JavaScript, rendendola invisibile ai bot ma
+  visibile agli utenti umani.
+
+  LIVELLO 2 — Form di contatto con protezione anti-spam
+  -------------------------------------------------------
+  Se non hai già un plugin per i form, installa Contact Form 7 (gratuito).
+  Una volta installato, aggiungici la protezione anti-spam:
+
+  OPZIONE A — reCAPTCHA v3 (consigliata, invisibile per l'utente)
+  ----------------------------------------------------------------
+  1. Vai su: https://www.google.com/recaptcha/admin
+  2. Crea una nuova proprietà:
+     — Tipo: reCAPTCHA v3
+     — Dominio: matacotti.design (senza www)
+  3. Copia la chiave SITO e la chiave SEGRETA
+  4. In WordPress, Contact Form 7 → Integrazione → reCAPTCHA
+  5. Inserisci le due chiavi e salva
+  Il reCAPTCHA v3 è completamente invisibile: assegna un punteggio
+  a ogni visita e blocca quelle probabilmente automatizzate.
+
+  OPZIONE B — Honeypot (alternativa senza Google)
+  ------------------------------------------------
+  Il plugin "Honeypot for Contact Form 7" aggiunge un campo invisibile
+  al form. I bot lo compilano, gli umani no. È GDPR-friendly perché non
+  usa cookie o tracking di terze parti.
+  Installa: "Contact Form 7 Honeypot" → attiva → il plugin funziona
+  automaticamente senza configurazione.
+
+  CONSIGLIO: usa entrambi (honeypot + reCAPTCHA v3) per massima protezione.
+
+  LIVELLO 3 — Akismet per spam nei commenti
+  ------------------------------------------
+  Se il sito ha la sezione commenti attiva:
+  1. Installa il plugin "Akismet Anti-Spam" (già presente in WordPress)
+  2. Crea un account gratuito su akismet.com (piano Personal è gratuito
+     per siti non commerciali)
+  3. Ottieni la chiave API e inseriscila nelle impostazioni del plugin
+  Se il sito non ha commenti, puoi disabilitarli del tutto:
+  Impostazioni → Discussione → deseleziona "Consenti agli utenti di
+  pubblicare commenti sui nuovi articoli"
+
+  LIVELLO 4 — Configurare SMTP per l'invio email affidabile
+  ----------------------------------------------------------
+  WordPress di default usa la funzione mail() di PHP per inviare email,
+  che spesso viene rifiutata o finisce in spam. Configura un SMTP dedicato.
+
+  OPZIONE CONSIGLIATA — Plugin WP Mail SMTP con Gmail
+  ----------------------------------------------------
+  1. Installa "WP Mail SMTP" (plugin gratuito)
+  2. Nelle impostazioni seleziona "Gmail" o "Google Workspace"
+  3. Segui la guida guidata per connettere il tuo account Gmail
+  4. In alternativa, puoi usare il servizio SMTP di Brevo (ex Sendinblue)
+     che offre 300 email/giorno gratis:
+     — Crea account su brevo.com
+     — Vai su SMTP & API → ottieni le credenziali SMTP
+     — In WP Mail SMTP seleziona "Altro SMTP" e inserisci:
+         Host: smtp-relay.brevo.com
+         Porta: 587
+         Sicurezza: TLS
+         Username: la tua email Brevo
+         Password: la chiave SMTP di Brevo
+
+  5. Fai il test di invio dal plugin per verificare che le email arrivino
+
+  LIVELLO 5 — Protezione a livello DNS con SPF e DKIM
+  ----------------------------------------------------
+  Per evitare che le email del tuo sito finiscano in spam, configura
+  i record DNS di autenticazione email:
+
+  SPF: aggiungi al DNS del dominio un record TXT:
+    v=spf1 include:_spf.brevo.com ~all
+    (adatta in base al tuo provider SMTP)
+
+  DKIM: Brevo e WP Mail SMTP forniscono il record DKIM da aggiungere.
+  Segui la procedura guidata nel loro pannello.
+
+  DMARC: aggiungi un record TXT per _dmarc.matacotti.design:
+    v=DMARC1; p=quarantine; rua=mailto:tua@email.it
+
+  Questi tre record dicono ai server email riceventi che le tue email
+  sono legittime e riducono drasticamente la possibilità che finiscano
+  nello spam.
+
+
+================================================================================
+  14. MIGRAZIONE SEO DA MATACOTTIDESIGN.IT AL NUOVO DOMINIO
+================================================================================
+
+Il sito precedente (matacottidesign.it) ha già una storia di indicizzazione
+su Google. Il nuovo sito (matacotti.design) ha un'architettura diversa, quindi
+è fondamentale gestire la transizione per non disperdere il traffico organico
+esistente e comunicare correttamente a Google il cambio di dominio.
+
+  PASSO 14.1 — Mappa gli URL del vecchio sito sul nuovo
+  -------------------------------------------------------
+  Prima di qualsiasi altra operazione, documenta la struttura del vecchio sito
+  e trova la pagina più corrispondente nel nuovo. Esempio:
+
+    VECCHIO URL (matacottidesign.it)     NUOVO URL (matacotti.design)
+    /portfolio/                      →   /progetti/
+    /chi-sono/                       →   /biografia/
+    /contatti/                       →   /contatti/
+    /portfolio/[slug-progetto]/      →   /progetto/[slug-progetto]/
+    /                                →   /
+
+  Questa mappatura ti serve per i redirect specifici del passo successivo.
+  Per le pagine del vecchio sito senza corrispondente nel nuovo, il redirect
+  andrà alla sezione più rilevante o alla homepage.
+
+  PASSO 14.2 — Configura i redirect 301 sul vecchio dominio
+  ----------------------------------------------------------
+  I redirect 301 ("Spostato permanentemente") trasferiscono il valore SEO
+  accumulato dal vecchio dominio al nuovo. Senza di essi Google tratta
+  matacotti.design come un sito completamente nuovo, azzerando il ranking.
+
+  Accedi via FTP al vecchio sito matacottidesign.it, apri il file .htaccess
+  nella root e aggiungi PRIMA di "# BEGIN WordPress":
+
+    # Redirect specifici per pagine che cambiano struttura
+    Redirect 301 /portfolio/ https://www.matacotti.design/progetti/
+    Redirect 301 /chi-sono/ https://www.matacotti.design/biografia/
+    # aggiungi qui tutti i redirect specifici dalla tua mappatura
+
+    # Redirect generico per tutto il resto (cattura il traffico rimanente)
+    RewriteEngine On
+    RewriteCond %{HTTP_HOST} ^(www\.)?matacottidesign\.it$ [NC]
+    RewriteRule ^(.*)$ https://www.matacotti.design/$1 [R=301,L]
+
+  I redirect specifici vanno PRIMA di quello generico, altrimenti vengono
+  ignorati. Il redirect generico manda tutto il resto alla homepage del nuovo
+  sito; se preferisci, puoi mandarlo a una pagina 404 personalizzata.
+
+  PASSO 14.3 — Usa "Cambio di indirizzo" in Google Search Console
+  ----------------------------------------------------------------
+  ATTENZIONE: questo strumento funziona solo DOPO che i redirect 301 sono
+  attivi e il nuovo sito è online con SSL.
+
+  1. Accedi a Google Search Console → seleziona la proprietà matacottidesign.it
+     Se non è già verificata, verificala ora (metodo consigliato: tag HTML
+     nell'header oppure file HTML da caricare sul vecchio server via FTP)
+  2. Vai su Impostazioni → Cambio di indirizzo
+  3. Inserisci il nuovo dominio: https://www.matacotti.design
+  4. Google verifica che i redirect 301 siano presenti e conferma l'operazione
+  5. Da quel momento Google accelera la migrazione del ranking al nuovo dominio
+
+  Lo strumento è efficace ma non istantaneo: il processo completo dura
+  da 6 a 12 settimane.
+
+  PASSO 14.4 — Verifica entrambe le proprietà in Search Console
+  -------------------------------------------------------------
+  Aggiungi e verifica entrambi i domini in Google Search Console:
+    — matacottidesign.it   (vecchio, per monitorare il calo fisiologico)
+    — matacotti.design     (nuovo, per monitorare la crescita del ranking)
+
+  Invia la sitemap del nuovo sito (vedi sezione 15 — Yoast):
+    https://www.matacotti.design/sitemap_index.xml
+
+  PASSO 14.5 — Non dismettere il vecchio dominio troppo presto
+  -------------------------------------------------------------
+  NON disattivare i redirect su matacottidesign.it. Mantienili attivi per
+  almeno 12 mesi, idealmente 18-24. Google impiega mesi ad aggiornare
+  completamente il suo indice, e gli utenti con link salvati verranno
+  reindirizzati correttamente fintanto che il dominio è attivo.
+
+  Se il dominio matacottidesign.it è in scadenza, rinnova il piano hosting
+  minimo (o solo il dominio con redirect DNS-level) per garantire la
+  continuità dei redirect.
+
+  PASSO 14.6 — Calo temporaneo del traffico: è normale
+  ------------------------------------------------------
+  Aspettati questo andamento tipico (indicativo):
+
+    Settimane 1-2:   Google scopre il nuovo sito e i redirect 301
+    Settimane 2-4:   Indicizzazione progressiva delle pagine del nuovo sito
+    Settimane 4-8:   Calo temporaneo del traffico organico (fisiologico!)
+    Settimane 8-16:  Recupero progressivo del ranking sul nuovo dominio
+    Mesi 4-6:        Ranking stabili sul nuovo dominio
+
+  Il calo temporaneo è normale in qualsiasi migrazione di dominio, a maggior
+  ragione con un cambio di architettura. Non è un segnale che qualcosa sia
+  andato storto: è il tempo che Google impiega per rivalutare il nuovo sito.
+
+  PASSO 14.7 — Monitoring settimanale post-migrazione
+  ----------------------------------------------------
+  Controlla ogni settimana in Google Search Console (nuovo dominio):
+  □ Copertura: quante pagine sono già indicizzate
+  □ Query di ricerca: il traffico organico cresce nel tempo?
+  □ Errori di scansione: i 404 vanno corretti aggiungendo redirect specifici
+  □ Core Web Vitals: nessuna regressione nelle performance
+
+  Se trovi URL vecchi che Google prova ancora a scansionare sul nuovo sito
+  e ricevono 404, aggiungili alla mappatura del passo 14.1 e crea il
+  redirect specifico nel .htaccess del vecchio sito.
+
+  PASSO 14.8 — Gestione contenuti duplicati durante la transizione
+  ----------------------------------------------------------------
+  Se per qualsiasi motivo entrambi i siti fossero temporaneamente accessibili
+  senza redirect (es. problema .htaccess), Yoast aggiunge automaticamente i
+  tag canonical al nuovo sito. Come misura aggiuntiva, puoi impostare il
+  vecchio sito su "noindex" temporaneamente dal pannello WordPress del vecchio
+  sito: Impostazioni → Lettura → "Scoraggia i motori di ricerca".
+  Rimuovi questa impostazione non appena i redirect funzionano.
+
+
+================================================================================
+  15. PLUGIN: YOAST SEO
+================================================================================
+
+  INSTALLAZIONE
+  -------------
+  1. Plugin → Aggiungi nuovo → cerca "Yoast SEO"
+  2. Installa "Yoast SEO" (quello con l'icona viola) e attiva
+
+  CONFIGURAZIONE GUIDATA (Wizard)
+  --------------------------------
+  1. Vai su SEO → Configurazione guidata (o clicca il banner che appare)
+  2. Segui i passaggi:
+     — Ambiente: "Un sito web live" (non in costruzione)
+     — Tipo di sito: seleziona il tipo appropriato (es. "Attività locale"
+       o "Sito web personale")
+     — Dati dell'organizzazione: inserisci nome, logo (importante per
+       il rich snippet nei risultati Google)
+     — Visibilità nei motori di ricerca: mantieni tutto indicizzabile
+     — URL profili social: aggiungi LinkedIn, Instagram, ecc.
+
+  IMPOSTAZIONI PRINCIPALI
+  -----------------------
+
+  A) SEO → Impostazioni → Generali → Titolo del sito
+     Formato titolo: %%title%% %%sep%% %%sitename%%
+     Il separatore può essere un trattino, punto, ecc.
+
+  B) SEO → Impostazioni → Tipi di contenuto
+     — Post: normalmente disabilitati se non usi il blog
+     — Pagine: abilita la SEO, imposta il template del titolo
+     — Progetto (CPT): abilita, imposta il template:
+         %%title%% %%sep%% Progetti %%sep%% %%sitename%%
+     — Archivio progetti: abilita, usa come titolo:
+         Progetti %%sep%% %%sitename%%
+
+  C) SEO → Impostazioni → Social
+     Inserisci le URL dei tuoi profili social.
+     Carica un'immagine social di default (1200×630 px) per le
+     condivisioni su Facebook/LinkedIn quando non c'è un'immagine
+     specifica della pagina.
+
+  D) SEO → Impostazioni → Sitemap XML
+     Assicurati che la sitemap sia abilitata.
+     L'URL della sitemap sarà: https://www.matacotti.design/sitemap_index.xml
+     Questo URL ti servirà in Google Search Console (vedi sezione 15).
+
+  E) OTTIMIZZAZIONE DI OGNI PAGINA E PROGETTO
+     In ogni pagina/post, nella sezione Yoast SEO in basso all'editor:
+     — Imposta il "Titolo SEO" (max 60 caratteri)
+     — Imposta la "Meta descrizione" (max 155 caratteri)
+     — Imposta l'immagine social (Open Graph) per ogni pagina importante
+     Yoast mostra semafori verde/arancio/rosso per guidarti.
+
+  F) ROBOTS.TXT
+     Yoast gestisce automaticamente il robots.txt. Verifica che contenga:
+       User-agent: *
+       Allow: /wp-content/uploads/
+       Disallow: /wp-admin/
+       Sitemap: https://www.matacotti.design/sitemap_index.xml
+
+  G) BREADCRUMB
+     Yoast genera automaticamente i breadcrumb. Per attivarli nel tema:
+     Aggiungi nei template appropriati (es. single-progetto.php):
+       <?php if ( function_exists('yoast_breadcrumb') ) {
+           yoast_breadcrumb('<p id="breadcrumbs">','</p>');
+       } ?>
+
+  H) CANONICAL URL
+     Yoast aggiunge automaticamente i canonical tag. Nessuna azione
+     richiesta a meno che non ci siano URL duplicati.
+
+
+================================================================================
+  16. PLUGIN: GOOGLE SITE KIT
+================================================================================
+
+  PREREQUISITI
+  ------------
+  Prima di installare Site Kit assicurati di avere:
+  □ Un account Google (Gmail o Google Workspace)
+  □ Il sito live con SSL attivo (richiesto da Site Kit)
+  □ Accesso al pannello WordPress come amministratore
+
+  INSTALLAZIONE
+  -------------
+  1. Plugin → Aggiungi nuovo → cerca "Google Site Kit"
+  2. Installa "Site Kit by Google" e attiva
+  3. Nella barra laterale del pannello compare "Site Kit"
+  4. Clicca su Site Kit → Inizia
+
+  CONFIGURAZIONE — PASSAGGI NELL'ORDINE CORRETTO
+  ------------------------------------------------
+
+  PASSO A — Connessione all'account Google
+  ----------------------------------------
+  1. Clicca "Accedi con Google" e autorizza Site Kit
+  2. Conferma di essere proprietario del sito
+
+  PASSO B — Google Search Console (PRIMO da configurare)
+  -------------------------------------------------------
+  Search Console è la base di tutto. Site Kit la configura per prima.
+  1. Site Kit ti chiederà di verificare la proprietà del sito
+  2. Site Kit la verifica automaticamente aggiungendo un tag nel <head>
+  3. Attendi 24-48 ore perché Search Console inizi a raccogliere dati
+
+  Dopo la verifica, invia la sitemap:
+  1. Vai su Google Search Console → Sitemaps (menu laterale)
+  2. Inserisci: sitemap_index.xml
+  3. Clicca "Invia"
+  Questo dice a Google di indicizzare il tuo sito più velocemente.
+
+  PASSO C — Google Analytics 4 (GA4)
+  ------------------------------------
+  1. In Site Kit → Impostazioni → Collega Analytics
+  2. Accedi al tuo account Google Analytics (o creane uno su analytics.google.com)
+  3. Se non hai una property GA4, Site Kit può crearla automaticamente
+  4. Seleziona o crea la property e il flusso di dati per il tuo dominio
+  5. Site Kit inserisce automaticamente il tag GA4 nel sito
+  IMPORTANTE: coordinati con Iubenda (sezione 16) per non raccogliere
+  dati prima del consenso dell'utente. Site Kit supporta il Consent Mode v2.
+
+  PASSO D — Google PageSpeed Insights
+  ------------------------------------
+  1. In Site Kit → Impostazioni → Collega PageSpeed Insights
+  2. Nessuna autenticazione aggiuntiva richiesta
+  3. I dati di performance (Core Web Vitals) appariranno nella dashboard
+
+  PASSO E — Google AdSense (opzionale)
+  -------------------------------------
+  Se vuoi monetizzare con pubblicità, puoi collegare AdSense da
+  Site Kit → Impostazioni → AdSense.
+  Non necessario per un portfolio professionale.
+
+  DASHBOARD DI SITE KIT
+  ---------------------
+  Dopo la configurazione, la dashboard di Site Kit (Site Kit → Dashboard)
+  mostra in un'unica vista:
+  — Sessioni e utenti (Analytics)
+  — Query di ricerca (Search Console)
+  — Punteggio PageSpeed
+  Controlla questa dashboard settimanalmente per monitorare le performance.
+
+  NOTA GDPR IMPORTANTE
+  --------------------
+  GA4 raccoglie dati personali degli utenti. Devi assicurarti di:
+  1. Raccogliere il consenso prima di attivare GA4 (gestito da Iubenda, sez. 16)
+  2. In Google Analytics → Impostazioni account → Privacy dei dati:
+     — Attiva "Raccolta dati IP anonimizzata"
+     — Attiva "Controlli sui dati"
+  3. In Site Kit → Impostazioni Analytics → Consent Mode: ATTIVA
+  4. Aggiungi Google come DPA nella tua Privacy Policy
+
+
+================================================================================
+  17. PLUGIN: IUBENDA (GDPR, COOKIE, PRIVACY)
+================================================================================
+
+Iubenda è il metodo più semplice e giuridicamente solido per la compliance
+GDPR in Italia. Il plugin WordPress è gratuito; le policy si generano sul
+sito iubenda.com con piano a pagamento (Piano Starter da ~27€/anno è
+sufficiente per la maggior parte dei siti).
+
+  STEP 1 — Creare un account su iubenda.com
+  ------------------------------------------
+  1. Vai su iubenda.com e crea un account
+  2. Crea un nuovo prodotto scegliendo "Sito web"
+  3. Inserisci il dominio: matacotti.design
+
+  STEP 2 — Generare la Privacy Policy
+  -------------------------------------
+  1. Nel pannello iubenda, seleziona il tuo sito → "Privacy and Cookie Policy"
+  2. Aggiungi i "servizi" che utilizzi (iubenda ha un catalogo):
+     — Google Analytics 4
+     — Google Search Console
+     — Contact Form 7 (o il tuo form)
+     — Font Google (se caricati da CDN esterno)
+     — Akismet (se attivo)
+     — Qualsiasi altro servizio di terze parti
+  3. Inserisci i dati del titolare del trattamento (il tuo nome/ragione sociale,
+     indirizzo, email di contatto)
+  4. Iubenda genera la Privacy Policy in automatico, aggiornandola quando
+     le leggi cambiano
+  5. Copia il codice di embed della policy
+
+  STEP 3 — Generare la Cookie Policy (integrata nella Privacy Policy)
+  -------------------------------------------------------------------
+  Iubenda integra automaticamente la Cookie Policy nella Privacy Policy.
+  Non è necessario un documento separato, ma verifica che tutti i cookie
+  di terze parti (Google, Font, ecc.) siano elencati.
+
+  STEP 4 — Installare il plugin WordPress
+  ----------------------------------------
+  1. Plugin → Aggiungi nuovo → cerca "iubenda"
+  2. Installa "iubenda | All-in-one Compliance for GDPR/CCPA Cookie Consent"
+  3. Attiva il plugin
+  4. Vai su iubenda nella barra laterale di WordPress
+  5. Inserisci il tuo Site ID (lo trovi nel pannello iubenda)
+  6. Il plugin si sincronizza automaticamente con il tuo account
+
+  STEP 5 — Configurare il Cookie Banner
+  ---------------------------------------
+  In iubenda → Cookie Solution:
+  1. Scegli lo stile del banner (bottom banner, popup, ecc.)
+  2. Lingue: italiano (e inglese se necessario)
+  3. Configura le categorie di cookie:
+     — Tecnici/Necessari: sempre attivi, nessun consenso richiesto
+       (es. cookie di sessione WordPress)
+     — Statistiche: richiedono consenso (es. Google Analytics)
+     — Marketing: richiedono consenso (es. pixel Facebook, se presenti)
+  4. Personalizza i colori del banner per allinearlo al brand
+     (usa --primary: rgb(68,111,142) che è il colore del tema)
+  5. Abilita il "Consent Mode v2" di Google: questo è fondamentale per
+     far funzionare correttamente GA4 in Europa
+  6. Salva e il plugin inserisce automaticamente il banner nel sito
+
+  STEP 6 — Aggiungere la Privacy Policy nel footer
+  --------------------------------------------------
+  Nel widget Footer Intero (Aspetto → Widget → Footer Intero):
+  1. Aggiungi un blocco HTML personalizzato o blocco paragrafo
+  2. Copia l'embed code della Privacy Policy da iubenda
+     (è un link <a> che apre la policy in una modale elegante)
+  3. Aggiungi anche il link ai "Preferenze cookie" se vuoi
+     permettere all'utente di cambiare il consenso in qualsiasi momento
+
+  STEP 7 — Termini e condizioni (opzionale ma consigliato)
+  ----------------------------------------------------------
+  Se vendi servizi o fai preventivi, iubenda può generare anche i
+  Termini e Condizioni. Dal pannello iubenda → "Termini e Condizioni"
+  → segui la procedura guidata.
+
+  STEP 8 — Registri del trattamento (per compliance avanzata)
+  -------------------------------------------------------------
+  Per aziende o professionisti con clienti UE, iubenda offre anche
+  la gestione del Registro delle Attività di Trattamento (art. 30 GDPR).
+  Questo va oltre lo scope di questa guida ma è disponibile nel pannello
+  iubenda per i piani superiori.
+
+  VERIFICA FINALE GDPR
+  --------------------
+  □ Il cookie banner appare alla prima visita
+  □ GA4 si attiva SOLO dopo il consenso dell'utente
+  □ Il link alla Privacy Policy è nel footer di ogni pagina
+  □ I dati del titolare del trattamento sono corretti nella policy
+  □ Il banner rispetta la scelta dell'utente (se rifiuta, i cookie
+    di terze parti non vengono impostati)
+
+
+================================================================================
+  18. PERFORMANCE E CACHE
+================================================================================
+
+  PASSO 17.1 — Plugin di cache
+  -----------------------------
+  Installa "WP Rocket" (a pagamento, consigliato) oppure "W3 Total Cache"
+  (gratuito) o "LiteSpeed Cache" (gratuito, ottimale se Netsons usa LiteSpeed).
+
+  Verifica nel cPanel Netsons quale server web usano: se è LiteSpeed,
+  installa LiteSpeed Cache perché si integra nativamente.
+
+  Configurazione base con WP Rocket (o equivalente):
+  □ Cache delle pagine: ATTIVA
+  □ Cache mobile: ATTIVA
+  □ Minificazione CSS e JS: ATTIVA (testa che non rompa nulla)
+  □ Lazy load immagini: ATTIVA
+  □ Prefetch DNS: aggiungi fonts.googleapis.com, fonts.gstatic.com
+
+  PASSO 17.2 — Ottimizzazione immagini
+  --------------------------------------
+  Installa "ShortPixel Image Optimizer" o "Imagify":
+  □ Comprimi tutte le immagini esistenti in wp-content/uploads/
+  □ Attiva la conversione automatica in formato WebP
+  □ Abilita il lazy loading (se non già fatto dal plugin cache)
+
+  PASSO 17.3 — CDN (opzionale ma consigliato)
+  -------------------------------------------
+  Cloudflare offre un piano gratuito che agisce da CDN e aggiunge
+  uno strato di sicurezza:
+  1. Crea account su cloudflare.com
+  2. Aggiungi il dominio matacotti.design
+  3. Cloudflare scansiona i tuoi DNS e li replica
+  4. Aggiorna i nameserver del dominio con quelli di Cloudflare
+  5. Dal pannello Cloudflare:
+     — Attiva "Always Use HTTPS"
+     — Attiva "Auto Minify" (HTML, CSS, JS)
+     — Attiva "Brotli compression"
+     — Imposta SSL: "Full (strict)"
+  Cloudflare migliora anche la protezione anti-DDoS e anti-bot.
+
+
+================================================================================
+  19. BACKUP AUTOMATICI IN PRODUZIONE
+================================================================================
+
+Una volta online, un backup automatico è fondamentale.
+
+  OPZIONE A — UpdraftPlus (gratuita, consigliata)
+  -------------------------------------------------
+  1. Installa "UpdraftPlus - Backup/Restore"
+  2. Nelle impostazioni configura:
+     — Frequenza backup file: settimanale
+     — Frequenza backup database: giornaliero
+     — Numero di copie da mantenere: 4 (un mese)
+  3. Archiviazione remota (fondamentale!):
+     Collega Google Drive o Dropbox per salvare i backup fuori dal server.
+     Se il server va in crash e i backup sono solo sul server, sei al
+     punto di partenza. Google Drive gratuito ha 15GB, sufficiente.
+  4. Fai subito un backup manuale e verifica che funzioni scaricando
+     e ispezionando i file.
+
+  OPZIONE B — Backup dal cPanel Netsons
+  ----------------------------------------
+  Alcuni piani Netsons includono backup automatici. Verifica nel cPanel
+  se c'è la sezione "JetBackup" o "Backup". Se presente, attiva i backup
+  giornalieri automatici. Tuttavia, non affidarti solo ai backup del
+  provider: usa sempre anche UpdraftPlus su storage esterno.
+
+
+================================================================================
+  20. CHECKLIST FINALE PRE-LANCIO
+================================================================================
+
+Prima di comunicare il lancio del sito, verifica che tutto sia a posto:
+
+  FUNZIONALITÀ
+  □ Homepage carica correttamente su desktop, tablet e mobile
+  □ Tutti i link nel menu di navigazione funzionano
+  □ La sezione progetti in homepage mostra i dati ACF corretti
+  □ L'archivio progetti mostra le card e l'infinite scroll funziona
+  □ Le pagine singolo progetto si aprono e mostrano il contenuto
+  □ La pagina Biografia è accessibile e corretta
+  □ La pagina Contatti mostra il form di contatto
+  □ Il form di contatto invia email (fai un test reale)
+  □ Il footer mostra il contenuto configurato nel widget
+
+  MIGRAZIONE SEO (da matacottidesign.it)
+  □ Mappatura URL vecchio → nuovo completata (sezione 14.1)
+  □ Redirect 301 attivi nel .htaccess del vecchio sito (sezione 14.2)
+  □ Verifica redirect: aprire nel browser un URL del vecchio sito e
+    controllare che arrivi sul nuovo con barra degli indirizzi aggiornata
+  □ matacottidesign.it verificato in Google Search Console
+  □ "Cambio di indirizzo" inviato in Search Console (sezione 14.3)
+  □ matacotti.design aggiunto e verificato in Search Console
+  □ Monitoraggio settimanale pianificato (sezione 14.7)
+
+  SEO
+  □ Yoast SEO attivo e configurato
+  □ Ogni pagina ha un titolo SEO e una meta descrizione
+  □ La sitemap XML è accessibile: /sitemap_index.xml
+  □ La sitemap è stata inviata a Google Search Console
+  □ Nessuna pagina importante è impostata su "noindex"
+  □ I tag canonici sono presenti (Yoast li aggiunge in automatico)
+
+  LEGAL & PRIVACY
+  □ Cookie banner visibile alla prima visita
+  □ La Privacy Policy è nel footer e accessibile
+  □ GA4 si attiva solo dopo il consenso
+  □ Il titolare del trattamento è corretto nella policy
+
+  PERFORMANCE
+  □ Plugin di cache attivo
+  □ Immagini ottimizzate
+  □ Punteggio Google PageSpeed > 70 su mobile, > 85 su desktop
+  □ Il sito carica in meno di 3 secondi (verifica su gtmetrix.com)
+
+  SICUREZZA
+  □ HTTPS attivo, nessuna risorsa caricata in HTTP (mixed content)
+  □ wp-config.php con permessi 600
+  □ Limit Login Attempts attivo
+  □ WP_DEBUG impostato su false
+  □ Backup automatici configurati e testati
+  □ Plugin e WordPress core aggiornati all'ultima versione
+
+  COMUNICAZIONE
+  □ Testa il sito su almeno tre browser: Chrome, Firefox, Safari
+  □ Testa su iOS (Safari) e Android (Chrome)
+  □ Condividi l'URL con un amico/collega per un test di terze parti
+  □ Controlla che le condivisioni social mostrino il preview corretto
+    (usa Facebook Debugger: developers.facebook.com/tools/debug/)
+
+
+================================================================================
+  NOTE FINALI
+================================================================================
+
+Questa guida copre la migrazione e il lancio di un sito WordPress sviluppato
+con il tema figlio Understrap Child, con i plugin ACF Pro, Font Awesome,
+Amelia Booking e il tema padre Understrap.
+
+Conserva questo documento e aggiornalo ogni volta che apporti modifiche
+significative all'infrastruttura.
+
+Per qualsiasi problema post-migrazione:
+  — Il log degli errori PHP si trova in: /public_html/error_log
+    (puoi leggerlo dal File Manager del cPanel o via FTP)
+  — Attiva temporaneamente WP_DEBUG in wp-config.php solo per il debug,
+    poi disattivalo immediatamente
+  — Il forum ufficiale WordPress è su: it.wordpress.org/support/
+
+Buon lancio!
+
+================================================================================

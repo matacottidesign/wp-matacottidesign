@@ -167,40 +167,61 @@ class GoogleCalendarMiddlewareService extends AbstractGoogleCalendarMiddlewareSe
 
     /**
      * Get Google Client
-     * $providerGoogleCalendar - provider's google calendar settings
-     * @param array $providerGoogleCalendar
+     * @param array|null $providerGoogleCalendar
      *
      * @return Client|null
      */
     public function getClient($providerGoogleCalendar)
     {
         $accessToken = $this->googleCalendarSettings['accessToken'];
+        $isProviderToken = false;
+
         if ($accessToken === 'null') {
             $this->settingsService->setSetting('googleCalendar', 'accessToken', '');
             $this->googleCalendarSettings['accessToken'] = '';
             $accessToken = $this->googleCalendarSettings['accessToken'];
         }
+
+        $isProviderToken = false;
         if (isset($providerGoogleCalendar['token'])) {
             $accessToken = $providerGoogleCalendar['token'];
+            $isProviderToken = true;
+        }
+
+        if (!$accessToken) {
+            error_log('GoogleCalendar: No access token available');
+            return null;
         }
 
         $client = new Client();
         $client->setAccessToken($accessToken);
 
         if ($client->isAccessTokenExpired()) {
-            $accessToken = json_decode($this->googleCalendarSettings['accessToken'], true);
-            $refreshToken = $accessToken['refresh_token'];
+            $tokenData = json_decode($isProviderToken ? $providerGoogleCalendar['token'] : $this->googleCalendarSettings['accessToken'], true);
+            $refreshToken = $tokenData['refresh_token'] ?? null;
+
+            if (!$refreshToken) {
+                error_log('GoogleCalendar: No refresh token available');
+                return null;
+            }
+
             $newAccessToken = $this->refreshAccessToken($refreshToken);
 
-            // Check if token refresh failed
             if ($newAccessToken === null) {
                 error_log('GoogleCalendar: Failed to refresh access token');
                 return null;
             }
 
+            if (empty($newAccessToken['refresh_token'])) {
+                $newAccessToken['refresh_token'] = $refreshToken;
+            }
+
             $token = json_encode($newAccessToken);
-            $this->googleCalendarSettings['accessToken'] = $token;
-            $this->settingsService->setCategorySettings('googleCalendar', $this->googleCalendarSettings);
+
+            if (!$isProviderToken) {
+                $this->googleCalendarSettings['accessToken'] = $token;
+                $this->settingsService->setCategorySettings('googleCalendar', $this->googleCalendarSettings);
+            }
 
             $client->setAccessToken($token);
         }
@@ -212,5 +233,25 @@ class GoogleCalendarMiddlewareService extends AbstractGoogleCalendarMiddlewareSe
     {
         return $this->settingsService->isFeatureEnabled('googleCalendar') &&
             $this->googleCalendarSettings['accessToken'];
+    }
+
+    /**
+     * Get calendar lists for multiple Google accounts
+     *
+     * @param array $accounts
+     *
+     * @return array
+     */
+    public function getCalendarListsForAccounts(array $accounts): array
+    {
+        foreach ($accounts as &$account) {
+            if (isset($account['token']) && $account['token']) {
+                $account['calendarList'] = $this->getCalendarList(['token' => $account['token']]);
+            } else {
+                $account['calendarList'] = [];
+            }
+        }
+
+        return $accounts;
     }
 }

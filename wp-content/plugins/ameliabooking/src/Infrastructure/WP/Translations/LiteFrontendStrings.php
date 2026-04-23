@@ -6,20 +6,13 @@ use AmeliaBooking\Domain\Services\Settings\SettingsService;
 use AmeliaBooking\Infrastructure\WP\SettingsService\SettingsStorage;
 
 /**
- * Class LiteFrontendStrings
- *
- * @package AmeliaBooking\Infrastructure\WP\Translations
- *
  * @phpcs:disable
  */
 class LiteFrontendStrings
 {
-    /** @var SettingsService $settings */
-    private static $settings;
+    private static ?SettingsService $settings = null;
 
     /**
-     * Set Settings
-     *
      * @return array|mixed
      */
     public static function getLabelsFromSettings()
@@ -40,10 +33,8 @@ class LiteFrontendStrings
 
     /**
      * Return all strings for frontend
-     *
-     * @return array
      */
-    public static function getAllStrings()
+    public static function getAllStrings(): array
     {
         return array_merge(
             self::getCommonStrings(),
@@ -59,21 +50,16 @@ class LiteFrontendStrings
 
     /**
      * Returns the array for the bookable strings
-     *
-     * @return array
      */
-    public static function getBookableStrings()
+    public static function getBookableStrings(): array
     {
-        return [
-        ];
+        return [];
     }
 
     /**
      * Returns the array of the common frontend strings
-     *
-     * @return array
      */
-    public static function getCommonStrings()
+    public static function getCommonStrings(): array
     {
         return [
             'add_to_calendar'              => __('Add to Calendar', 'wpamelia'),
@@ -144,26 +130,22 @@ class LiteFrontendStrings
             'view'                         => __('View', 'wpamelia'),
             'select'                       => __('Select', 'wpamelia'),
             'free'                         => __('Free', 'wpamelia'),
+            'error_use_diff_email_or_phone' => __('Please use a different email or phone number to complete the booking.', 'wpamelia'),
         ];
     }
 
     /**
      * Returns the array of the frontend strings for the search shortcode
-     *
-     * @return array
      */
-    public static function getSearchStrings()
+    public static function getSearchStrings(): array
     {
-        return [
-        ];
+        return [];
     }
 
     /**
      * Returns the array of the frontend strings for the booking shortcode
-     *
-     * @return array
      */
-    public static function getBookingStrings()
+    public static function getBookingStrings(): array
     {
         return [
             'continue'                     => __('Continue', 'wpamelia'),
@@ -214,10 +196,8 @@ class LiteFrontendStrings
 
     /**
      * Returns the array of the frontend strings for the event shortcode
-     *
-     * @return array
      */
-    public static function getEventStrings()
+    public static function getEventStrings(): array
     {
         return [
             'event_book_event'          => __('Book event', 'wpamelia'),
@@ -245,15 +225,14 @@ class LiteFrontendStrings
             'event_show_more'           => __('Show more', 'wpamelia'),
             'event_location'            => __('Event Location', 'wpamelia'),
             'no_events'                 => __('No results found...', 'wpamelia'),
+            'date_picker_placeholder'   => __('Date Picker', 'wpamelia'),
         ];
     }
 
     /**
      * Returns the array of the frontend strings for the catalog shortcode
-     *
-     * @return array
      */
-    public static function getCatalogStrings()
+    public static function getCatalogStrings(): array
     {
         return [
             'categories'                         => __('Categories', 'wpamelia'),
@@ -276,10 +255,8 @@ class LiteFrontendStrings
 
     /**
      * Returns the array of the frontend strings for the event shortcode
-     *
-     * @return array
      */
-    public static function getCabinetStrings()
+    public static function getCabinetStrings(): array
     {
         return [
             'available'                              => __('Available', 'wpamelia'),

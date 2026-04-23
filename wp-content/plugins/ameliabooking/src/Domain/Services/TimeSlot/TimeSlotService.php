@@ -552,12 +552,18 @@ class TimeSlotService
 
                 $specialDayDateKey = null;
 
+                $emptySpecialDayKey = null;
+
                 foreach ((array)$specialDayIntervals[$providerKey] as $specialDayKey => $specialDays) {
                     if (array_key_exists($dateKey, $specialDays['dates']) && !empty($specialDays['intervals'])) {
                         $specialDayDateKey = $specialDayKey;
                         break;
+                    } elseif (array_key_exists($dateKey, $specialDays['dates'])) {
+                        $emptySpecialDayKey = $specialDayKey;
                     }
                 }
+
+                $specialDayDateKey = $specialDayDateKey !== null ? $specialDayDateKey : $emptySpecialDayKey;
 
                 if (
                     $specialDayDateKey !== null &&
@@ -629,6 +635,8 @@ class TimeSlotService
 
                     $specialDayDateKey = null;
 
+                    $emptySpecialDayKey = null;
+
                     foreach ((array)$specialDayIntervals[$providerKey] as $specialDayKey => $specialDays) {
                         if (
                             array_key_exists($currentDate, $specialDays['dates']) &&
@@ -636,8 +644,12 @@ class TimeSlotService
                         ) {
                             $specialDayDateKey = $specialDayKey;
                             break;
+                        } elseif (array_key_exists($currentDate, $specialDays['dates'])) {
+                            $emptySpecialDayKey = $specialDayKey;
                         }
                     }
+
+                    $specialDayDateKey = $specialDayDateKey !== null ? $specialDayDateKey : $emptySpecialDayKey;
 
                     if (!$isProviderDayOff) {
                         // daily limit per employee
@@ -948,9 +960,9 @@ class TimeSlotService
                             . sprintf('%02d', floor(($timeSlot / 60) % 60));
 
                         if ($timeSlot <= 86400) {
-                            if (!$structured) {
+                            if (!$structured && $time !== '24:00') {
                                 $availableResult[$dateKey][$time] = $data;
-                            } else {
+                            } elseif ($time !== '24:00') {
                                 foreach ($data as $item) {
                                     $availableResult[$dateKey][$time][] = [
                                         'e' => $item[0],

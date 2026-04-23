@@ -15,12 +15,9 @@ use AmeliaBooking\Infrastructure\Licence;
  */
 class FrontendStrings
 {
-    /** @var SettingsService */
-    private static $settings;
+    private static ?SettingsService $settings = null;
 
     /**
-     * Set Settings
-     *
      * @return array|mixed
      */
     public static function getLabelsFromSettings()
@@ -41,10 +38,8 @@ class FrontendStrings
 
     /**
      * Return all strings for frontend
-     *
-     * @return array
      */
-    public static function getAllStrings()
+    public static function getAllStrings(): array
     {
         return array_merge(
             self::getCommonStrings(),
@@ -61,10 +56,8 @@ class FrontendStrings
 
     /**
      * Returns the array for the bookable strings
-     *
-     * @return array
      */
-    public static function getBookableStrings()
+    private static function getBookableStrings(): array
     {
         $labels = Licence\Licence::isPremium() ? [
             'allow_customers_to_pay_total'       => __('Check this option if you want your<br> customers to have the option to choose<br> whether they will pay a full amount<br> or just a deposit. If unchecked,<br> customers will only have deposit<br> as a payment option.', 'wpamelia'),
@@ -91,10 +84,8 @@ class FrontendStrings
 
     /**
      * Returns the array of the common frontend strings
-     *
-     * @return array
      */
-    public static function getCommonStrings()
+    public static function getCommonStrings(): array
     {
         $labels = Licence\Licence::isPremium() ? [
             'no_results_found'             => __('No results found...', 'wpamelia'),
@@ -109,8 +100,9 @@ class FrontendStrings
             'apple_icloud_id'              => __('iCloud Email Address', 'wpamelia'),
             'apple_app_specific_password'  => __('iCloud App-specific Password', 'wpamelia'),
             'apple_disconnect'             => __('Disconnect from Apple', 'wpamelia'),
-            'apple_connect'                   => __('Connect to Apple Calendar', 'wpamelia'),
+            'apple_connect'                => __('Connect to Apple Calendar', 'wpamelia'),
             'apple_connect_employee_calendar' => __('Connect to your personal Apple Calendar', 'wpamelia'),
+            'red_employee_apple_description' => __('Sync your schedule with your personal Apple Calendar to prevent double bookings.', 'wpamelia'),
             'no_package_services'          => __('It seems like there are no available or visible services assigned to the packages, at this moment.', 'wpamelia'),
             'all_slots_selected'           => __('All slots are selected', 'wpamelia'),
             'appointment'                  => __('Appointment', 'wpamelia'),
@@ -227,6 +219,8 @@ class FrontendStrings
             'years'                        => __('Years', 'wpamelia'),
             'week_days'                    => __('Day of the Week', 'wpamelia'),
             'custom_days'                  => __('Specific Date & Time', 'wpamelia'),
+            'delete_appointment'           => __('Delete appointment', 'wpamelia'),
+            'open_side_menu'               => __('Open side menu', 'wpamelia'),
         ] : [];
 
         return array_merge($labels, LiteFrontendStrings::getCommonStrings());
@@ -234,10 +228,8 @@ class FrontendStrings
 
     /**
      * Returns the array of the frontend strings for the search shortcode
-     *
-     * @return array
      */
-    public static function getSearchStrings()
+    public static function getSearchStrings(): array
     {
         $labels = Licence\Licence::isPremium() ? [
             'appointment_date_colon'  => __('Appointment Date:', 'wpamelia'),
@@ -271,10 +263,8 @@ class FrontendStrings
 
     /**
      * Returns the array of the frontend strings for the booking shortcode
-     *
-     * @return array
      */
-    public static function getBookingStrings()
+    public static function getBookingStrings(): array
     {
         $labels = Licence\Licence::isPremium() ? [
             'add_appointment'              => __('Add appointment', 'wpamelia'),
@@ -508,10 +498,8 @@ class FrontendStrings
 
     /**
      * Returns the array of the frontend strings for the event shortcode
-     *
-     * @return array
      */
-    public static function getEventStrings()
+    public static function getEventStrings(): array
     {
         $labels = Licence\Licence::isPremium() ? [
             'add_ticket_category'       => __('Add Pricing Category', 'wpamelia'),
@@ -574,10 +562,8 @@ class FrontendStrings
 
     /**
      * Returns the array of the frontend strings for the catalog shortcode
-     *
-     * @return array
      */
-    public static function getCatalogStrings()
+    public static function getCatalogStrings(): array
     {
         $labels = Licence\Licence::isPremium() ? [
             'booking_appointment'                => __('Booking Appointment', 'wpamelia'),
@@ -619,10 +605,8 @@ class FrontendStrings
 
     /**
      * Returns the array of the frontend strings for the cabinet shortcode
-     *
-     * @return array
      */
-    public static function getFrontendCabinetAuthStrings()
+    public static function getFrontendCabinetAuthStrings(): array
     {
         return [
             'access_link_send'                       => __('Send Access Link', 'wpamelia'),
@@ -666,10 +650,8 @@ class FrontendStrings
 
     /**
      * Returns the array of the frontend strings for the event shortcode
-     *
-     * @return array
      */
-    public static function getCabinetStrings()
+    public static function getCabinetStrings(): array
     {
         $labels = Licence\Licence::isPremium() ? [
             'add_customer'                           => __('Add Customer', 'wpamelia'),
@@ -845,6 +827,11 @@ class FrontendStrings
             'event_tags'                             => __('Tags', 'wpamelia'),
             'event_tags_create'                      => __('No Tags. Create a new one.', 'wpamelia'),
             'event_tags_select_or_create'            => __('Select or Create Tag', 'wpamelia'),
+            'manage_event_tags'                      => __('Manage Event Tags', 'wpamelia'),
+            'create_new_event_tag'                   => __('Create New Tag', 'wpamelia'),
+            'tag_label'                              => __('Tag label', 'wpamelia'),
+            'tag_name_required'                      => __('Tag label cannot be empty', 'wpamelia'),
+            'add'                                    => __('Add', 'wpamelia'),
             'events_dropdown'                        => __('Event', 'wpamelia'),
             'export'                                 => __('Export', 'wpamelia'),
             'export_tooltip_attendees'               => __('You can use this option to export attendees in CSV file<br/>for the selected event.', 'wpamelia'),
@@ -854,6 +841,8 @@ class FrontendStrings
             'google_calendar_tooltip'                => __('Connect your Google Calendar here so once<br/>the appointment is scheduled it can be added<br/>to your Google Calendar automatically.', 'wpamelia'),
             'google_sign_in'                         => __('Sign in with Google', 'wpamelia'),
             'google_sign_out'                        => __('Sign out from Google', 'wpamelia'),
+            'red_employee_google_description'        => __('Sync your schedule with your personal Google Calendar to prevent double bookings.', 'wpamelia'),
+            'red_employee_google_calendar_connected_by_admin' => __('You are currently connected to Google Calendar by Admin. Overriding Google Calendar connection is not available.', 'wpamelia'),
             'h1'                                     => __('1h', 'wpamelia'),
             'h10'                                    => __('10h', 'wpamelia'),
             'h11'                                    => __('11h', 'wpamelia'),
@@ -1018,17 +1007,20 @@ class FrontendStrings
             'settings'                               => __('Settings', 'wpamelia'),
             'special_day_date_warning'               => __('Please enter date', 'wpamelia'),
             'special_day_end_time_warning'           => __('Please enter end time', 'wpamelia'),
+            'select_day_period_warning'              => __('Please add period', 'wpamelia'),
             'special_day_start_time_warning'         => __('Please enter start time', 'wpamelia'),
             'special_days'                           => __('Special Days', 'wpamelia'),
             'special_days_reflect_services'          => __('Reflect On', 'wpamelia'),
             'spots'                                  => __('Spots', 'wpamelia'),
             'status'                                 => __('Status', 'wpamelia'),
+            'connect'                                => __('Connect', 'wpamelia'),
             'disconnect'                             => __('Disconnect', 'wpamelia'),
             'stripe_connect'                         => __('Stripe Connect', 'wpamelia'),
             'stripe_preview'                         => __('Dashboard', 'wpamelia'),
             'stripe_onboard'                         => __('OnBoard', 'wpamelia'),
             'stripe_account_standard'                => __('Standard Account', 'wpamelia'),
             'stripe_account_express'                 => __('Express Account', 'wpamelia'),
+            'red_employee_stripe_description'        => __('Sync your Stripe Connect account for effortless payments and seamless payouts.', 'wpamelia'),
             'success'                                => __('Success', 'wpamelia'),
             'time'                                   => __('Time', 'wpamelia'),
             'today'                                  => __('Today', 'wpamelia'),
@@ -1059,6 +1051,8 @@ class FrontendStrings
             'outlook_sign_in'                        => __('Sign in with Outlook', 'wpamelia'),
             'outlook_sign_out'                       => __('Sign out from Outlook', 'wpamelia'),
             'outlook_calendar_tooltip'               => __('Here you can connect employee with Outlook Calendar,<br/>so once the appointment is scheduled it will be<br/>automatically added to employee\'s calendar.', 'wpamelia'),
+            'red_employee_outlook_description'       => __('Sync your schedule with your personal Outlook Calendar to prevent double bookings.', 'wpamelia'),
+            'red_employee_outlook_calendar_connected_by_admin' => __('You are currently connected to Outlook Calendar by Admin. Overriding Outlook Calendar connection is not available.', 'wpamelia'),
             'zoom'                                   => __('Zoom', 'wpamelia'),
             'zoom_click_to_join'                     => __('Join Zoom Meeting', 'wpamelia'),
             'zoom_click_to_start'                    => __('Start Zoom Meeting', 'wpamelia'),
@@ -1069,6 +1063,7 @@ class FrontendStrings
             'zoom_user'                              => __('Zoom User', 'wpamelia'),
             'zoom_user_placeholder'                  => __('Select Zoom User', 'wpamelia'),
             'zoom_user_tooltip'                      => __('Here you can select Zoom User,<br/>so once the appointment is scheduled,<br/>zoom meeting will be automatically created.', 'wpamelia'),
+            'red_employee_zoom_description'          => __('Connect your personal Zoom account to host virtual meetings and chats.', 'wpamelia'),
             'wc_order'                               => __('Order', 'wpamelia'),
             'tax'                                    => __('Tax', 'wpamelia'),
             'due'                                    => __('Due', 'wpamelia'),
@@ -1136,6 +1131,15 @@ class FrontendStrings
             'camera_error_3'                         => __('Camera not supported by this browser.', 'wpamelia'),
             'checked_in'                             => __('Checked in', 'wpamelia'),
             'ticket_not_valid'                       => __('Ticket not valid', 'wpamelia'),
+            'red_connected'                          => __('Connected', 'wpamelia'),
+            'red_not_connected'                      => __('Not connected', 'wpamelia'),
+            'select_calendar'                        => __('Select calendar', 'wpamelia'),
+            'add_another_account'                    => __('Add another account', 'wpamelia'),
+            'block_time_from_calendars'              => __('Block time from calendars', 'wpamelia'),
+            'add_calendar'                           => __('Add calendar', 'wpamelia'),
+            'red_sync_with'                          => __('Sync with', 'wpamelia'),
+            'insert_pending_appointments'            => __('Insert pending appointments', 'wpamelia'),
+            'red_include_buffer_time'                => __('Include buffer time in calendar events', 'wpamelia'),
         ] : [];
 
         return array_merge($labels, LiteFrontendStrings::getCabinetStrings());

@@ -707,9 +707,9 @@ class EventApplicationService
                             }
                         }
                     }
-                    if (!$bookingOpensSame) {
+                    if (!$bookingClosesSame) {
                         $periodStartClose = DateTimeService::getCustomDateTimeObject($periodStart);
-                        if (isset($eventDateDiffCloses)) {
+                        if ($eventDateDiffCloses) {
                             $periodStartClose = $periodStartClose->sub($eventDateDiffCloses);
                         }
                         $lastEvent->setBookingCloses(new DateTimeValue($periodStartClose));
@@ -1559,7 +1559,6 @@ class EventApplicationService
         /** @var CustomerRepository $customerRepository */
         $customerRepository = $this->container->get('domain.users.customers.repository');
 
-        /** @var Collection $events */
         $events = $eventRepository->getByIdsWithEntities(
             $ids,
             [
@@ -1705,7 +1704,6 @@ class EventApplicationService
                 }
             }
 
-            /** @var Collection $customers */
             $customers = $customerIds ? $customerRepository->getByCriteria(['ids' => $customerIds]) : new Collection();
 
             /** @var Collection $eventBookings */
