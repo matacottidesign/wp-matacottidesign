@@ -14,3 +14,59 @@ RewriteRule . /index.php [L]
 </IfModule>
 
 # END WordPress
+
+# ==============================================================
+# PERFORMANCE — COMPRESSIONE GZIP
+# Riduce il peso dei trasferimenti su testo, CSS, JS e SVG.
+# ==============================================================
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml text/javascript
+    AddOutputFilterByType DEFLATE application/javascript application/x-javascript application/json
+    AddOutputFilterByType DEFLATE image/svg+xml application/xml application/xhtml+xml
+    AddOutputFilterByType DEFLATE font/ttf font/otf font/woff font/woff2
+</IfModule>
+
+# ==============================================================
+# PERFORMANCE — CACHE BROWSER LUNGA
+# Asset statici: cache di 1 anno (immutable per file versionati).
+# HTML e JSON: cache breve per aggiornamenti frequenti.
+# ==============================================================
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # HTML / dati dinamici — breve
+    ExpiresByType text/html                    "access plus 0 seconds"
+    ExpiresByType application/json             "access plus 0 seconds"
+
+    # CSS e JavaScript — 1 mese (WordPress usa versioning nei query string)
+    ExpiresByType text/css                     "access plus 1 month"
+    ExpiresByType application/javascript       "access plus 1 month"
+    ExpiresByType text/javascript              "access plus 1 month"
+
+    # Immagini — 1 anno
+    ExpiresByType image/jpeg                   "access plus 1 year"
+    ExpiresByType image/png                    "access plus 1 year"
+    ExpiresByType image/gif                    "access plus 1 year"
+    ExpiresByType image/webp                   "access plus 1 year"
+    ExpiresByType image/avif                   "access plus 1 year"
+    ExpiresByType image/svg+xml                "access plus 1 year"
+    ExpiresByType image/x-icon                 "access plus 1 year"
+
+    # Font — 1 anno
+    ExpiresByType font/woff                    "access plus 1 year"
+    ExpiresByType font/woff2                   "access plus 1 year"
+    ExpiresByType font/ttf                     "access plus 1 year"
+    ExpiresByType font/otf                     "access plus 1 year"
+    ExpiresByType application/font-woff        "access plus 1 year"
+    ExpiresByType application/font-woff2       "access plus 1 year"
+</IfModule>
+
+# Cache-Control per i font (immutable = non ri-validare mai)
+<IfModule mod_headers.c>
+    <FilesMatch "\.(woff|woff2|ttf|otf|eot)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    <FilesMatch "\.(jpg|jpeg|png|gif|webp|avif|svg|ico)$">
+        Header set Cache-Control "public, max-age=31536000"
+    </FilesMatch>
+</IfModule>
