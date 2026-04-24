@@ -240,6 +240,38 @@ add_action( 'template_redirect', function () {
 
 /*
  * ============================================================
+ * SEO — INDICIZZAZIONE E META TAG
+ * ============================================================
+ */
+
+// Rimuove noindex forzato se "Scoraggia motori di ricerca" è attivo in WP > Impostazioni > Lettura.
+// AZIONE RICHIESTA: disattivare anche manualmente quella casella nel pannello WP.
+add_filter( 'wp_robots', function( $robots ) {
+    unset( $robots['noindex'] );
+    $robots['index']  = true;
+    $robots['follow'] = true;
+    return $robots;
+} );
+
+// Meta description per la homepage — fallback se Yoast non ne ha una configurata.
+// Per rimuovere questo fallback, imposta la descrizione direttamente in Yoast SEO > Cerca > Homepage.
+add_filter( 'wpseo_metadesc', function( $desc ) {
+    if ( is_front_page() && empty( $desc ) ) {
+        return 'Francesco Matacotti – Web designer freelance. Realizzo siti web, e-commerce, identità visive e offro formazione per privati e aziende in Italia.';
+    }
+    return $desc;
+} );
+
+// OG description per la homepage — fallback Yoast.
+add_filter( 'wpseo_opengraph_desc', function( $desc ) {
+    if ( is_front_page() && empty( $desc ) ) {
+        return 'Francesco Matacotti – Web designer freelance. Realizzo siti web, e-commerce, identità visive e offro formazione per privati e aziende in Italia.';
+    }
+    return $desc;
+} );
+
+/*
+ * ============================================================
  * FOOTER: rimuove le classi col-* automatiche di Understrap
  * ============================================================
  */
