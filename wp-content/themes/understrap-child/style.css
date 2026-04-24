@@ -397,9 +397,10 @@ strong {
     }
 
     /* Bordi arrotondati solo in basso sull'immagine centrale desktop */
-    .hero-desktop img.w-100 {
+    .hero-desktop img.w-75 {
         border-bottom-left-radius: var(--radius-xl);
         border-bottom-right-radius: var(--radius-xl);
+        height: auto;
     }
 
     /* Spaziatura verticale tra i servizi nella colonna destra */

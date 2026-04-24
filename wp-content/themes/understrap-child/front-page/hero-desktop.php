@@ -49,7 +49,7 @@ $cta       = $args['cta']       ?? '';
 
                 <?php if ( has_post_thumbnail() ) : ?>
                     <?php echo get_the_post_thumbnail( get_the_ID(), 'large', [
-                        'class'         => 'img-fluid w-100',
+                        'class'         => 'img-fluid w-75',
                         'fetchpriority' => 'high',
                         'loading'       => 'eager',
                         'decoding'      => 'async',
