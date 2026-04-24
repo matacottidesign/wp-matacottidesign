@@ -396,11 +396,16 @@ strong {
         margin: 3rem 0;
     }
 
-    /* Bordi arrotondati solo in basso sull'immagine centrale desktop */
-    .hero-desktop img.w-75 {
+    /* Immagine hero desktop come background cover: altezza fissa, nessuna distorsione */
+    .hero-desktop-img {
+        height: 500px;
+        width: 75%;
+        margin: 0 auto;
+        background-size: cover;
+        background-position: center top;
+        background-repeat: no-repeat;
         border-bottom-left-radius: var(--radius-xl);
         border-bottom-right-radius: var(--radius-xl);
-        height: auto;
     }
 
     /* Spaziatura verticale tra i servizi nella colonna destra */

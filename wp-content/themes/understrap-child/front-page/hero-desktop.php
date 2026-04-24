@@ -47,13 +47,16 @@ $cta       = $args['cta']       ?? '';
             <?php /* ---- COLONNA CENTRALE: foto in evidenza + recensioni Google ---- */ ?>
             <div class="col-4 text-center">
 
-                <?php if ( has_post_thumbnail() ) : ?>
-                    <?php echo get_the_post_thumbnail( get_the_ID(), 'large', [
-                        'class'         => 'img-fluid w-75',
-                        'fetchpriority' => 'high',
-                        'loading'       => 'eager',
-                        'decoding'      => 'async',
-                    ] ); ?>
+                <?php if ( has_post_thumbnail() ) :
+                    $img_id  = get_post_thumbnail_id( get_the_ID() );
+                    $img_url = get_the_post_thumbnail_url( get_the_ID(), 'large' );
+                    $img_alt = get_post_meta( $img_id, '_wp_attachment_image_alt', true );
+                ?>
+                    <div class="hero-desktop-img"
+                         style="background-image: url('<?php echo esc_url( $img_url ); ?>');"
+                         role="img"
+                         aria-label="<?php echo esc_attr( $img_alt ); ?>">
+                    </div>
                 <?php endif; ?>
 
                 <div class="trustindex mt-3">
