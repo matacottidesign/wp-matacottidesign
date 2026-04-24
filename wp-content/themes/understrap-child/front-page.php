@@ -31,7 +31,7 @@ $args = [
 ];
 ?>
 
-<div id="front-page-wrapper">
+<main id="content" tabindex="-1">
 
     <?php /* H1 nascosto visivamente ma indicizzato dai motori di ricerca */ ?>
     <h1 class="sr-only">
@@ -47,6 +47,6 @@ $args = [
     <?php get_template_part( 'front-page/projects' ); ?>
     <?php get_template_part( 'front-page/bio-banner' ); ?>
 
-</div>
+</main>
 
 <?php get_footer(); ?>
