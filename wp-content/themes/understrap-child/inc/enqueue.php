@@ -26,21 +26,10 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 
         /*
         |--------------------------------------------------------------------------
-        | GOOGLE FONTS
-        | Carica Bebas Neue (titoli) e Poppins (testo) da Google Fonts
-        |--------------------------------------------------------------------------
-        */
-        wp_enqueue_style(
-            'md-google-fonts',
-            'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap',
-            array(),
-            null
-        );
-
-        /*
-        |--------------------------------------------------------------------------
         | CSS DEL TEMA PADRE
-        | Seleziona il file CSS corretto in base alla versione Bootstrap attiva
+        | Seleziona il file CSS corretto in base alla versione Bootstrap attiva.
+        | Google Fonts è rimosso dalle dipendenze perché caricato in modo
+        | asincrono via wp_head (vedi md_google_fonts_async sotto).
         |--------------------------------------------------------------------------
         */
         $theme_styles  = "/css/theme{$suffix}.css";
@@ -56,7 +45,7 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
         wp_enqueue_style(
             'understrap-styles',
             get_template_directory_uri() . $theme_styles,
-            array( 'md-google-fonts' ),
+            array(),
             $css_version
         );
 
@@ -132,6 +121,44 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 
 add_action( 'wp_enqueue_scripts', 'understrap_scripts' );
 
+
+/*
+ * ============================================================
+ * GOOGLE FONTS — CARICAMENTO ASINCRONO (non bloccante)
+ * ============================================================
+ * Il pattern rel="preload" + onload="this.rel='stylesheet'" carica
+ * il foglio di stile senza bloccare il rendering della pagina.
+ * Il tag <noscript> garantisce il fallback per browser senza JS.
+ * I due <link rel="preconnect"> riducono il DNS lookup time.
+ * ============================================================
+ */
+add_action( 'wp_head', function() {
+    $fonts_url = 'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap';
+    ?>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="<?php echo esc_url( $fonts_url ); ?>" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="<?php echo esc_url( $fonts_url ); ?>"></noscript>
+    <?php
+}, 1 );
+
+/*
+ * ============================================================
+ * SCRIPT DEFER — Bootstrap JS e script tema figlio
+ * ============================================================
+ * Aggiunge l'attributo defer agli script non critici caricati
+ * nel footer: il browser li scarica in parallelo ma li esegue
+ * solo dopo il parsing del documento.
+ * jQuery è escluso per compatibilità con i plugin.
+ * ============================================================
+ */
+add_filter( 'script_loader_tag', function( $tag, $handle ) {
+    $defer_handles = [ 'understrap-scripts', 'md-custom-script', 'md-infinite-scroll' ];
+    if ( in_array( $handle, $defer_handles, true ) ) {
+        return str_replace( ' src=', ' defer src=', $tag );
+    }
+    return $tag;
+}, 10, 2 );
 
 /*
  * ============================================================
