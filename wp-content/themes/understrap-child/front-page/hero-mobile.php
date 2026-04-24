@@ -25,9 +25,12 @@ $hero_mobile = $args['hero_mobile'] ?? '';
     <div class="hero-mobile-bg d-flex align-items-end justify-content-center text-center position-relative">
 
         <?php if ( ! empty( $hero_mobile ) ) : ?>
-            <img src="<?php echo esc_url( $hero_mobile['url'] ); ?>"
-                 alt="<?php echo esc_attr( $hero_mobile['alt'] ); ?>"
-                 class="position-absolute">
+            <?php echo wp_get_attachment_image( $hero_mobile['ID'], 'large', false, [
+                'class'         => 'position-absolute',
+                'fetchpriority' => 'high',
+                'loading'       => 'eager',
+                'decoding'      => 'async',
+            ] ); ?>
         <?php endif; ?>
 
         <div class="hero-title text-white pb-4">
@@ -61,9 +64,11 @@ $hero_mobile = $args['hero_mobile'] ?? '';
 
                         <?php if ( $immagine ) : ?>
                             <div class="servizio-img">
-                                <img src="<?php echo esc_url( $immagine['url'] ); ?>"
-                                     alt="<?php echo esc_attr( $immagine['alt'] ); ?>"
-                                     class="img-fluid">
+                                <?php echo wp_get_attachment_image( $immagine['ID'], 'thumbnail', false, [
+                                    'class'    => 'img-fluid',
+                                    'loading'  => 'lazy',
+                                    'decoding' => 'async',
+                                ] ); ?>
                             </div>
                         <?php endif; ?>
 

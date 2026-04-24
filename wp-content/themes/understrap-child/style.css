@@ -158,16 +158,30 @@ strong {
     backdrop-filter: none !important;
 }
 
-/* Navbar trasparente di default, con transizione allo scroll */
+/* Navbar trasparente di default */
 #main-nav {
     background-color: transparent;
-    transition: background-color .35s ease, backdrop-filter .35s ease;
+}
+
+/* Pseudo-elemento per il frosted glass.
+   Separato dall'elemento per non intrappolare l'offcanvas (position:fixed)
+   nello stacking context della navbar. */
+#main-nav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: rgba(255, 255, 255, .8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    transition: opacity .35s ease;
+    pointer-events: none;
 }
 
 /* Classe aggiunta via JS quando l'utente scrolla: sfondo frosted glass */
-#main-nav.scrolled {
-    background-color: rgba(255, 255, 255, .8);
-    backdrop-filter: blur(8px);
+#main-nav.scrolled::before {
+    opacity: 1;
 }
 
 /* Logo: altezza fissa, larghezza automatica */
@@ -563,3 +577,46 @@ strong {
    (Il footer utilizza principalmente le classi Bootstrap;
    aggiungere qui eventuali personalizzazioni future.)
 ================================================== */
+
+/* ==================================================
+   13. WIDGET TERZE PARTI — RISERVA SPAZIO CLS
+   Previene layout shift riservando spazio prima che
+   Trustindex e altri widget asincroni si renderizzino.
+================================================== */
+
+/* Trustindex Google Reviews: altezza minima stimata del widget compact */
+.trustindex {
+    min-height: 120px;
+}
+
+/* ==================================================
+   14. PAGINA 404
+   Layout centrato a tutta altezza con numero decorativo.
+================================================== */
+
+.error404-hero {
+    min-height: 80vh;
+    padding: 6rem 1.5rem;
+}
+
+.error404-code {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(8rem, 25vw, 18rem);
+    line-height: 1;
+    color: var(--grey);
+    margin: 0;
+    user-select: none;
+}
+
+.error404-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+}
+
+.error404-text {
+    font-size: 1.1rem;
+    color: #6c757d;
+    max-width: 400px;
+    margin-bottom: 2.5rem;
+}

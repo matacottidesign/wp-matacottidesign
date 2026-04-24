@@ -240,6 +240,41 @@ add_action( 'template_redirect', function () {
 
 /*
  * ============================================================
+ * LCP — PRELOAD IMMAGINI HERO
+ * ============================================================
+ * Emette <link rel="preload"> per ogni breakpoint hero con media
+ * query corrispondente: il browser preleva solo l'immagine visibile,
+ * anticipando il fetch prima che il parser arrivi al <body>.
+ * ============================================================
+ */
+add_action( 'wp_head', function() {
+    if ( ! is_front_page() ) return;
+
+    // Hero mobile e tablet condividono lo stesso campo ACF
+    $hero_mobile = get_field( 'immagine_hero_mobile' );
+    if ( ! empty( $hero_mobile['url'] ) ) {
+        printf(
+            '<link rel="preload" as="image" href="%s" media="(max-width:767px)" fetchpriority="high">' . "\n",
+            esc_url( $hero_mobile['url'] )
+        );
+        printf(
+            '<link rel="preload" as="image" href="%s" media="(min-width:768px) and (max-width:1399px)" fetchpriority="high">' . "\n",
+            esc_url( $hero_mobile['url'] )
+        );
+    }
+
+    // Hero desktop: post thumbnail della homepage
+    $desktop_src = get_the_post_thumbnail_url( get_queried_object_id(), 'large' );
+    if ( $desktop_src ) {
+        printf(
+            '<link rel="preload" as="image" href="%s" media="(min-width:1400px)" fetchpriority="high">' . "\n",
+            esc_url( $desktop_src )
+        );
+    }
+}, 1 );
+
+/*
+ * ============================================================
  * SEO — INDICIZZAZIONE E META TAG
  * ============================================================
  */

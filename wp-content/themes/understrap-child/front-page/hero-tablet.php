@@ -52,9 +52,12 @@ $hero_mobile = $args['hero_mobile'] ?? '';
             <?php /* Colonna destra: immagine hero */ ?>
             <div class="col-6">
                 <?php if ( ! empty( $hero_mobile ) ) : ?>
-                    <img src="<?php echo esc_url( $hero_mobile['url'] ); ?>"
-                         alt="<?php echo esc_attr( $hero_mobile['alt'] ); ?>"
-                         class="img-fluid" />
+                    <?php echo wp_get_attachment_image( $hero_mobile['ID'], 'large', false, [
+                        'class'         => 'img-fluid',
+                        'fetchpriority' => 'high',
+                        'loading'       => 'eager',
+                        'decoding'      => 'async',
+                    ] ); ?>
                 <?php endif; ?>
             </div>
 
@@ -82,8 +85,10 @@ $hero_mobile = $args['hero_mobile'] ?? '';
 
                     <?php if ( $image = get_sub_field( 'immagine_servizio_hero' ) ) : ?>
                         <div class="servizio-img mt-3">
-                            <img src="<?php echo esc_url( $image['url'] ); ?>"
-                                 alt="<?php echo esc_attr( $image['alt'] ); ?>">
+                            <?php echo wp_get_attachment_image( $image['ID'], 'thumbnail', false, [
+                                'loading'  => 'lazy',
+                                'decoding' => 'async',
+                            ] ); ?>
                         </div>
                     <?php endif; ?>
 

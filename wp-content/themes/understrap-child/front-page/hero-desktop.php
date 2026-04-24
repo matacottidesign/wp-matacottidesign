@@ -48,7 +48,12 @@ $cta       = $args['cta']       ?? '';
             <div class="col-4 text-center">
 
                 <?php if ( has_post_thumbnail() ) : ?>
-                    <?php echo get_the_post_thumbnail( get_the_ID(), 'large', ['class' => 'img-fluid w-75'] ); ?>
+                    <?php echo get_the_post_thumbnail( get_the_ID(), 'large', [
+                        'class'         => 'img-fluid w-75',
+                        'fetchpriority' => 'high',
+                        'loading'       => 'eager',
+                        'decoding'      => 'async',
+                    ] ); ?>
                 <?php endif; ?>
 
                 <div class="trustindex mt-3">
@@ -73,8 +78,10 @@ $cta       = $args['cta']       ?? '';
 
                                 <?php if ( $image = get_sub_field( 'immagine_servizio_hero' ) ) : ?>
                                     <div class="servizio-img ms-4">
-                                        <img src="<?php echo esc_url( $image['url'] ); ?>"
-                                             alt="<?php echo esc_attr( $image['alt'] ); ?>">
+                                        <?php echo wp_get_attachment_image( $image['ID'], 'thumbnail', false, [
+                                            'loading'  => 'lazy',
+                                            'decoding' => 'async',
+                                        ] ); ?>
                                     </div>
                                 <?php endif; ?>
 
