@@ -340,6 +340,7 @@ strong {
 
 .hero-mobile-bg img {
     height: 450px;
+    width: auto;
     z-index: 1;
 }
 
